@@ -43,3 +43,88 @@ git status: to check file is tracking or not
 git add: to track the file
 git commit -m "v-1" index.html: to store the index.html 
 git log: to show the commits
+
+
+DAY-02: 14-02-2023
+
+
+APP: a group of services.
+who will develop the application:
+developers (frontend, backend, db)
+
+what to do: write the code 
+where to store: git
+
+
+
+GIT LOGS: used to check the commits history.
+the latest commit will be on top (LIFO).
+
+
+git log			: shows the commits 
+git log --oneline	: shows the commits on oneline
+git log --oneline -2	: shows last 2 commits
+git show commit_id	: shows files committed to that commit_id
+
+GIT CONFIGURE:
+git config user.name "raham"
+git config user.email "raham@gmail.com"
+
+HISTORY:
+ 1  mkdir paytm
+    2  cd paytm/
+    3  yum install git -y
+    4  git init
+    5  ls -al
+    6  git status
+    7  cd ..
+    8  git status
+    9  ls -al
+   10  cd paytm/
+   11  vim index.html
+   12  git status
+   13  git add index.html
+   14  git status
+   15  git commit -m "commit-1" index.html
+   16  git status
+   17  touch recharge.java
+   18  git status
+   19  git add recharge.java
+   20  git status
+   21  git commit -m "commit-2" recharge.java
+   22  ll
+   23  git status
+   24  touch raham
+   25  git add raham
+   26  git commit -m "raham commits" raham
+   27  git log
+   28  git log --oneline
+   29  git log --oneline -2
+   30  git log --oneline -1
+   31  git show 1e06d41
+   32  touch python{1..10}
+   33  git status
+   34  git add p*
+   35  git status
+   36  git commit -m "backedn files" p*
+   37  git log
+   38  git log --oneline
+   39  git log --oneline -1
+   40  git show 460311a
+   41  git log
+   42  git config user.name "raham"
+   43  git config user.email  "raham@gmail.com"
+   44  git log
+   45  touch php
+   46  git add php
+   47  git commit -m "php file" php
+   48  git log
+   49  git config user.name "sohail"
+   50  git config user.email "soggade@gmail.com"
+   51  git log
+   52  touch sohail
+   53  git add sohail
+   54  git commit -m "shoail" sohail
+   55  git log
+   56  history
+
