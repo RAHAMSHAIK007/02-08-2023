@@ -262,3 +262,28 @@ HISTORY:
    90  git branch
    91  ll
    92  history
+========================================================
+
+DAY-03:
+
+GIT MERGE: used to merge files blw two branches.
+git merge branch_name
+
+git checkout master
+git merge movies
+
+GIT REBASE: used to merge files blw two branches.
+
+
+MERGE VS REBASE:
+merge will show files, but rebase will not show.
+merge will not show the branch, but rebase will show.
+merge will store the entire history, but rebase will not show.
+
+
+GIT REVERT: used to undo merging blw branches.
+git revert branch_name
+
+
+GIT PULL: it will get the files form github to git
+
