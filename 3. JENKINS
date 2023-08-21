@@ -1,0 +1,77 @@
+
+DAY-01:
+
+JENKINS = CI/CD TOOL
+
+CI = CONTINOUS INTEGRATION : CONTINOUS BUILD + CONTINOUS TEST : (OLD CODE + NEW CODE)
+CD = CONTINOUS DEVLIVERY : DEPLOYMENT TO PROD IS MANUAL
+CD = CONTINOUS DEPLOYMENT: DEPLOYMENT TO PROD IS AUTOMATIC
+
+
+ENV:
+DEV	: DEVELOPERS
+TEST/QA	: TESTERS
+UAT	: CLIENT
+PROD	: USERS
+
+
+PIPELINE: STEP BY STEP EXECUTION OF A PROCESS.
+SERIES OF EVENTS INTERLINKED WITH EACHOTHER.
+
+CODE --- > BUILD  -- > TEST --- > WAR  --- > DEV/TEST/UAT/PROD 
+
+
+JENKINS:
+ITS A FREE AND OPEN SOURCE TOOL.
+JENKINS WRITTEN ON JAVA-11.
+IT IS PLATFORM INDEPENDENT.
+IT CONSIST OF PLUGINS.
+WE HAVE COMMUNITY SUPPORT.
+IT CAN AUTOMATE ENTIRE SDLC.
+IT IS OWNED BY SUN MICRO SYSTEM AS HUDSON.
+HUDSON IS PAID VERSION.
+LATER ORACLE BROUHT HUDSON AND MAKE IT FREE.
+INVENTOR: Kohsuke Kawaguchi
+PORT NUMBER: 8080
+
+SETUP:
+
+#STEP-1: INSTALLING GIT JAVA-1.8.0 MAVEN 
+yum install git java-1.8.0-openjdk maven -y
+
+#STEP-2: GETTING THE REPO (jenkins.io --> download -- > redhat)
+sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+#STEP-3: DOWNLOAD JAVA11 AND JENKINS
+amazon-linux-extras install java-openjdk11 -y
+yum install jenkins -y
+update-alternatives --config java
+
+#STEP-4: RESTARTING JENKINS (when we download service it will on stopped state)
+systemctl start jenkins.service
+systemctl status jenkins.service
+
+copy-public-ip:8080 (browser)
+cat /var/lib/jenkins/secrets/initialAdminPassword
+paster passowd on browser -- > installing plugins --- > user details -- > start
+
+
+CREATING A JOB:
+NEW ITEM -- > NAME: ABC -- > FREESTYLE -- > OK -- > SCM -- > GIT -- > REPOURL: https://github.com/devopsbyraham/jenkins-java-project.git -- >Build Steps -- > ADD Build Steps -- > Execute shell -- > mvn clean package -- > save -- > build now
+
+
+HISTORY:
+  1  yum install git java-1.8.0-openjdk maven -y
+    2  sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+    3    sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+    4  amazon-linux-extras install java-openjdk11 -y
+    5  yum install jenkins -y
+    6  java -version
+    7  update-alternatives --config java
+    8  java -version
+    9  systemctl start jenkins.service
+   10  systemctl status jenkins.service
+   11  cat /var/lib/jenkins/secrets/initialAdminPassword
+   12  13.38.89.174:8080
+   13  history
