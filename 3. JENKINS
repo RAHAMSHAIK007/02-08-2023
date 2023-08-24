@@ -75,3 +75,113 @@ HISTORY:
    11  cat /var/lib/jenkins/secrets/initialAdminPassword
    12  13.38.89.174:8080
    13  history
+
+
+day-02 & 03
+
+VARIABLES:
+variable stores the values and keep changing.
+a=13
+
+LOCAL VARIBALE: it works inside job.
+
+NEW ITEM -- > NAME: ABC -- > FREESTYLE -- > OK -- > BUILD -- >EXECUTE SHELL
+name=antony
+echo "hai all my name is $name, $name is from hyderabad, $name is teaching devops"
+
+
+GLOBAL VARIBALE: it works outside job.
+
+Dashboard
+Manage Jenkins
+System
+Global properties
+Environment variables
+add
+
+echo "hai all my name is $name, $name is from hyderabad, $name is teaching devops"
+
+JENKINS ENV VARIABLES:
+this variable is not defined by user.
+these values are going to change as per build.
+
+
+
+ex: echo "the build number is: $BUILD_NUMBER, the job name is: $JOB_NAME, the url is: $BUILD_URL"
+
+=====================================================================================================
+
+PARAMETER: Passing a input for the jobs.
+
+1. choice paramter:
+setup ci job -- > This project is parameterized -- > choice parameter -- > name: env & values:dev,test,uat,prod -- > save
+
+2. string paramter: passing input form a single line.
+3. multi-line string parameter: 
+4. bolean: 
+
+=============================================================================================
+
+cronjob: to schedule the work on Jenkins.
+here we need to write cron synytax for scheduling the job.
+the cron syntax will have 5 stars.
+
+
+*	: minutes
+*	: hours
+*	: date
+*	: month
+*	: day of week (0=sun, 1=mon, 2=tues --6=sat)
+
+
+25-08-2023 9:00 am : 0 9 25 8 5
+25-08-2023 11:43 am : 43 11 25 8 5
+
+create a ci job -- > Build Triggers -- > build periodically -- > * * * * * -- > save
+commit the changes in GitHub then wait for 1 min.
+
+website: crontab generator
+
+limitation: it will not check the code is changed or not.
+
+
+POLL SCM: 
+in pollscm we will set time limit for the jobs.
+if dev commit the code it will wait until the time is done.
+in given time if we have any changes on code it will generate a build
+
+create a ci job -- > Build Triggers -- > poll scm -- > * * * * * -- > save
+commit the changes in GitHub then wait for 1 min.
+
+1. in pollscm, we need to wait for the time we set.
+2. we will get the last commit only.
+
+WEBHOOK: it will trigger build the moment we change the code.
+here we need not to wait for the build.
+
+repo -- > settings -- > webhooks -- > add webhook -- > Payload URL (jenkins url) -- > http://35.180.46.134:8080/github-webhook/  -- > Content type -- > application/json -- > add
+
+create ci job -- > Build Triggers: GitHub hook trigger for GITScm polling -- > save
+
+THROTTLEBUILD:
+To restrict the builds in a certain time or intervals.
+
+create a ci job -- > configure -- > Throttle builds -- > Number of builds: 2 -- > time period : hours -- > save
+
+
+PASSWORDLESS LOGIN:
+
+vim /var/lib/jenkins/config.xml
+line 7 (true=false)
+systemctl restart jenkins.service
+public-ip:8080
+
+PORT CHANGING:
+
+vim /usr/lib/systemd/system/jenkins.service
+line 67 (8080=8090)
+systemctl daemon-reload
+systemctl restart jenkins.service
+public-ip:8090
+
+===================================================================================
