@@ -185,3 +185,205 @@ systemctl restart jenkins.service
 public-ip:8090
 
 ===================================================================================
+
+
+DAY-04:
+
+PIPELINE: STEP BY STEP EXECUTION OF A PROCESS.
+SERIES OF EVENTS INTERLINKED WITH EACHOTHER.
+
+CODE --- > BUILD  -- > TEST --- > WAR  --- > DEV/TEST/UAT/PROD 
+
+why to use ?
+to automate the work.
+to have clarity about the stage.
+
+TYPES:
+1. DECLARATIVE
+2. SCRPTED
+
+pipeline syntax:
+to write the pipeline we use DSL.
+it consists of blocks that include stages.
+it includes () & {} braces.
+
+pipeline consist multiple stages
+shortcut: PASSS
+
+P	: pipeline
+A	: AGENT
+S	: STAGES
+S	: STAGE
+S	: STEPS
+
+
+
+SINGLE STAGE:
+
+pipeline {
+    agent any 
+    
+    stages {
+        stage('abc') {
+            steps {
+                echo "hello world"
+            }
+        }
+    }
+}
+
+
+MULTI STAGE:
+
+pipeline {
+    agent any 
+    
+    stages {
+        stage('one') {
+            steps {
+                echo "hello world"
+            }
+        }
+        stage('two') {
+            steps {
+                sh 'touch file1'
+            }
+        }
+        stage('three') {
+            steps {
+                sh 'touch file2'
+            }
+        }
+    }
+}
+
+
+CI PIPELINE:
+pipeline {
+    agent any
+    
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+}
+
+workspace means the place op is stored in jenkins server.
+Default workspace is: /var/lib/jenkins/workspace
+
+PIPELINE AS A CODE: here we have multiple actions over single stage.
+
+pipeline {
+    agent any
+    
+    stages {
+        stage('one') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+                sh 'mvn compile'
+                sh 'mvn test'
+                sh 'mvn package'
+            }
+        }
+    }
+}
+
+
+PAAC SINGLE SHELL:
+
+pipeline {
+    agent any
+    
+    stages {
+        stage('one') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+                sh '''
+                mvn compile
+                mvn test
+                mvn package
+                '''
+            }
+        }
+    }
+}
+
+
+---------------------------------------------------------------------
+
+INPUT PARAMETER:
+
+
+pipeline {
+    agent any
+    
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('package') {
+            input {
+                message "is input clear"
+                ok "yes"
+            }
+            steps {
+                sh 'mvn package'
+            }
+        }
+    }
+}
+
+
+
+
+BLUE OCEAN: to enhance the jenkins dashboard.
+
+Dashboard -- > Manage Jenkins -- > Plugins -- > Available plugins -- > Blue Ocean -- > select -- > install -- > Go back to the top page -- > 
+ 
+
+
+LIST VIEW: to make a list of all jobs as per my req.
+MY VIEW: to see all the jobs which i can access.
+
+
+SCRIPTED PIPELINE:
+
+node {
+    stage('one') {
+       echo 'hello world'
+    }
+}
+
+SCRIPTED VS DECLARATIVE:
+
+DECLARATIVE START WITH PIPELINE, SCRIPTED START WITH NODE
+DECLARATIVE HAVE STAGES, SCRIPTED WILL NOT HAVE
+DECLARATIVE HAVE STEPS, SCRIPTED WILL NOT HAVE
+DECLARATIVE CODE IS LENGTHY, SCRIPTED IS SHORT
+
+
