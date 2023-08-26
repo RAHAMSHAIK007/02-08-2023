@@ -386,4 +386,105 @@ DECLARATIVE HAVE STAGES, SCRIPTED WILL NOT HAVE
 DECLARATIVE HAVE STEPS, SCRIPTED WILL NOT HAVE
 DECLARATIVE CODE IS LENGTHY, SCRIPTED IS SHORT
 
+===============================================================================================================================
+
+
+MASTER AND SLAVE:
+it is used to distribute the builds.
+it reduce the load on jenkins server.
+communication blw master and slave is ssh.
+Here we need to install agent (java-11).
+slave can use any platform.
+label = way of assingning work for slave.
+
+SETUP:
+#STEP-1 : Create a server and install java-11
+amazon-linux-extras install java-openjdk11 -y
+
+#STEP-2: SETUP THE SLAVE SERVER
+Dashboard -- > Manage Jenkins -- > Nodes & Clouds -- > New node -- > nodename: abc -- > permanaent agent -- > save 
+
+CONFIGURATION OF SALVE:
+
+Number of executors : 3 #Number of Parallel builds
+Remote root directory : /tmp #The place where our output is stored on slave sever.
+Labels : swiggy #place the op in a particular slave
+useage: last option
+Launch method : last option 
+Host: (your privte ip)
+Credentials -- > add -- >jenkins -- > Kind : ssh username with privatekey -- > username: ec2-user 
+privatekey : pemfile of server -- > save -- > 
+Host Key Verification Strategy: last option
+
+DASHBOARD -- > JOB -- > CONFIGURE -- > RESTRTICT WHERE THIS JOB RUN -- > LABEL: SLAVE1 -- > SAVE
+
+BUILD FAILS -- > WHY -- > WE NEED TO INSTALL PACKAGES
+yum install git java-1.8.0-openjdk maven -y
+
+
+PIPLEINE CODE:
+
+
+
+pipeline {
+    agent {
+        label 'swiggy'
+    }
+    
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/RAHAMSHAIK007/jenkins-java-project.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
+    post {
+        failure {
+            echo "my code is tested"
+        }
+    }
+}
+
+POST BUILD ACTIONS:
+Events happens after the build:
+1. ALWAYS	: always execute the post builds
+2. SUCCESS	: it will execute the post build if build is success
+3. FAILUER	: it will execute the post build if build is failure
+
+
+
+NOTE: USE ABOVE CODE AND CHANGE THE OPTIONS (always/sucess/failuer)
+To maeke build faile: remove h from sh in stages
+
+
+CUSTOM WORKSPACE:
+to create a seperate a folder to store the build outputs.
+mkdir raham
+cd raham
+pwd
+chown jenkins:jenkins /root/raham
+cd /root
+chown jenkins:jenkins /root
+
+job -- > configure -- > advance -- > use custom workspace -- > /root/raham -- > save
+
+#JENKINS BACKUP:
+
+Dashboard
+Manage Jenkins
+Plugins
+available plugins 
+Periodic Backup
+install
+
 
