@@ -487,4 +487,150 @@ available plugins
 Periodic Backup
 install
 
+=================================================
 
+RBAC : Role based access control
+it is used to restrict the user for jenkins job.
+it provide only few permissions for only few jobs.
+
+fresher: ramesh, ganesh 
+experince: suresh
+
+
+STEP-1: USER CREATION
+manage jenkins -- > users -- > create users -- > rajesh: fresher & ravi: exp
+
+STEP-2: PLUGIN DOWNLOADING
+Dashboard
+Manage Jenkins
+Plugins
+Available plugin
+Role-based Authorization Strategy  
+
+STEP-3: 
+Dashboard
+Manage Jenkins
+Security
+Authorization 
+Role-based  Strategy  
+SAVE
+
+STEP-4: MANAGE AND ASSIGN USERS
+manage roles -- > add -- > fresher & exp -- > fresher: overall read & exp: admin -- > save
+assign roles -- > add user -- > rajesh: fresher & ravi: exp -- > save
+
+LIST VIEW & MY VIEW:
+To seperate the jobs as per our requirment
+
+
+#JENKINS BACKUP:
+
+Dashboard
+Manage Jenkins
+Plugins
+available plugins 
+Periodic Backup
+install
+
+CONFIGURE BACKUP:
+manage jenkins -- > Pereodic backup manager -- > configure now -- >
+
+
+SONARQUBE:
+it is used to check the quality of code.
+it supports 20+ programming languages.
+
+ADV:
+it will make bugs finding easy.
+it will improve the dev skills.
+code duplication will be avioded.
+vulunerabilities can be assesed.
+code smells.
+
+
+port: 9000
+dependency: java11
+req: t2.medium
+
+STEUP:
+
+#! /bin/bash
+#Launch an instance with 9000 and t2.medium
+cd /opt/
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-8.9.6.50800.zip
+unzip sonarqube-8.9.6.50800.zip
+amazon-linux-extras install java-openjdk11 -y
+useradd sonar
+chown sonar:sonar sonarqube-8.9.6.50800 -R
+chmod 777 sonarqube-8.9.6.50800 -R
+su - sonar
+
+#run this on server manually
+cd /opt/sonarqube-8.9.6.50800/bin/linux/
+sh sonar.sh start
+sh sonar.sh status
+
+#echo "user=admon & password=admin"
+
+
+public-ip:9000
+add project -- > name -- > token -- > continue -- > maven -- > copy paste commands on pipeline
+
+
+PIPELINE:
+
+pipeline {
+    agent {
+        label 'slave2'
+    }
+    
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/RAHAMSHAIK007/jenkins-java-project.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('code quality') {
+            steps {
+                sh '''
+                mvn sonar:sonar \
+                  -Dsonar.projectKey=netflix \
+                  -Dsonar.host.url=http://35.181.58.222:9000 \
+                  -Dsonar.login=daf4f7f46f0598a9c800ee6cc5010bf9980a2e03
+                '''
+            }
+        }
+        stage('artifact') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+    }
+}
+
+LINKED JOBS: one job is going to link with other job.
+1. up stream:
+2. down stream:
+
+create 2 jobs job-1, job-2
+
+job-1 -- > confiogure -- > Post-build Actions -- > Build other projects -- > job-2 -- > save
+
+
+TASK:
+Creata a master and slave.
+1. job-1: build and test the code
+2. job-2: run code quality
+
+if we trigger job-1 then job-2 need to be teigger automatically.
+but job-1 need to trigger itself.
