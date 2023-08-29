@@ -634,3 +634,107 @@ Creata a master and slave.
 
 if we trigger job-1 then job-2 need to be teigger automatically.
 but job-1 need to trigger itself.
+
+=========================================
+
+
+TOMCAT:
+it is application server.
+used to deploy java applications
+its free and platform independent.
+it is given by apache software foundations.
+Here we can deploy jar and war files.
+
+SETUP:
+1. wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
+2. tar -zxvf apache-tomcat-9.0.80.tar.gz && cd apache-tomcat-9.0.80
+3. vim webapps/manager/META-INF/context.xml  (delete line 21 and 22)
+4. vim conf/tomcat-users.xml (copy paste those lines in last)
+
+
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <user username="tomcat" password="raham123" roles="manager-gui, manager-script"/>
+
+5. ./bin/startup.sh
+6. login: public-ip:8080 -- > manager app -- > username: tomcat passowrd:raham123 -- > enter
+
+DOWNLOAD THE PLUGIN: Deploy to container
+ADD CREDS:
+Manage jenkins -- > credentials -- > global -- > add credentials -- > kind: username with password -- > user: tomcat password: raham123 -- > save
+
+
+TROUBLESHOOT SCENARIOS:
+1. SONARQUBE:
+start the server and start serice also
+update the public ip on pipeline.
+
+2. DEPLOY:
+credntails:
+
+
+Logs: tail -100f /root/apache-tomcat-9.0.80/logs/catalina.out
+Port Changing:  vim /root/apache-tomcat-9.0.80/conf/server.xml
+line 69: 8080=8090 -- > save -- > shutdown and start the tomcat using scripts
+
+
+
+
+
+pipeline {
+    agent {
+        label 'slave2'
+    }
+    
+    stages {
+        stage('checkout') {
+            steps {
+                git 'https://github.com/devopsbyraham/jenkins-java-project.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('code quality') {
+            steps {
+                sh '''
+                mvn sonar:sonar \
+                  -Dsonar.projectKey=new \
+                  -Dsonar.host.url=http://15.236.204.150:9000 \
+                  -Dsonar.login=4c2af25ea47794c3c8e9ccbb2e347c2e7b2dd7e2
+                '''
+            }
+        }
+        stage('artifact') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('deploy') {
+            steps {
+                deploy adapters:[
+                    tomcat9(
+                        credentialsId: '47267833-b417-45ab-a351-5014ab1b50d4',
+                        path: '',
+                        url: 'http://35.180.97.49:8080/'
+                        )
+                    ],
+                    contextPath: 'netflix',
+                    war: 'target/*.war'
+            }
+        }
+    }
+}
+
+
+
+
+
+35.180.97.49:8090/netflixxx/
