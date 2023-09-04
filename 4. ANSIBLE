@@ -97,5 +97,45 @@ ansible all -a "systemctl status httpd"
 ansible all -a "useradd raham"
 ansible all -a "cat /etc/passwd"
 
+HISTORY:
+
+  1  passwd root
+    2  vim /etc/ssh/sshd_config
+    3  systemctl restart sshd
+    4  systemctl status sshd
+    5  amazon-linux-extras install ansible2 -y
+    6  yum install python3 python-pip python-dlevel -y
+    7  vim /etc/ansible/hosts
+    8  ansible all -m setup
+    9  ssh-keygen
+   10  ls -al
+   11  ll .ssh
+   12  ssh-copy-id root@172.31.46.151
+   13  ll .ssh
+   14  ssh 172.31.46.151
+   15  ssh-copy-id root@172.31.36.14
+   16  ssh 172.31.36.14
+   17  ssh-copy-id root@172.31.34.187
+   18  ssh 172.31.34.187
+   19  ssh-copy-id root@172.31.35.145
+   20  ssh 172.31.35.145
+   21  ansible all -m setup
+   22  ansible all -m ping
+   23  git --version
+   24  mvn --version
+   25  ansible dev -a "yum install git -y"
+   26  ansible test -a "yum install git -y"
+   27  ansible all -a "yum install maven -y"
+   28  ansible all -a "touch file1"
+   29  ansible all -a "ls"
+   30  ansible all -a "touch file2"
+   31  ansible all -a "ll"
+   32  ansible all -a "ls"
+   33  ansible all -a "useradd raham"
+   34  ansible all -a "cat /etc/passwd"
+   35  ansible all -a "yum install httpd -y"
+   36  ansible all -a "systemctl start httpd"
+   37  ansible all -a "systemctl status httpd"
+   38  history
 
 ============================================================================================================
