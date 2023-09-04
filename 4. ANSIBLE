@@ -1,0 +1,101 @@
+ANSIBLE:
+Its a configuration management too1.
+
+Configuration= Software & Hardware props of server
+Management= Installing, deleting, updating 
+
+Automate= serve creation, Software installation, Deployment
+you can do automation in more than one server.
+
+python is dependency for ansible.
+we use yaml to write the code.
+yml=yet another markup language
+It is free and opensource.
+It is agent less.
+Agent less means no need to install any package in worker node.
+
+HISTORY:
+2012 -- > maichel dehaan -- > RedHat 
+we can use ansible in amazon linux, ubuntu, RedHat, Centos -----
+
+
+COMPONENTS:
+MASTER NODE: it will communicate and work with worker node.
+WORKER NODE: it will execute the instructions of master node.
+INEVNTORY: it wiil store the information of worker nodes.
+PLAYBOOK: its the way of doing work with anisble. 
+
+
+SETUP:
+Create 5 servers (1=ansible 2=dev 2=test)
+Connect all servers to mobaxterm
+
+ALL SERVERS: (use multi execution mod)
+sudo -i
+1. hostnamectl set-hostname ansible/dev-1/dev-2/test-1/test-2
+sudo -i
+
+2. passwd root #to login to worker nodes
+3. vim /etc/ssh/sshd_config (uncomment: 38 , no=yes: 63)
+4. systemctl restart sshd
+5. systemctl status sshd
+
+ANSIBLE SERVER:
+amazon-linux-extras install ansible2 -y
+yum install python python-pip python-dlevel -y
+vim /etc/ansible/hosts   (inventory file)  (below: 12 th line)
+
+[dev]
+172.31.81.244
+172.31.93.180
+
+[test]
+172.31.91.255
+172.31.93.101
+
+
+ssh-keygen  -- > enter 4 times
+ssh-copy-id root@private_ip of dev-1 -- > yes -- > password 
+ssh private_ip of dev-1
+ctrl + d
+
+ssh-copy-id root@private_ip of dev-2 -- > yes -- > password 
+ssh private_ip of dev-2
+ctrl + d
+
+ssh-copy-id root@private_ip of test-1 -- > yes -- > password 
+ssh private_ip of test-1
+ctrl + d
+
+ssh-copy-id root@private_ip of test-2 -- > yes -- > password 
+ssh private_ip of test-2
+ctrl + d
+
+ansible all -m setup 	: gives complete info about nodes
+ansible all -m ping	: gives the connection response
+
+
+COLORS:
+YELLOW	: SUCCESS
+RED	: FAILED
+GREEN	: ALREADY DONE
+BLUE	: SKIPPED
+
+MODES OF WORKING
+1. ADHOC COMMANDS:
+its a simple linux commands.
+we can use it for temperory works.
+this commands will be overrided.
+
+ansible all -a "ls"
+ansible all -a "touch abc.txt"
+ansible all -a "yum install git -y"
+ansible all -a "yum install java-1.8.0-openjdk -y"
+ansible all -a "yum install httpd -y"
+ansible all -a "systemctl start httpd"
+ansible all -a "systemctl status httpd"
+ansible all -a "useradd raham"
+ansible all -a "cat /etc/passwd"
+
+
+============================================================================================================
