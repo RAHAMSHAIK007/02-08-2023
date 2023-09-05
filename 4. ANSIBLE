@@ -139,3 +139,156 @@ HISTORY:
    38  history
 
 ============================================================================================================
+
+
+MODULES:
+it is a key-value pair.
+and also called as dictionary.
+we can resue the moudules.
+
+ansible all -m yum -a "name=git state=present"   (present = install)
+ansible all -m yum -a "name=maven state=latest" (update = latest)
+ansible all -m yum -a "name=maven state=present" (absent = uninstall)
+ansible all -m service -a "name=httpd state=stopped" (started = start)
+ansible all -m service -a "name=httpd state=stopped" (stopped = stop)
+ansible all -m user -a "name=vijay state=present"
+ansible all -m user -a "name=radika state=present"
+ansible all -a "cat /etc/passwd"
+ansible dev -m copy -a "src=raham.txt dest=/root"
+ansible dev -a "ls"
+
+INVENTORY HOST PATTREN:
+ansible all --list-host
+ansible all[0] --list-host
+ansible dev --list-host
+ansible test --list-host
+
+DIS: we can only use single module at time.
+
+PLAYBOOKS:
+its a collection of modules.
+we can run multiple modules at a single time.
+playbook can be use to automate work.
+we can reuse the playbooks.
+playbook works on yaml syntax.
+yaml syntax is key-value pair.
+playbook extension is .yml or .yaml
+
+SYNTAX:
+playbook start with --- and end with ...
+it contains a list of values
+each value is going to start at 3rd letter.
+: is the seperation of key and value.
+
+YMAL SYNTAX EXAMPLE:
+name: raham
+loc: hyderabad
+profession: devops
+age: **
+
+
+Gathering Facts means to get info of worker nodes
+it is default task perform by ansible playbook
+
+TO REMOVE GATHER FACTS:   gather_facts: false
+
+PLAYBBOK-1: MULTI MODULE PLAYBOOK
+
+vim playbook1.yml
+
+- hosts: all
+  tasks:
+    - name: install apache
+      yum: name=httpd state=present
+
+    - name: restart apache
+      service: name=httpd state=started
+
+    - name: create user
+      user: name=vishu state=present
+
+    - name: copy file
+      copy: src=raham.txt dest=/tmp
+
+ansible-playbook playbook1.yml
+
+ansible all -a "yum remove httpd* -y"
+
+===========================================================
+
+TAGS: used to execute or skip a particulat task in playbook
+
+- hosts: all
+  tasks:
+    - name: install apache
+      yum: name=httpd state=present
+      tags: a
+
+    - name: restart apache
+      service: name=httpd state=started
+      tags: b
+
+    - name: create user
+      user: name=vishu state=present
+      tags: c
+
+    - name: copy file
+      copy: src=raham.txt dest=/opt
+      tags: d
+
+SINGLE TAG: ansible-playbook playbook1.yml --tags a
+MULTI TAGS: ansible-playbook playbook1.yml --tags b,c
+ansible all -a "yum remove httpd* -y"
+
+SINGLE SKIP TAGS: ansible-playbook playbook1.yml --skip-tags "c"
+MULTI SKIP TAGS: ansible-playbook playbook1.yml --skip-tags "a,b"
+
+HISTORY:
+ 41  ansible all -m ping
+   42  ansible all -m "yum remove git* httpd* maven* -y"
+   43  ansible all -a "yum remove git* httpd* maven* -y"
+   44  ansible all -m yum -a "name=git state=present"
+   45  ansible all -m yum -a "name=maven state=present"
+   46  ansible all -m yum -a "name=maven state=absent"
+   47  ansible all -m yum -a "name=maven state=present"
+   48  ansible all -m yum -a "name=maven state=latest"
+   49  ansible all -m yum -a "name=httpd state=present"
+   50  ansible all -m yum -a "name=httpd state=started"
+   51  ansible all -m service -a "name=httpd state=started"
+   52  ansible all -m service -a "name=httpd state=stopped"
+   53  ansible all -m user -a "name=vijay state=present"
+   54  ansible all -a "cat /etc/passwd"
+   55  ansible all -m user -a "name=radhika state=present"
+   56  ansible all -a "cat /etc/passwd"
+   57  ll
+   58  vim raham.txt
+   59  ll
+   60  ansible all --list-hosts
+   61  ansible dev --list-hosts
+   62  ansible test --list-hosts
+   63  ansible all[0] --list-hosts
+   64  ansible all[1] --list-hosts
+   65  ansible test[0] --list-hosts
+   66  ll
+   67  ansible dev -m copy -a "src=raham.txt destination=/root"
+   68  ansible dev -m copy -a "src=raham.txt dest=/root"
+   69  ansible dev -a "ls"
+   70  ansible all -a "yum remove git* maven* httpd* -y"
+   71  vim playbook1.yml
+   72  ansible-playbook playbook1.yml
+   73  rm -rf *
+   74  vim playbook1.yml
+   75  ansible all -a "yum remove httpd* -y"
+   76  vim playbook1.yml
+   77  cat playbook1.yml
+   78  ansible-playbook playbook1.yml --tags a
+   79  ansible-playbook playbook1.yml --tags b,c
+   80  cat playbook1.yml
+   81  ansible all -a "yum remove httpd* -y"
+   82  cat playbook1.yml
+   83  ansible-playbook playbook1.yml --skip-tags "c"
+   84  ansible-playbook playbook1.yml --skip-tags "a,b,d"
+   85  vim playbook1.yml
+   86  ansible-playbook playbook1.yml --skip-tags "a,b,d"
+   87  cat playbook1.yml
+   88  history
