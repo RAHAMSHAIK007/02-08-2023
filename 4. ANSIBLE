@@ -292,3 +292,204 @@ HISTORY:
    86  ansible-playbook playbook1.yml --skip-tags "a,b,d"
    87  cat playbook1.yml
    88  history
+====================================================================================================
+
+CLUSTER : GROUP OF SERVERS
+HOMOGENIUS CLUSTER	: ALL SERVERS OS FLAVOURS ARE SAME
+HETROGENIUS CLUSTER	: ALL SERVERS OS FLAVOURS ARE DIFFERENT
+
+CONDITIONS: used when we have hetrogenius clusters.
+
+- hosts: all
+  tasks:
+    - name: install apache on redhat
+      yum: name=httpd state=present
+      when: ansible_os_family == "RedHat"
+
+    - name: install apache on ubuntu
+      apt: name=apache2 state=present
+      when: ansible_os_family == "Debian"
+
+
+- hosts: all
+  tasks:
+    - name: install tree on RedHat
+      yum: name=tree state=present
+      when: ansible_os_family == "RedHat"
+
+    - name: install tree on Ubuntu
+      apt: name=tree state=present
+      when: ansible_os_family == "Debian"
+
+
+
+ansible dev[0] -m setup
+ansible dev[0] -m setup | grep family -i
+ansible dev[0] -m setup | grep cpus -i
+ansible dev[0] -m setup | grep mem -i
+
+
+
+HANDLERS:
+one task is going to call another task.
+when task-1 is finish the notify module will call other task.
+
+
+- hosts: all
+  tasks:
+    - name: install httpd
+      yum: name=httpd state=present
+      notify: restart httpd
+
+  handlers:
+    - name: restart httpd
+      service: name=httpd state=started
+
+
+- hosts: all
+  tasks:
+    - name: install docker
+      yum: name=docker state=present
+      notify: restart docker
+
+  handlers:
+    - name: restart docker
+      service: name=docker state=started
+
+LOOPS: to do multiple operations repetetively
+
+- hosts: all
+  tasks:
+    - name: install packages
+      yum: name={{item}} state=present
+      with_items:
+        - git
+        - java-1.8.0-openjdk
+        - docker
+        - httpd
+        - maven
+
+
+- hosts: all
+  tasks:
+    - name: install packages
+      yum: name={{item}} state=absent
+      with_items:
+        - git*
+        - java-1.8.0-openjdk*
+        - docker*
+        - httpd*
+        - maven*
+
+
+- hosts: all
+  tasks:
+    - name: create users
+      user: name={{item}} state=present
+      with_items:
+        - samar
+        - syed
+        - vishnu
+        - sampath
+        - revi
+
+- hosts: all
+  tasks:
+    - name: create users
+      user: name={{item}} state=absent
+      with_items:
+        - samar
+        - syed
+        - vishnu
+        - sampath
+        - revi
+
+
+SHELL VS COMMAND VS RAW:
+
+- hosts: all
+  tasks:
+    - name: install tree
+      shell: yum install tree -y
+
+    - name: install docker
+      command: yum install docker -y
+
+    - name: install httpd
+      raw: yum install httpd -y
+
+raw >> command >> shell 
+
+
+Linux: yum or apt
+python: pip
+
+
+- hosts: all
+  tasks:
+    - name: install pip module
+      shell: yum install pip -y
+
+    - name: installing NumPy
+      pip:
+        name: NumPy
+
+- hosts: all
+  tasks:
+    - name: install pip module
+      shell: yum install pip -y
+
+    - name: installing Pandas
+      pip:
+        name: Pandas
+
+HISTORY:
+
+  89  vim playbook1.yml
+   90  ansible all -a "yum remove httpd* -y"
+   91  ansible-playbook playbook1.yml
+   92  ansible setup -m dev[0]
+   93  ansible all --list-hosts
+   94  ansible setup -m 172.31.34.187
+   95  ansible dev[0] -m setup
+   96  ansible dev[0] -m setup | grep family -i
+   97  ansible dev[0] -m setup | grep cpus -i
+   98  ansible dev[0] -m setup | grep mem -i
+   99  vim playbook1.yml
+  100  ansible dev[1] -m setup | grep -i family
+  101  ansible-playbook playbook1.yml
+  102  vim playbook1.yml
+  103  ansible all -a "yum remove httpd* tree* -y"
+  104  vim playbook1.yml
+  105  ansible-playbook playbook1.yml
+  106  ansible all -a "systemctl status httpd"
+  107  vim playbook1.yml
+  108  ansible-playbook playbook1.yml
+  109  vim playbook1.yml
+  110  ansible all -a "yum remove httpd* docker* tree* -y"
+  111  ansible-playbook playbook1.yml
+  112  ansible all -a "git -v"
+  113  ansible all -a "mvn --version"
+  114  ansible all -a "java -version"
+  115  ansible all -a "docker --version"
+  116  ansible all -a "httpd --version"
+  117  vim playbook1.yml
+  118  ansible-playbook playbook1.yml
+  119  ansible all -a "mvn --version"
+  120  ansible all -a "httpd --version"
+  121  ansible all -a "docker --version"
+  122  vim playbook1.yml
+  123  ansible-playbook playbook1.yml
+  124  ansible all -a "cat /etc/passwd"
+  125  vim playbook1.yml
+  126  ansible-playbook playbook1.yml
+  127  vim playbook1.yml
+  128  ansible-playbook playbook1.yml
+  129  vim playbook1.yml
+  130  ansible-playbook playbook1.yml
+  131  vim playbook1.yml
+  132  ansible-playbook playbook1.yml
+  133  vim playbook1.yml
+  134  history
+
+=========================================================================================================================
