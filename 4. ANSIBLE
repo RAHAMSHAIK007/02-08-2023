@@ -489,6 +489,214 @@ HISTORY:
   130  ansible-playbook playbook1.yml
   131  vim playbook1.yml
   132  ansible-playbook playbook1.yml
+
+==============================================================================================================================================
+
+ROLES:
+its a way of organizing the playbooks.
+it will encapsulate the data.
+roles will divide the playbook and reduce length.
+it is used to execute the playbook from directories.
+
+
+mkdir playbook
+cd playbook/
+mkdir -p roles/pkgs/tasks/
+vim roles/pkgs/tasks/main.yml
+
+
+vim master.yml
+- hosts: test[1]
+  roles:
+    - abc
+
+
+
+tree structure:
+
+.
+├── master.yml
+└── roles
+    ├── abc
+    │   └── tasks
+    │       └── main.yml
+    ├── pkgs
+    │   └── tasks
+    │       └── main.yml
+    └── users
+        └── tasks
+            └── main.yml
+
+
+cat roles/pkgs/tasks/main.yml
+
+- name: installing pkgs
+  yum: name=git state=present
+  yum: name=maven state=present
+  yum: name=httpd state=present
+
+
+cat roles/users/tasks/main.yml
+
+- name: creating users
+  user: name={{item}} state=present
+  with_items:
+    - vishal
+    - praneeth
+    - gowrav
+    - kiranmai
+========================================================
+ANSIBLE GALAXY:
+its a place to store all the ansible roles.
+we can use other people roles also here.
+it will consist the community roles.
+we can upload and downalod our roles in ansible galaxy.
+
+
+ansible-galaxy search java
+ansible-galaxy install amtega.java
+ansible-galaxy search tomcat
+ansible-galaxy install akhilesh9589.tomcat
+ansible-galaxy search --author akhilesh9589
+ansible-galaxy search --author alikins
+
+
+ANSIBLE VAULT:
+it is used to secure the playbooks/files.
+data will be encrypted.
+technique: AES256 used by facebook
+
+vim playbook1.yml
+
+- hosts: all
+  tasks:
+    - name: pkg installation
+      yum: name=tree state=present
+
+ansible-vault create creds.txt	: to create a vault file
+ansible-vault edit creds.txt	: to edit a vault file
+ansible-vault rekey creds.txt	: to change password for a vault file
+ansible-vault encrypt creds.txt	: to encrypt the file
+ansible-vault decrypt creds.txt	: to decrypt the file
+ansible-vault view creds.txt	: to show the content without decrypt
+
+=======================================================
+ASYNCHRONOUS ACTIONS & POLLING:
+we use this for restricting the task for particular time
+within in the requested time only the task need to be complete
+if it takes more than requested time task will be failed
+
+
+- hosts: all
+  tasks:
+    - name: install git
+      command: sleep 40
+      async: 30
+      poll: 10
+
+    - name: install maven
+      yum: name=maven state=present
+
+
+STRATAGIES:
+
+LINEAR: execute tasks sequencially
+FREE: execute all tasks on all node at same time
+ROLLING:
+SEQUENC:
+BATCH:
+
+history:
+ 135  cat playbook1.yml
+  136  rm -rf *
+  137  mkdir playbook
+  138  cd playbook/
+  139  mkdir -p roles/pkgs/tasks/
+  140  vim roles/pkgs/tasks/main.yml
+  141  vim master.yml
+  142  yum install tree -y
+  143  tree
+  144  cat roles/pkgs/tasks/main.yml
+  145  cat master.yml
+  146  ansible-playbook master.yml
+  147  ansible all -a "yum remove git* httpd* maven* -y"
+  148  ansible-playbook master.yml
+  149  tree
+  150  mdkir -p roles/users/tasks
+  151  mkdir -p roles/users/tasks
+  152  tree
+  153  vim roles/users/tasks/main.yml
+  154  vim master.yml
+  155  ansible-playbook master.yml
+  156  vim master.yml
+  157  ansible-playbook master.yml
+  158  tree
+  159  cat master.yml
+  160  mkdir roles/abc/tasks
+  161  mkdir -p roles/abc/tasks
+  162  vim roles/abc/tasks/main.yml
+  163  tree
+  164  vim master.yml
+  165  ansible-playbook master.yml
+  166  tree
+  167  cat master.yml
+  168  cat roles/pkgs/tasks/main.yml
+  169  cat roles/users/tasks/main.yml
+  170  cd
+  171  rm -rf *
+  172  ll
+  173  ansible-galaxy search java
+  174  ansible-galaxy install alikins.java
+  175  ansible-galaxy install amtega.java
+  176  ll
+  177  ll .ansible/roles/amtega.java/
+  178  ll .ansible/roles/amtega.java/vars/
+  179  cat .ansible/roles/amtega.java/vars/main.yml
+  180  ansible-galaxy search tomcat
+  181  ansible-galaxy install alikins.tomcat6
+  182  ansible-galaxy install akhilesh9589.tomcat
+  183  ll .ansible/roles/akhilesh9589.tomcat/
+  184  ansible-galaxy search --author akhilesh9589
+  185  ansible-galaxy search --author alikins
+  186  rm -rf *
+  187  vim playbook1.yml
+  188  cat playbook1.yml
+  189  ansible-vault create playbook2.yml
+  190  ll
+  191  cat playbook2
+  192  cat playbook2.yml
+  193  ansible-vault create creds.txt
+  194  cat creds.txt
+  195  ll
+  196  ansible-vault edit creds.txt
+  197  ansible-vault rekey creds.txt
+  198  cat creds.txt
+  199  ansible-vault decrypt creds.txt
+  200  cat creds.txt
+  201  ansible-vault encrypt creds.txt
+  202  cat creds.txt
+  203  ansible-vault view creds.txt
+  204  cat creds.txt
+  205  ll
+  206  cat playbook1.yml
+  207  ansible-vault encrypt playbook1.yml
+  208  cat playbook1.yml
+  209  ansible-vault decrypt playbook1.yml
+  210  cat playbook1.yml
+  211  ansible-vault encrypt playbook1.yml
+  212  ll
+  213  ansible-playbook playbook1.yml
+  214  ansible-vault decrypt playbook1.yml
+  215  ansible-playbook playbook1.yml
+  216  mv playbook2.yml /tmp/
+  217  ll
+  218  mv /tmp/playbook2.yml .
+  219  ll
+  220  rm -rf *
+  221  ll
+  222  vim play.yml
+  223  ansible-playbook play.yml
+
   133  vim playbook1.yml
   134  history
 
