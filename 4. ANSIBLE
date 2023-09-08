@@ -701,3 +701,65 @@ history:
   134  history
 
 =========================================================================================================================
+
+
+- hosts: all
+  tasks:
+    - name: print msg
+      debug:
+        msg: hai all my ansible servers flavour is "{{ansible_os_family}}"
+
+
+======================
+NETFLIX DEPLOYMENT:
+
+- hosts: dev
+  tasks:
+    - name: installing apache server
+      yum: name=httpd state=present
+
+    - name: activating apache server
+      service: name=httpd state=started
+
+    - name: installing git
+      yum: name=git state=present
+
+    - name: git checkout
+      git:
+        repo: "https://github.com/RAHAMSHAIK007/netflix-clone.git"
+        dest: "/var/www/html"
+
+HISTORY:
+ 235  ansible-playbook playbook1.yml --check
+  236  rm -rf *
+  237  vim playbook1.yml
+  238  ansible-playbook playbook1.yml
+  239  vim playbook1.yml
+  240  ansible-playbook playbook1.yml
+  241  ansible setupm -m dev[0]
+  242  ansible setup -m dev[0]
+  243  ansible dev[0] -m setup
+  244  vim playbook1.yml
+  245  ansible all -a "yum remove git* httpd* -y"
+  246  ansible-playbook playbook1.yml
+  247  vim playbook1.yml
+  248  ansible-playbook playbook1.yml
+  249  vim playbook1.yml
+  250  ansible-playbook playbook1.yml
+  251  vim playbook1.yml
+  252  vim tomcat-users.xml
+  253  ll
+  254  vim playbook1.yml
+  255  vim context.xml
+  256  vim playbook1.yml
+  257  ll
+  258  ansible-playbook playbook1.yml
+  259  vim playbook1.yml
+  260  ansible-playbook playbook1.yml
+  261  vim playbook1.yml
+  262  cat tomcat-users.xml
+  263  cat playbook1.yml
+  264  ll
+  265  cat playbook1.yml
+  266  ansible-playbook playbook1.yml
+  267  cat tomcat-users.xml
