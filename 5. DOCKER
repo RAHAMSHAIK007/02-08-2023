@@ -1,0 +1,124 @@
+MONOLITHIC: multiple services are deployed on single server with single database.
+
+MICRO SERVICES: multiple services are deployed on multiple servers with multiple database.
+
+CONTAINERS:
+its same as a server/vm.
+it will not have any operating system.
+os will be on images.
+(SERVER=AMI, CONTAINER=IMAGE)
+
+DOCKER: 
+Its an free & opensource tool.
+it is platform independent.
+used to create, run & deploy applications containers.
+it is introduced on 2013 by solomenhykes & sebastian phal.
+We used GO laguage to develope the docker.
+here we write files on YAML.
+before docker user faced lot of problems, but after docker there is no issues with the application.
+
+
+CONTAINERIZATION:
+Process of packing an application with its dependencies.
+ex: PUBG
+
+os level of virtualization.
+
+VIRTUALIZATION:
+able to create resouce with our hardware properties.
+
+ARCHITECTURE & COMPONENTS:
+client: it will interact with user
+user gives commands and it will be executed by docker client
+
+daemon: manages the docker components(images, containers, volumes)
+
+host: where we install docker (ex: linux, windows, macos)
+
+Registry: manages the images.
+
+ARCHITECTURE OF DOCKER:
+yum install docker -y    #client
+systemctl start docker	 #client,Engine
+systemctl status docker
+
+
+COMMANDS:
+docker pull ubuntu	: pull ubuntu image
+docker images		: to see list of images
+docker run -it --name cont1 ubuntu : to create a container
+-it (interactive) - to go inside a container
+cat /etc/os-release	: to see os flavour
+
+
+apt update -y	: to update 
+redhat=yum
+ubuntu=apt
+without update we cant install any pkg in ubuntu
+
+
+apt install git -y
+apt install apache2 -y
+service apache2 start
+service apache2 status
+
+docker p q		: to exit container
+docker ps -a		: to list all containers
+docker attach cont_name	: to go inside container
+docker stop cont_name	: to stop container
+docker start cont_name	: to start container
+docker pause cont_name	: to pause container
+docker unpause cont_name: to unpause container
+docker inspect cont_name: to get complete info of a container
+docker rm cont_name	: to delete a container
+
+HISTORY:
+   1  yum install docker -y
+    2  systemctl start docker
+    3  systemctl status docker
+    4  docker images
+    5  docker container ls
+    6  docker version
+    7  docker pull amazonlinux
+    8  docker images
+    9  docker run -it --name cont1 amazonlinux
+   10  docker container ls
+   11  docker container ls -a
+   12  docker images
+   13  cd /
+   14  du -sh
+   15  cd
+   16  docker pull ubuntu
+   17  docker run -it --name cont2 ubuntu
+   18  docker container ls
+   19  docker container ls -a
+   20  docker attach cont2
+   21  docker container ls -a
+   22  docker ps -a
+   23  docker stop cont2
+   24  docker ps -a
+   25  docker start cont2
+   26  docker ps -a
+   27  docker kill cont2
+   28  docker ps -a
+   29  docker start cont2
+   30  docker ps -a
+   31  docker pause cont2
+   32  docker ps -a
+   33  docker unpause cont2
+   34  docker ps -a
+   35  docker inspect cont2
+   36  docker rm cont2
+   37  docker kill cont2
+   38  docker rm cont2
+   39  docker ps -a
+   40  docker rm cont1
+   41  docker ps -a
+   42  docker run -it --name cont2 ubuntu
+   43  docker ps -a
+   44  docker stop cont2
+   45  docker ps -a
+   46  docker start cont2
+   47  docker kill cont2
+   48  yum install docker -y
+   49  history
