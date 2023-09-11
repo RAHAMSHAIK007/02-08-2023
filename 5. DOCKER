@@ -122,3 +122,227 @@ HISTORY:
    47  docker kill cont2
    48  yum install docker -y
    49  history
+
+==================================================
+
+DAY-02:
+
+OS-LEVEL OF VIRTAULIZATION:
+
+docker pull ubuntu
+docker run -it --name cont1 ubuntu
+
+1  apt update -y
+2  apt install apache2 -y
+3  apt install mysql-server -y
+4  apt install default-jre default-jdk -y
+5  touch file{1..5}
+
+docker commit cont1 image1
+docke run -it --name cont2 image1
+
+DOCKERFILE:
+it is an automation way to create image.
+here we use components to create image.
+in Dockerfile D must be Capiatl.
+Components also capital.
+here we can create image directly without container help.
+
+
+COMPONENTS:
+
+FROM		: used to base image
+RUN		: used to run linux commands (image creation)
+CMD		: used to run linux commands (container creation)
+ENTRYPOINT	: high priority than cmd
+COPY		: to copy local files to conatiner
+ADD		: to copy internet files to conatiner
+WORKDIR		: to open req directory
+LABEL		: to add labels for docker file
+ENV		: to set env variables (inside container)
+ARGS		: to pass env variables (outside containers)
+EXPOSE		: to give port number
+
+EX1:
+Vim Dockerfile
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+RUN apt install mysql-server -y
+
+To run: docker build -t raham:v1 .
+docker images
+docker run -it --name cont3 raham:v1 
+
+EX-2:
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+RUN apt install mysql-server -y
+RUN apt install default-jre default-jdk -y
+
+To run: docker build -t raham:v2 .
+docker images
+docker run -it --name cont4 raham:v2 
+
+EX-3:
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+RUN apt install mysql-server -y
+RUN apt install default-jre default-jdk -y
+CMD apt install maven -y
+
+To run: docker build -t raham:v3 .
+docker images
+docker run -it --name cont5 raham:v3
+
+EX-4:
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+RUN apt install mysql-server -y
+COPY index.html /tmp
+ADD http://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz /tmp
+
+To run: docker build -t raham:v4 .
+docker images
+docker run -it --name cont6 raham:v4
+
+EX-5:
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+RUN apt install mysql-server -y
+COPY index.html /tmp
+ADD http://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz /tmp
+WORKDIR /tmp
+LABEL author rahamshaik
+
+EX-6:
+
+FROM ubuntu
+RUN apt update -y
+RUN apt install apache2 -y
+RUN apt install mysql-server -y
+COPY index.html /tmp
+ADD http://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz /tmp
+WORKDIR /tmp
+LABEL author rahamshaik
+ENV client swiggy
+ENV conatiner appcontainer
+EXPOSE 8080
+
+TO STOP ALL CONTAINERS:
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+NETFLIX APP DEPLOYMENT ON CONTAINER:
+
+Vim Dockerfile
+
+FROM ubuntu
+RUN apt-get update -y
+RUN apt-get install apache2 -y
+COPY * /var/www/html/
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+
+git clone https://github.com/RAHAMSHAIK007/netflix-clone.git
+mv netflix-clone/* .
+
+docker build -t netflix:v1 .
+docker run -itd --name cont1 -p 80:80 netflix:v1
+
+HISTORY:
+
+ 32  yum install docker -y
+   33  docker version
+   34  docker pull ubuntu
+   35  systemctl start docker
+   36  systemctl status docker
+   37  docker pull ubuntu
+   38  docker run -it --name cont1 ubuntu
+   39  docker ps -a
+   40  docker image
+   41  docker ps -a
+   42  docker images
+   43  docker commit cont1 img1
+   44  docker images
+   45  docker run -it --name cont2 img1
+   46  vim Dockerfile
+   47  docker build -t raham:v1 .
+   48  docker images
+   49  docker run -it --name cont3 raham:v1
+   50  vim Dockerfile
+   51  docker build -t raham:v2 .
+   52  docker images
+   53  docker run -it --name cont4 raham:v2
+   54  vim Dockerfile
+   55  docker build -t raham:v3 .
+   56  vim Dockerfile
+   57  docker rmi raham:v3
+   58  docker build -t raham:v3 .
+   59  docker run -it --name cont5 raham:v3
+   60  docker ps -a
+   61  vim Dockerfile
+   62  docker build -t raham:v4 .
+   63  ll
+   64  vim index.html
+   65  docker build -t raham:v4 .
+   66  docker run -it --name cont6 raham:v4
+   67  vim Dockerfile
+   68  dockrer build -t raham:v4 .
+   69  docker build -t raham:v4 .
+   70  docker run -it --name cont7 raham:v4
+   71  docker inspect cont7
+   72  vim Dockerfile
+   73  docker build -t raham:v4 .
+   74  docker run -it --name cont8 raham:v4
+   75  vim Dockerfile
+   76  vim index.html
+   77  docker build -t netflix:v1 .
+   78  docker run -it --name netflix -p 80:81 netflix:v1
+   79  docker run -it --name nfappcont -p 80:82 netflix:v1
+   80  docker ps
+   81  docker ps -a
+   82  docker logs 0f6f6aae0243
+   83  docker ps -a -q
+   84  docker stop $(docker ps -a -q)
+   85  docker ps -a
+   86  docker rm $(docker ps -a -q)
+   87  vim Dockerfile
+   88  docker build -t raham:v9 .
+   89  docker run -itd --name cont1 -p 80:80 raham:v9
+   90  docker ps
+   91  git clone https://github.com/RAHAMSHAIK007/netflix-clone.git
+   92  ll
+   93  vim Dockerfile
+   94*
+   95  ll
+   96  docker build -t raham:v9 .
+   97  docker run -it --name cont2 -p 80:81 raham:v9
+   98*
+   99  docker ps -a
+  100  docker ps -a -q
+  101  docker kill $(docker ps -a -q)
+  102  docker stop $(docker ps -a -q)
+  103  docker rm $(docker ps -a -q)
+  104  docker run -itd --name cont1 -p 80:81 raham:v9
+  105  docker ps -a
+  106  docker run -itd --name cont1 -p 80:82 raham:v9
+  107  docker run -itd --name cont3 -p 80:83 raham:v9
+  108  docker run -itd --name cont3 -p 81:80 raham:v9
+  109  docker run -itd --name raham 84:80 raham:v1
+  110  docker run -itd --name raham1 -p 85:80 raham:v8
+  111  docker run -itd --name cont7 -p 86:80 raham:v9
+  112  docker ps -a
+  113  docker run -itd --name cont2 -p 82:80 raham:v9
+  114  vim Dockerfile
+  115  history
+
+==================================================================================================================
