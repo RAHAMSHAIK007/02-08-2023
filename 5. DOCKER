@@ -346,3 +346,167 @@ HISTORY:
   115  history
 
 ==================================================================================================================
+
+DAY-03:
+VOLUMES:
+It is used to store data inside container.
+volume is a simple directory inside container.
+containers uses host resources (cpu, ram, rom).
+single volume can be shared to multiple containers.
+ex: cont-1 (vol1)  --- > cont2 (vol1) & cont3 (vol1) & cont4 (vol1)
+at a time we can share single volume to single container only.
+
+METHOD-1:
+DOCKER FILE:
+
+FROM ubuntu
+VOLUME ["/volume1"]
+
+docker build -t raham:v1 .
+docker run -it --name cont1 raham:v1
+cd volume1/
+touch file{1..5}
+cat>file1
+ctrl p q
+
+docker run -it --name cont2 --volumes-from cont1 --privileged=true  ubuntu
+
+METHOD-2:
+FROM CLI:
+
+docker run -it --name cont3 -v volume2 ubuntu
+cd volume1/
+touch java{1..5}
+ctrl p q
+
+docker run -it --name cont4 --volumes-from cont3 --privileged=true ubuntu
+
+METHOD-3: VOLUME MOUNTING
+
+docker volume ls 		: to list volumes
+docker volume create name	: to create volume
+docker volume inspect volume3	: to get info of volume3
+cd /var/lib/docker/volumes/volume3/_data 
+touch python{1..5}
+docker run -it --name cont5 --mount source=volume3,destination=/volume3 ubuntu
+docker volume rm 	: to delete volumes
+docker volume prune	: to delete unused volumes
+
+HOST -- > CONTAINER:
+
+cd /root
+touch raham{1..5}
+docker volume inspect volume4
+cp * /var/lib/docker/volumes/volume4/_data
+docker attach cont6 
+ls /volume4
+
+DOCKER SYSTEM COMMANDS:
+used to know complete info about the docker elements
+
+docker system df : to give info of docker objects
+docker system df -v
+docker inspect cont4 | grep volume -i
+docker inspect cont5 | grep volume -i
+docker system prune : to remove unused objects of docker
+
+DOCKER MEMORY MANAGEMENT:
+conatiners uses our host resources (cpu, mem)
+by default we dont have any limits for containers
+we need to set it
+docker run -itd --name cont3 --memory="200mb" --cpus="0.2" ubuntu
+docker inspect cont3
+docker stats
+
+HISTORY:
+
+ 1  yum install docker -y
+    2  docker version
+    3  docker pull ubuntu
+    4  systemctl start docker
+    5  systemctl status docker
+    6  ll
+    7  rm -rf *
+    8  vim Dockerfile
+    9  docker build -t raham:v1 .
+   10  docker run -it --name cont1 raham:v1
+   11  docker ps -a
+   12  docker run -it --name cont2 --volumes-from cont1 --privileged=true  ubuntu
+   13  docker run -it --name cont3 -v volume2 ubuntu
+   14  docker run -it --name cont4 --volumes-from cont3 --privileged=true ubuntu
+   15  docker kill $(docker ps -a -q)
+   16  docker rm $(docker ps -a -q)
+   17  docker volume rm volume1 volume2
+   18  docker volume rm volume1
+   19  docker volume
+   20  docker volume ls
+   21  docker volume rm 1636d0d0813d5ccf074d052c21e74c8359290ef07b10b9da8f3dd2f4bf156b7a
+   22  docker volume rm 66584189205bf6c28c44fa648de2a4ef26f024cfb500ab646076cd4118d070d6
+   23  vim Dockerfile
+   24  docker build -t raham:v1 .
+   25  docker run -it --name cont1 raham:v1
+   26  docker run -it --name cont2 --volumes-from cont1 --privileged=true  ubuntu
+   27  docker run -it --name cont3 -v volume2 ubuntu
+   28  docker run -it --name cont4 --volumes-from cont3 --privileged=true ubuntu
+   29  docker volume ls
+   30  docker volume create volume3
+   31  docker volume ls
+   32  docker volume inspect volume3
+   33  cd /var/lib/docker/volumes/volume3/_data
+   34  touch python{1..5}
+   35  ll
+   36  docker run -it --name cont5 --mount source=volume3,destination=volume3 ubuntu
+   37  docker run -it --name cont5 --mount source=/volume3,destination=/volume3 ubuntu
+   38  dockrer volume ls
+   39  dockre volume ls
+   40  docker volume ls
+   41  docker run -it --name cont5 --mount source=volume3, destination=volume3 ubuntu
+   42  docker run -it --name cont5 --mount source=volume3 destination=volume3 ubuntu
+   43  docker run -it --name cont5 --mount "source=volume3,destination=volume3" ubuntu
+   44  docker run -it --name cont5 --mount source=volume3,destination=/volume3 ubuntu
+   45  ll
+   46  touch python{6..10}
+   47  docker attach cont5
+   48  docker volume create volume4
+   49  docker volume inspect volume4
+   50  cd /var/lib/docker/volumes/volume4/_data
+   51  touch php{1..5}
+   52  ll
+   53  docker run -it --name cont6 --mount source=volume4,destination=/volume4 ubuntu
+   54  docker attach cont6
+   55  ll
+   56  docker volume ls
+   57  cd
+   58  ll
+   59  pwd
+   60  touch raham{1..5}
+   61  ll
+   62  docker inspect volume4
+   63  cp * /var/lib/docker/volumes/volume4/_data
+   64  cd /var/lib/docker/volumes/volume4/_data
+   65  ll
+   66  docker attach cont6
+   67  pwd
+   68  cd
+   69  docker system -v
+   70  docker system df
+   71  docker system df -v
+   72  docker inspect cont4 | grep -i volume
+   73  docker inspect cont3 | grep -i volume
+   74  docker inspect cont6 | grep -i volume
+   75  docker volume create volume5
+   76  docker pull amazonlinux
+   77  docker system prune
+   78  docker kill $(docker ps -a -q)
+   79  docker system prune
+   80  docker run -itd --name cont1 ubuntu
+   81  docker inspect cont1
+   82  docker run -itd --name --memory="100mb" --cpus="0.1" cont2 ubuntu
+   83  docker run -itd --name cont2 --memory="100mb" --cpus="0.1" ubuntu
+   84  docker inspect cont2
+   85  docker run -itd --name cont3 --memory="200mb" --cpus="2" ubuntu
+   86  docker run -itd --name cont3 --memory="200mb" --cpus="0.2" ubuntu
+   87  docker inspect cont3
+   88  docker stats
+   89  docker attach cont6
+   90  history
