@@ -671,3 +671,10 @@ HISTORY:
   118  2023-09-13 13:58:33 history
   119  2023-09-13 13:59:02 export HISTTIMEFORMAT="%F %T "
   120  2023-09-13 13:59:09 history
+
+ASSIGNMENT:
+install webserver, app server, db server on conatiner
+in amutomation way.
+create 5 services and lauch them automatically on sigle host.
+upload to docker hub.
+
