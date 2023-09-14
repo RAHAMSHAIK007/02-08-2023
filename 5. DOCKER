@@ -678,3 +678,191 @@ in amutomation way.
 create 5 services and lauch them automatically on sigle host.
 upload to docker hub.
 
+========================
+
+DOCKER SWARM:
+it is a high avalibilty method to make our application run efficiently.
+cluster = group of servers
+
+we can run same comtainer on multiple servers.
+docker swarm manger is going to distribute conatiners to workernodes.
+docker engine is responsible for creating cluster.
+inside cluster we create services.
+in swarm cluster conatiners are self-healed.
+
+SETUP: 
+CREATE 3 SERVERS (1=MANAGER, 2=WORKER)
+sudo -i
+hostnamectl set-hostname manager/worker-1/worker-2
+sudo -i
+
+yum install docker -y
+systemctl start docker
+systemctl status docker
+
+DOCKER MANAGER NODE:
+docker swarm init 
+copy token to worker nodes
+docker node ls
+
+
+SERVICES:
+to copy the container to worker nodes we need to create services.
+service -- > container -- > app
+service is a way of exposing app.
+we can manage multiple conatiners with help of services.
+
+docker service create --name train --repliacs 6 -p 81:80 vinodvanama/paytmtrain:latest
+docker service ls
+docker service scale movies=10
+docker service ps movies
+docker service scale movies=4
+docker service inspect movies
+docker service rollback movies
+docker service logs movies
+
+TO DETACH NODE FROM CLUSTER:
+go to worker node
+docker swarm leave
+if you want to add again: copy the token again
+
+TO REMOVE THE WORKR NODE COMPLETELY:
+docker node rm id(node) -- > run this on manager
+
+docker swarm join-token manager : to retive the token of manager
+
+
+DOCKER NETWORK:
+Docker networks are used to make a communication between the multiple containers that are running on same or different docker hosts. We have different types of docker networks.
+Bridge Network
+Host Network
+None network
+Overlay network
+
+BRIDGE NETWORK: It is a default network that container will communicate with each other within the same host.
+
+HOST NETWORK: When you Want your container IP and ec2 instance IP same then you use host network
+
+NONE NETWORK: When you don’t Want The container to get exposed to the world, we use none network. It will not provide any network to our container.
+
+OVERLAY NETWORK: Used to communicate containers with each other across the multiple docker hosts.
+
+Note: stop before remove
+
+COMMANDS:
+docker network create paytm
+docker network ls
+docker network inspect paytm
+docker network connect paytm cont1
+docker network connect paytm cont2
+docker exec cont1 sudo apt update -y
+docker exec cont1 sudo apt install iputils-ping -y
+docker exec cont1 ping ip-cont2
+
+HISTORY:
+1  yum install docker -y
+    2  systemctl start docker
+    3  systemctl status docker
+    4  docker swarm init
+    5  docker node ls
+    6  docker run -itd --name cont1 -p 80:80 vinodvanama/paytmmovies:latest
+    7  docker ps
+    8  docker kill cont1
+    9  docker rm cont1
+   10  docker service create --name movies --replicas 3 -p 80:80 vinodvanama/movies:latest
+   11  docker service create --name movies --replicas 3 -p 80:80 vinodvanama/paytmmovies:latest
+   12  docker kill $(docker ps -a -q)
+   13  docker service ls
+   14  docker service rm movies
+   15  docker service create --name movies --replicas 3 -p 80:80 vinodvanama/paytmmovies:latest
+   16  docker ps -a
+   17  docker service create --name train --repliacs 6 -p 81:80 vinodvanama/paytmtrain:latest
+   18  docker service create --name train --replicas 6 -p 81:80 vinodvanama/paytmtrain:latest
+   19  docker servive ls
+   20  docker service ls
+   21  docker service movies scale=10
+   22  docker service movies --scale=10
+   23  docker service scale movies=10
+   24  docker service ls
+   25  docker service ps movies
+   26  docker service movies scale=4
+   27  docker service scale movies=4
+   28  docker service ls
+   29  docker service inspect movies
+   30  docker service
+   31  docker service rollback movies
+   32  docker service update movies
+   33  docker service logs movies
+   34  docker service rm  movies
+   35  docker service ls
+   36  docker node ls
+   37  docker swarm rm i7pseueexeui5jwzw8f43ff7u
+   38  docker node rm i7pseueexeui5jwzw8f43ff7u
+   39  docker node ls
+   40  docker node rm vacadmz0bmuwsho80re0ht70a
+   41  docker node rm xrbaq93t5jzgha8dw1vogt5lo
+   42  docker node ls
+   43  docker node rm sxl0x677yx6qpo4pwpz6q49x7
+   44  docker node ls
+   45  docker swarm init
+   46  docker swarm init joint-token
+   47  docker swarm init
+   48  docker swarm
+   49  docker swarm join-token
+   50  docker swarm manager join-token
+   51  docker swarm join-token join-token
+   52  docker swarm join-token manager
+   53  docker network ls
+   54  docker network create paytm
+   55  docker network ls
+   56  docker network inspect raham
+   57  docker network inspect paytm
+   58  docker serice rm train
+   59  docker service rm train
+   60  docker ps -a
+   61  docker run -itd --name cont1 -p 80:80 vinodvanama/paytmmovies:latest
+   62  docker run -itd --name cont2 -p 81:80 vinodvanama/paytmtrain:latest
+   63  docker ps
+   64  docker inspect cont1 | grep -i network
+   65  docker network attach paytm cont1
+   66  docker network connect paytm cont1
+   67  docker inspect cont1 | grep -i network
+   68  docker inspect network paytm
+   69  docker network connect paytm cont2
+   70  docker inspect network paytm
+   71  docker attach cont2
+   72  docker ps
+   73  docker network connect paytm cont2
+   74  docker inspect network paytm
+   75  docker run -itd --name cont2 -p 81:80 vinodvanama/paytmtrain:latest
+   76  docker ps -a
+   77  docker start cont2
+   78  docker attach cont2
+   79  docker rm cont2
+   80  docker run -itd --name cont2 -p 81:80 vinodvanama/paytmtrain:latest
+   81  docker network connect paytm cont2
+   82  docker ps -a
+   83  docker network inspect paytm
+   84  docker attach cont1
+   85  docker ps -a
+   86  docker swarm leave --force
+   87  docker node ls
+   88  docker ps -a
+   89  docker rm cont1
+   90  docker run -itd --name cont1 -p 80:80 vinodvanama/paytmmovies:latest
+   91  docker network connect paytm cont1
+   92  docker network inspect paytm
+   93  docker attach cont1
+   94  docker start cont1
+   95  docker ps -a
+   96  docker exec cont1 --sh ls
+   97  docker exec cont1  ls
+   98  docker exec cont1 ping 172.19.0.3
+   99  docker exec cont1 sudo yum update -y
+  100  docker exec cont1 apt update -y
+  101  docker exec cont1 apt install iputils -y
+  102  docker exec cont1 apt install ip-utils -y
+  103  docker exec cont1 apt install iputils-ping -y
+  104  docker exec cont1 ping 172.19.0.3
+  105  history
+========================================================
