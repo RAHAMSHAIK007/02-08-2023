@@ -1,0 +1,144 @@
+K8S:
+
+IT is an open-source container orchestration platform.
+It is used to automates many of the manual processes like deploying, managing, and scaling containerized applications.
+Kubernetes was developed by GOOGLE using GO Language.
+Google donated K8's to CNCF in 2014.
+1st version was released in 2015.
+
+ARCHITECTURE:
+
+DOCKER : CNCA
+K8S: CNPCA
+
+C : CLUSTER
+N : NODE
+P : POD
+C : CONTAINER
+A : APPLICATION
+
+
+COMPONENTS:
+MASTER:
+
+1. API SERVER: communicate with user (takes command execute & give op)
+2. ETCD: database of cluster (stores complete info of a cluster)
+3. SCHEDULER: schedules pods on worker node (depends on hw of node)
+4. CONTROLLER: control the k8s objects (n/w, service, volume)
+
+WORKER:
+
+1. KUBELET : its an agent (it will inform all activites to master)
+2. KUBEPROXY: it deals with nlw (ip, networks, ports)
+3. POD : group of conatiners (inside pod we have app)
+
+
+CLUSTER:
+1. SELF MANAGED: WE NEED TO CREATE & MANAGE THEM
+
+minikube = single node cluster
+kubeadm = multi node cluster (manual)
+kops = multi node cluster (automation)
+
+2. CLOUD BASED: CLOUD PROVIDERS WILL MANAGE THEM
+
+AWS = EKS = ELASTIC KUBERNETES SERVICE
+AZURE = AKS = AZURE KUBERENETS SERVICE
+GOOGLE = GKS = GOOGLE KUBERENETS SERVICE
+
+
+
+MINIKUBE:
+It is a tool used to setup single node cluster on K8's. 
+It contains API Servers, ETDC database and container runtime
+It is used for development, testing, and experimentation purposes on local. 
+Here Master and worker runs on same machine
+It is a platform Independent.
+Installing Minikube is simple compared to other tools.
+
+NOTE: But we dont implement this in real-time Prod
+
+REQUIREMENTS:
+
+2 CPUs or more
+2GB of free memory
+20GB of free disk space
+Internet connection
+Container or virtual machine manager, such as: Docker.
+
+Kubectl is the command line tool for k8s
+if we want to execute commands we need to use kubectl.
+
+SETUP:
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install curl wget apt-transport-https -y
+sudo curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+sudo chmod +x /usr/local/bin/minikube
+sudo minikube version
+sudo curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+sudo echo "$(cat kubectl.sha256) kubectl" | sha256sum --check
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+sudo minikube start --driver=docker --force
+
+POD:
+It is a smallest unit of deployment in K8's.
+It is a group of containers.
+Pods are ephemeral (short living objects)
+Mostly we can use single container inside a pod but if we required, we can create multiple containers inside a same pod.
+when we create a pod, containers inside pods can share the same network namespace, and can share the same storage volumes .
+While creating pod, we must specify the image, along with any necessary configuration and resource limits.
+K8's cannot communicate with containers, they can communicate with only pods.
+ We can create this pod in two ways, 
+1. Imperative(command) 
+2. Declarative (Manifest file)
+
+
+IMPERATIVE:
+
+kubectl run pod1 --image vinodvanama/paytmmovies:latest
+kubectl get pod
+kubectl get pod -o wide
+kubectl describe pod pod1
+kubectl delete pod pod2
+
+DECRALATIVE:
+
+vim pod.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod1
+spec:
+  containers:
+    - image: vinodvanama/paytmtrain:latest
+      name: cont1
+
+kubectl apply -f pod.yml
+
+
+HISTORY:
+ 1  vim minikube.sh
+    2  sh minikube.sh
+    3  minikube status
+    4  kubectl run pod1 --image vinodvanama/paytmmovies:latest
+    5  kubectl get pod
+    6  kubectl run pod2 --image vinodvanama/paytmtrain:latest
+    7  kubectl get pod
+    8  kubectl grt pod -o wide
+    9  kubectl get pod -o wide
+   10  kubectl describe pod pod1
+   11  kubectl delete pod pod2
+   12  kubectl get pod
+   13  kubectl delete pod pod1
+   14  vim pod.yml
+   15  kubectl create -f pod.yml
+   16  kubectl get pod
+   17  kubectl describe pod pod1
+   18  cat pod.yml
+   19  history
