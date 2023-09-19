@@ -142,3 +142,173 @@ HISTORY:
    17  kubectl describe pod pod1
    18  cat pod.yml
    19  history
+===============================================
+REPLICASET:
+it will create multiple copies of same pod.
+if we delete one pod automatically it will create new pod.
+
+
+LABELS: is used to craete the particular pods as a single unit.
+SELECTOR: Used to select pods with same labels.
+
+
+vim replicaset.yml
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: swiggy
+  name: swiggy-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+      - name: cont1
+        image: nginx
+
+
+To list rs		:kubectl get rs/replicaset
+To show addtional info	:kubectl get rs -o wide
+To show complete info	:kubectl describe rs name-of-rs
+To delete the rs	:kubectl delete rs name-of-rs
+to get lables of pods 	: kubectl get pods -l app=swiggy
+TO scale rs		: kubectl scale rs/swiggy-rs --replicas=10 (LIFO)
+
+DRAWBACKS:
+1. we cant rollin and rollout, we cant update the application in rs.
+
+DEPLOYMENT:
+deploy -- > rs -- > pods
+we can update the application.
+its high level k8s objects.
+
+vim deploy.yml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: swiggy
+  name: swiggy-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: swiggy
+  template:
+    metadata:
+      labels:
+        app: swiggy
+    spec:
+      containers:
+      - name: cont1
+        image: nginx
+
+
+To list deployment	:kubectl get deploy
+To show addtional info	:kubectl get deploy -o wide
+To show complete info	:kubectl describe deploy name-of-deployment
+To delete the deploy	:kubectl delete deploy name-of-deploy
+to get lables of pods 	:kubectl get pods -l app=swiggy
+TO scale deploy		:kubectl scale deploy/name-of-deploy --replicas=10 (LIFO)
+To edit deploy		:kubectl edit deploy/name-of-deploy
+to show all pod labels	:kubectl get pods --show-labels
+To delete all pods	:kubectl delete pod --all
+
+
+
+HISTORY:
+ 1  vim minikube.sh
+    2  sh minikube.sh
+    3  vim rs.yml
+    4  kubectl get pods
+    5  kubectl create -f rs.yml
+    6  kubectl get pods
+    7  kubectl get pods --show labels
+    8  kubectl get pods -l swiggy
+    9  kubectl get pods -l=swiggy
+   10  kubectl get pods
+   11  kubectl describe pod swiggy-rs-h4f6x
+   12  kubectl get pods -l app=swiggy
+   13  kubectl delete pod swiggy-rs-h4f6x
+   14  kubectl get pods
+   15  kubectl delete pod swiggy-rs-9ks7n
+   16  kubectl get pods
+   17  kubectl get replicaset
+   18  kubectl get rs
+   19  kubectl get rs -o wide
+   20  kubectl describe rs swiggy-rs
+   21  kubectl delete rs swiggy-rs
+   22  kubectl get po
+   23  cat rs.yml
+   24  kubectl api-resource
+   25  kubectl api-resources
+   26  cat rs.yml
+   27  kubectl create -f rs.yml
+   28  kubectl get rs
+   29  kubectl get rs -o wide
+   30  kubectl describe rs swiggy-rs
+   31  kubectl delete rs swiggy-rs
+   32  kubectl get rs
+   33  kubectl get po
+   34  kubectl create -f rs.yml
+   35  kubectl get rs
+   36  kubectl get po
+   37  kubectl scale rs/swiggy-rs --scale=10
+   38  kubectl scale rs/swiggy-rs --replicas=10
+   39  kubectl get po
+   40  kubectl scale rs/swiggy-rs --replicas=5
+   41  kubectl get po
+   42  kubectl delete rs swiggy-rs
+   43  vim rs.yml
+   44  kubectl apply -f rs.yml
+   45  kubectl get deploy
+   46  kubectl get rs
+   47  kubectl get pods
+   48  kubectl describe deploy swiggy-rs
+   49  kubectl get pods
+   50  kubectl describe pod swiggy-rs-6d6f49d7cd-rqf84
+   51  kubectl describe pod swiggy-rs-6d6f49d7cd-ts6jq
+   52  kubectl edit deploy/swiggy-rs
+   53  kubectl describe deploy swiggy-rs
+   54  kubectl get po
+   55  kubectl delete pod swiggy-rs-64956f47f-9q6mn
+   56  kubectl describe pod swiggy-rs-64956f47f-c46ss
+   57  kubectl describe pod swiggy-rs-64956f47f-g9cf8
+   58  kubectl edit deploy/swiggy-rs
+   59  kubectl get rs
+   60  kubectl describe deploy
+   61  kubectl get po
+   62  kubectl scale deploy/swiggy-rs --replicas=20
+   63  kubectl get po
+   64  kubectl scale deploy/swiggy-rs --replicas=3
+   65  kubectl get po
+   66  kubectl run pod1 --image vinodvanama/paytmmovies:latest
+   67  kubectl run pod2 --image vinodvanama/paytmmovies:latest
+   68  kubectl run pod3 --image vinodvanama/paytmmovies:latest
+   69  kubectl get po
+   70  kubectl get po -l app=swiggy
+   71  kubectl get po --help
+   72  kubectl get po
+   73  kubectl get po -o wide
+   74  kubectl get po -o wide --show --help
+   75  kubectl get po --show --help
+   76  kubectl get po --show -h
+   77  kubectl get po --labels
+   78  kubectl get po -l --help
+   79  kubectl get rs -o wide
+   80  kubectl get pods --show-labels
+   81  kubectl delete pod -A
+   82  kubectl delete pod -A default
+   83  kubectl delete pod --all default
+   84  kubectl delete pod --all
+   85  history
+root@ip-172-31-17-73:~#
