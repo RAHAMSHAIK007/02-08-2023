@@ -1,0 +1,130 @@
+INFRASTRUCTURE:
+resources used to run our application on cloud.
+ex: ec2, s3, elb, vpc --------------
+
+
+in genral we used to deploy infra on manual 
+
+Manual:
+1. time consume
+2. manual work
+3. commiting mistakes
+
+Automate -- > Terraform -- > code -- > hcl (Hashicorp configuration languge)
+
+
+
+its a tool used to make infrastructure automation.
+its a free and opensource.
+its platform independent.
+it comes on year 2014.
+who: mitchel hasimoto 
+ownde: hasicorp 
+terraform is written on go language.
+We can call terraform as IAAC TOOL.
+
+HOW IT WORKS:
+terraform uses code to automate the infra.
+we use HCL : HashiCorp Configuration Language.
+
+IAAC: Infrastructure as a code.
+
+Code --- > execute --- > Infra 
+
+ADVANTGAES:
+1. Reuseable 
+2. Time saving
+3. Automation
+4. Avoiding mistakes
+5. Dry run
+
+
+INSTALLING TERRAFORM:
+
+sudo yum install -y yum-utils shadow-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum -y install terraform
+aws configure
+
+
+mkdir terraform
+cd terraform
+
+
+TERRAFORM COMMANDS:
+terraform init	: initalize the provider plugins on backed
+terraform plan	: to create execution plan
+terrafrom apply : to create resources
+terrafrom destroy : to delete resources
+
+CODE:
+vim main.tf 
+
+provider "aws" {
+region = "us-east-1"
+}
+
+resource "aws_instance" "one" {
+ami = "ami-0bb4c991fa89d4b9b"
+instance_type = "t2.micro"
+}
+
+terraform init
+terraform plan
+terraform apply
+terraform destroy 
+
+
+STATE FILE: used to store the resource information which is created by terraform
+to track the resource activities
+in real time entire resource info is on state file.
+we need to keep it safe
+if we lost this file we cant track the infra.
+Command:
+terraform state list
+
+terrafrom target: used to destroy the specific resource 
+terraform state list
+single target: terraform destroy -target="aws_instance.one[3]"
+multi targets: terraform destroy -target="aws_instance.one[3]" -target="aws_instance.one[2]"
+
+HISTORY:
+ 1  sudo yum install -y yum-utils
+    2  sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+    3  sudo yum -y install terraform
+    4  aws config
+    5  aws configure
+    6  mkdir terraform
+    7  cd terraform/
+    8  ls -al
+    9  vim main.tf
+   10  cat main.tf
+   11  terraform init
+   12  terraform plan
+   13  terraform apply
+   14  terraform state list
+   15  cat main.tf
+   16  cat /root/.aws/config
+   17  terraform destroy
+   18  vim /root/.aws/credentials
+   19  vim main.tf
+   20  terraform init
+   21  terraform plan
+   22  terraform apply
+   23  terraform destroy
+   24  vim main.tf
+   25  terraform plan
+   26  terraform apply
+   27  ll
+   28  cat terraform.tfstate
+   29  terraform state list
+   30  terraform destroy -target=aws_instance.one[5]
+   31  terraform destroy -target="aws_instance.one[5]"
+   32  terraform state list
+   33  terraform destroy -target=aws_instance.one[5]
+   34  terraform destroy -target=aws_instance.one[4]
+   35  terraform state list
+   36  terraform destroy -target=aws_instance.one[0] -target=aws_instance.one[2]
+   37  terraform state list
+   38  terraform destroy --auto-approve
+   39  history
