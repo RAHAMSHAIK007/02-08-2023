@@ -327,3 +327,178 @@ HISTORY:
    76  terraform apply --auto-approve
    77  terraform destroy --auto-approve
    78  cat main.tf
+=============================================================
+
+TERRAFORM LOCALS:
+used to define the value once and we can use mutliple times.
+
+
+provider "aws" {
+}
+
+locals {
+env = "test"
+}
+
+resource "aws_instance" "raham" {
+ami = "ami-03d294e37a4820c21"
+instance_type = "t2.micro"
+tags = {
+Name = "${local.env}-server"
+}
+}
+
+resource "aws_s3_bucket" "two" {
+bucket = "${local.env}-bucketswiggy0011"
+}
+
+
+TERRAFORM WORKSPACES:
+workspace is used to isloate the envs.
+In real time we create infra for envs by using workspace only.
+by default we have a default workspace.
+the work is not going to effect from one workspace to another workspace.
+
+NOTE:
+1. we can't delete our current workspace.
+2. we can't delete our workspace without deleting resources.
+3. we cant't delete default workspace.
+
+COMMANDS:
+
+terraform workspace list	: to list workspaces
+terraform workspace new dev	: to create a new workspace	
+terraform workspace show	: to show current workspace
+terraform workspace select prod	: to switch the workspaces
+terraform workspace delete prod	: to delete the workspaces
+
+
+provider "aws" {
+}
+
+locals {
+env = "${terraform.workspace}"
+}
+
+resource "aws_instance" "raham" {
+ami = "ami-03d294e37a4820c21"
+instance_type = "t2.micro"
+tags = {
+Name = "${local.env}-server"
+}
+}
+
+resource "aws_s3_bucket" "two" {
+bucket = "${local.env}-bucketswiggy0011"
+}
+
+
+
+provider "aws" {
+}
+
+locals {
+env = "swiggy"
+}
+
+resource "aws_vpc" "one" {
+cidr_block = "10.0.0.0/16"
+tags = {
+Name = "${local.env}-vpc"
+}
+}
+
+resource "aws_subnet" "two" {
+vpc_id = aws_vpc.one.id
+cidr_block = "10.0.0.0/24"
+availability_zone = "ap-south-1a"
+tags = {
+Name = "${local.env}-subnet"
+}
+}
+
+resource "aws_instance" "raham" {
+subnet_id = aws_subnet.two.id
+ami = "ami-03d294e37a4820c21"
+instance_type = "t2.micro"
+availability_zone = "ap-south-1a"
+tags = {
+Name = "${local.env}-server"
+}
+}
+
+
+TERRAFORM GRAPH: used to show the flow chart of our infra
+terraform graph
+copy paste the content in graphviz online
+
+HISTORY:
+ 93  mkdir terraform
+   94  cd terraform/
+   95  vim main.tf
+   96  terraform init
+   97  terraform plan
+   98  terraform apply --auto-approve
+   99  vim main.tf
+  100  terraform apply --auto-approve
+  101  terraform destroy --auto-approve
+  102  vim main.tf
+  103  terraform workspace list
+  104  terraform workspace new dev
+  105  terraform workspace list
+  106  terraform workspace show
+  107  cat main.tf
+  108  terraform apply --auto-approve
+  109  terraform workspace new test
+  110  terraform workspace list
+  111  terraform workspace show
+  112  terraform apply --auto-approve
+  113  terraform workspace new prod
+  114  vim main.tf
+  115  terraform apply --auto-approve
+  116  terraform workspace list
+  117  terraform workspace delete prod
+  118  terraform state list
+  119  terraform workspace select test
+  120* terraform workspace delete prod
+  121  terraform workspace select prod
+  122  terraform destroy --auto-approve
+  123  terraform state list
+  124  terraform workspace select test
+  125  terraform workspace list
+  126  terraform workspace delete prod
+  127  terraform workspace list
+  128  terraform destroy --auto-approve
+  129  terraform workspace show
+  130  terraform state list
+  131  terraform workspace delete test
+  132  terraform workspace select dev
+  133  terraform workspace delete test
+  134  terraform workspace show
+  135  terraform destroy --auto-approve
+  136  terraform workspace select default
+  137  terraform workspace delete dev
+  138  terraform workspace list
+  139  terraform workspace delete default
+  140  vim main.tf
+  141  terraform apply --auto-approve
+  142  vim main.tf
+  143  terraform apply --auto-approve
+  144  vim main.tf
+  145  terraform apply --auto-approve
+  146  vim main.tf
+  147  terraform apply --auto-approve
+  148  vim main.tf
+  149  terraform apply --auto-approve
+  150  vim main.tf
+  151  terraform apply --auto-approve
+  152  terraform destroy --auto-approve
+  153  vim main.tf
+  154  terraform destroy --auto-approve
+  155  terraform apply --auto-approve
+  156  cat main.tf
+  157  terraform state list
+  158  terraform graph
+  159  terraform destroy --auto-approve
+  160  history
+
