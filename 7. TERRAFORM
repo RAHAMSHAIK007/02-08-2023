@@ -502,3 +502,182 @@ HISTORY:
   159  terraform destroy --auto-approve
   160  history
 
+=================================================
+
+
+ALIAS AND PROVIDER: used to create resources on mutliple regions in single file.
+
+provider "aws" {
+region = "us-east-1"
+}
+
+resource "aws_instance" "one" {
+ami = "ami-00c6177f250e07ec1"
+instance_type = "t2.micro"
+tags = {
+Name = "nvirgina-server"
+}
+}
+
+provider "aws" {
+region = "ap-south-1"
+alias = "mumbai"
+}
+
+resource "aws_instance" "two" {
+provider = aws.mumbai
+ami = "ami-03d294e37a4820c21"
+instance_type = "t2.micro"
+tags = {
+Name = "mumbai-server"
+}
+}
+
+
+TAINT: used to recrearte a specific objects.
+here no need to execute the entire file.
+we can just mark the object as tainted.
+
+terraform state list
+terraform taint aws_instance.one
+terraform apply --auto-approve
+terraform untaint aws_instance.one
+
+TERRAFORM REMOTE BACKEND SETUP:
+when we create infra the information of resources will store on state file.
+so it will be tracking the infra information.
+so we need to take backup of that file.
+if we lost that file we cant track the infra.
+so we prefer to locate the state file on remote loaction.
+here im using s3 as remote backend.
+
+create a bucket manually
+
+provider "aws" {
+region = "us-east-1"
+}
+
+terraform {
+  backend "s3" {
+    bucket = "swiggypordinfrabuckt0099"
+    key    = "swiggy/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+resource "aws_instance" "one" {
+ami = "ami-00c6177f250e07ec1"
+instance_type = "t2.micro"
+tags = {
+Name = "nvirgina-server"
+}
+}
+
+Note: while using new provider block always we need to run terraform init
+otherwise plugins will not be downloaded
+
+after removing backend setup run this command:
+terraform init -migrate-state
+
+
+TERRAFORM IMPORT: used to migrate the resource information to state file which is created manually.
+
+create a server manually.
+
+provider "aws" {
+region = "us-east-1"
+}
+
+
+resource "aws_instance" "one" {
+}
+
+terraform import aws_instance.one i-01352498aa00dded6
+cat terraform.tfstate
+
+
+terraform validate : command used to validate the terraform syntax.
+if you have any mistakes on syntax or arguments it will show you.
+this command can be used before plan
+
+
+provider "aws" {
+region = "us-east-1"
+}
+
+
+resource "aws_iam_user" "one" {
+name = "rahamshaik"
+}
+
+resource "aws_ebs_volume" "two" {
+size = 22
+availability_zone = "us-east-1a"
+tags = {
+Name = "raham-volume"
+}
+}
+
+HISTIRY:
+ 93  sh terraform.sh
+   94  terraform -v
+   95  mkdir terraform
+   96  cd terraform/
+   97  vim main.tf
+   98  terraform init
+   99  terraform plan
+  100  terraform apply --auto-approve
+  101  terraform state list
+  102  terraform destroy --auto-approve
+  103  terraform state list
+  104  vim main.tf
+  105  terraform apply --auto-approve
+  106  terraform state list
+  107  terraform taint aws_instance.one
+  108  terraform apply --auto-approve
+  109  terraform state list
+  110  terraform taint aws_instance.one
+  111  terraform taint aws_instance.two
+  112  terraform untaint aws_instance.one
+  113  terraform untaint aws_instance.two
+  114  terraform taint aws_instance.two aws_instance.one
+  115  terraform taint aws_instance.two
+  116  terraform taint aws_instance.one
+  117  terraform apply --auto-approve
+  118  terraform state list
+  119  terraform destroy --auto-approve
+  120  vim main.tf
+  121  terraform apply --auto-approve
+  122  terraform init
+  123  terraform apply --auto-approve
+  124  ll
+  125  vim main.tf
+  126  terraform apply --auto-approve
+  127  ll
+  128  terraform destroy --auto-approve
+  129  vim main.tf
+  130  terraform apply --auto-approve
+  131  terraform init -reconfigure
+  132  terraform apply --auto-approve
+  133  terraform init -migrate-state
+  134  terraform apply --auto-approve
+  135  terraform destroy --auto-approve
+  136  cat terraform.tfstate
+  137  vim main.tf
+  138  cat main.tf
+  139  terraform import aws_instance.one i-01352498aa00dded6
+  140  cat terraform.tfstate
+  141  cat main.tf
+  142  vim main.tf
+  143  terraform validate
+  144  vim main.tf
+  145  terraform validate
+  146  vim main.tf
+  147  terraform validate
+  148  terraform plan
+  149  terraform apply --auto-approve
+  150  vi main.tf
+  151  terraform apply --auto-approve
+  152  cat main.tf
+  153  terraform destroy --auto-approve
+  154  history
