@@ -681,3 +681,255 @@ HISTIRY:
   152  cat main.tf
   153  terraform destroy --auto-approve
   154  history
+
+=======================================================================================
+
+provider "aws" {
+}
+
+resource "local_file" "one" {
+filename = "abc.txt"
+content = "hai all my name is terraform"
+}
+
+TERRAFORM VERSION CONSTRATINTS:
+changing the versions of provider plugins of terraform.
+
+provider "aws" {
+}
+
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.17.0"
+    }
+  }
+}
+
+"> 5.17.0, < 5.19.0" & ">5.17.0" & "<5.19.0"
+
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+      version = "2.2.2"
+    }
+  }
+}
+
+===============================================================================
+
+DYNAMIC BLOCK: it is used to reduce the length of code and used for reusabilty of code in loop.
+
+provider "aws" {
+}
+
+locals {
+  ingress_rules = [{
+    port        = 443
+    description = "Ingress rules for port 443"
+    },
+    {
+      port        = 80
+      description = "Ingree rules for port 80"
+  },
+  {
+      port        = 8080
+      description = "Ingree rules for port 8080"
+
+  }]
+}
+
+resource "aws_instance" "ec2_example" {
+  ami                    = "ami-0c02fb55956c7d316"
+  instance_type          = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.main.id]
+  tags = {
+    Name = "Terraform EC2"
+  }
+}
+
+resource "aws_security_group" "main" {
+
+  egress = [
+    {
+      cidr_blocks      = ["0.0.0.0/0"]
+      description      = "*"
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "-1"
+      security_groups  = []
+      self             = false
+      to_port          = 0
+  }]
+
+  dynamic "ingress" {
+    for_each = local.ingress_rules
+
+    content {
+      description = "*"
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  tags = {
+    Name = "terra sg"
+  }
+}
+
+TERRAFORM FRT: to set the allignment for my code
+
+FOR_EACH:
+
+provider "aws" {
+}
+
+resource "aws_instance" "two" {
+for_each = toset(["web-server", "app-server", "db-server"])
+ami = "ami-04beabd6a4fb6ab6f"
+instance_type = "t2.micro"
+tags = {
+Name = "${each.key}"
+}
+}
+
+
+AWS - CFT
+AZURE - ARM
+GCP - GDE
+
+
+MODULES:
+
+[root@ip-172-31-87-7 terraform]# cat main.tf
+module "my_instance_module" {
+        source = "./modules/instances"
+        ami = "ami-04823729c75214919"
+        instance_type = "t2.micro"
+        instance_name = " rahaminstance"
+}
+
+module "s3_module" {
+source = "./modules/buckets"
+bucket_name = "devopsherahamshaik009988"
+}
+
+[root@ip-172-31-87-7 terraform]# cat provider.tf
+provider "aws" {
+}
+[root@ip-172-31-87-7 terraform]# cat modules/instances/main.tf
+resource "aws_instance" "my_instance" {
+        ami = var.ami
+        instance_type = var.instance_type
+        tags = {
+                Name = var.instance_name
+        }
+}
+
+[root@ip-172-31-87-7 terraform]# cat modules/instances/variable.tf
+variable "ami" {
+  type          = string
+}
+
+variable "instance_type" {
+  type          = string
+}
+
+variable "instance_name" {
+  description   = "Value of the Name tag for the EC2 instance"
+  type          = string
+}
+
+[root@ip-172-31-87-7 terraform]# cat modules/buckets/main.tf
+resource "aws_s3_bucket" "b" {
+bucket = var.bucket_name
+}
+
+[root@ip-172-31-87-7 terraform]# cat modules/buckets/variable.tf
+variable "bucket_name" {
+type = string
+}
+
+HISTORY:
+[root@ip-172-31-43-162 terraform]# history
+    1  sudo yum install -y yum-utils shadow-utils
+    2  sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+    3  sudo yum -y install terraform
+    4  aws configure
+    5  mkdir terraform
+    6  cd terraform/
+    7  vim main.tf
+    8  terraform init
+    9  terraform validate
+   10  terraform apply
+   11  ll
+   12  cat abc.txt
+   13  terraform destroy --auto-approve
+   14  vim main.tf
+   15  terraform init
+   16  vim main.tf
+   17  terraform init -upgrade
+   18  vim main.tf
+   19  terraform init -upgrade
+   20  vim main.tf
+   21  terraform init -upgrade
+   22  vim main.tf
+   23  terraform init -upgrade
+   24  vim main.tf
+   25  terraform init -upgrade
+   26  vim main.tf
+   27  terraform init -upgrade
+   28  vim main.tf
+   29  terraform apply --auto-approve
+   30  vim main.tf
+   31  terraform apply --auto-approve
+   32  vim main.tf
+   33  terraform apply --auto-approve
+   34  cat main.tf
+   35  terraform destroy --auto-approve
+   36  vim main.tf
+   37  cat main.tf
+   38  terraform fmt
+   39  cat main.tf
+   40  vim abc.tf
+   41  cat -n abc.tf
+   42  cat -n main.tf
+   43  cat main.tf
+   44  terraform apply --auto-approve
+   45  vim main.tf
+   46  terraform apply --auto-approve
+   47  ll
+   48  rm -rf abc.tf
+   49  terraform apply --auto-approve
+   50  vim main.tf
+   51  terraform apply --auto-approve
+   52  cat main.tf
+   53  terraform destroy --auto-approve
+   54  vim  main.tf
+   55  vim main.tf
+   56  vim provider.tf
+   57  cat main.tf
+   58  mkdir -p modules/instances
+   59  mkdir -p modules/buckets
+   60  yum install tree -y
+   61  tree
+   62  cat main.tf
+   63  vim modules/instances/main.tf
+   64  vim modules/instances/variable.tf
+   65  tree
+   66  cat main.tf
+   67  vim modules/buckets/main.tf
+   68  vim modules/buckets/variable.tf
+   69  tree
+   70  terraform apply --auto-approve
+   71  terraform init
+   72  terraform apply --auto-approve
+   73  terraform state list
+   74  terraform destroy --auto-approve
+   75  history
+[root@ip-172-31-43-162 terraform]#
