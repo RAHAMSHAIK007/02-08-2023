@@ -9,7 +9,7 @@ os will be on images.
 (SERVER=AMI, CONTAINER=IMAGE)
 
 DOCKER: 
-Its an free & opensource tool.
+Its an free & opensource tool.1
 it is platform independent.
 used to create, run & deploy applications containers.
 it is introduced on 2013 by solomenhykes & sebastian phal.
@@ -35,7 +35,7 @@ daemon: manages the docker components(images, containers, volumes)
 
 host: where we install docker (ex: linux, windows, macos)
 
-Registry: manages the images.
+Registry: manages docker the images.
 
 ARCHITECTURE OF DOCKER:
 yum install docker -y    #client
