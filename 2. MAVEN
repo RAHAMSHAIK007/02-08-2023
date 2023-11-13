@@ -57,7 +57,7 @@ maven: lifecycle, ant: not have a lifecycle
 maven: plugins (reusable), ant: scripts (not reusable)
 
 
-plugins: is a small software we can use without installing tool.
+plugins: is a small piece software we can use without installing tool.
 
 HISTORY:
 
