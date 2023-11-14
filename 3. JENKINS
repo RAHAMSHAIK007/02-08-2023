@@ -407,7 +407,7 @@ Dashboard -- > Manage Jenkins -- > Nodes & Clouds -- > New node -- > nodename: a
 CONFIGURATION OF SALVE:
 
 Number of executors : 3 #Number of Parallel builds
-Remote root directory : /tmp #The place where our output is stored on slave sever.
+Remote root directory : /tmp #The place where our output is stored ON THE SLAVE SERVER.
 Labels : swiggy #place the op in a particular slave
 useage: last option
 Launch method : last option 
