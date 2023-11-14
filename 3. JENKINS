@@ -411,7 +411,7 @@ Remote root directory : /tmp #The place where our output is stored ON THE SLAVE 
 Labels : swiggy #place the op in a particular slave
 useage: last option
 Launch method : last option 
-Host: (your privte ip)
+Host: (your SLAVE PRIVATE IP)
 Credentials -- > add -- >jenkins -- > Kind : ssh username with privatekey -- > username: ec2-user 
 privatekey : pemfile of server -- > save -- > 
 Host Key Verification Strategy: last option
