@@ -34,6 +34,15 @@ LATER ORACLE BROUHT HUDSON AND MAKE IT FREE.
 INVENTOR: Kohsuke Kawaguchi
 PORT NUMBER: 8080
 
+PORT CHANGING:
+
+vim /usr/lib/systemd/system/jenkins.service
+line 67 (8080=8090)
+systemctl daemon-reload
+systemctl restart jenkins.service
+public-ip:8090
+
+
 SETUP:
 
 #STEP-1: INSTALLING GIT JAVA-1.8.0 MAVEN 
