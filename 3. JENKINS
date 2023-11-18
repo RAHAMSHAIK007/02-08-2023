@@ -654,6 +654,9 @@ its free and platform independent.
 it is given by apache software foundations.
 Here we can deploy jar and war files.
 
+Port Changing:  vim /root/apache-tomcat-9.0.80/conf/server.xml
+line 69: 8080=8090 -- > save -- > shutdown and start the tomcat using scripts
+
 SETUP:
 1. wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
 2. tar -zxvf apache-tomcat-9.0.80.tar.gz && cd apache-tomcat-9.0.80
