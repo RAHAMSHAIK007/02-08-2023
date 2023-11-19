@@ -21,7 +21,7 @@ it comes on year 2014.
 who: mitchel hasimoto 
 ownde: hasicorp 
 terraform is written on go language.
-We can call terraform as IAAC TOOL.
+We can 'call terraform as IAAC TOOL'.
 
 HOW IT WORKS:
 terraform uses code to automate the infra.
