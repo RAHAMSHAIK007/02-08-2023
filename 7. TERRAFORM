@@ -24,7 +24,7 @@ terraform is written on go language.
 We can 'call terraform as IAAC TOOL'.
 
 HOW IT WORKS:
-terraform uses code to automate the infra.
+terraform uses 'code to automate the infra'.
 we use HCL : HashiCorp Configuration Language.
 
 IAAC: Infrastructure as a code.
