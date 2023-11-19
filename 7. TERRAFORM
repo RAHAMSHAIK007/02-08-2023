@@ -354,8 +354,8 @@ bucket = "${local.env}-bucketswiggy0011"
 
 
 TERRAFORM WORKSPACES:
-workspace is used to isloate the envs.
-In real time we create infra for envs by using workspace only.
+workspace is 'used to isloate the envs'.
+In real time 'we create infra for envs by using' workspace only.
 by default we have a default workspace.
 the work is not going to effect from one workspace to another workspace.
 
