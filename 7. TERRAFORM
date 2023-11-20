@@ -721,6 +721,8 @@ command to initialize: terraform init -upgrade
 ===============================================================================
 
 DYNAMIC BLOCK: it is used to reduce the length of code and used for reusabilty of code in loop.
+code for sg creation:
+Google-->terraform aws sg code-->aws-securitygroup|resources|harshicorp/aws
 
 provider "aws" {
 }
