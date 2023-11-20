@@ -694,7 +694,7 @@ content = "hai all my name is terraform"
 
 TERRAFORM VERSION CONSTRATINTS:
 changing the versions of provider plugins of terraform.
-
+Google Chrome--->terraform aws provider version-->Harchicorp/aws-->version(drop down)-->use provider
 provider "aws" {
 }
 
