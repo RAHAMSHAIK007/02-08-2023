@@ -784,7 +784,7 @@ resource "aws_security_group" "main" {
   }
 }
 
-TERRAFORM FRT: to set the allignment for my code
+TERRAFORM FMT: to set the allignment for my code
 
 FOR_EACH:
 
