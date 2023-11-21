@@ -397,7 +397,9 @@ kops rolling-update cluster
 
 To delete cluster: kops delete cluster --name rahams.k8s.local --yes
 Note: bucket will not delete 
-
+2/2 check:
+1.system check.
+2.instance check --means Hardware properties like cpu ram comes under instance check.
 ===============================================
 
 CRIPT:
