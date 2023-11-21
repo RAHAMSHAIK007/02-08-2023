@@ -400,8 +400,52 @@ Note: bucket will not delete
 2/2 check:
 1.system check.
 2.instance check --means Hardware properties like cpu ram comes under instance check.
-===============================================
 
+HISTORY:
+1  vim .bashrc
+    2  source .bashrc
+    3  aws configure
+    4  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubec                                                                                                                   tl"
+    5  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
+    6  ll
+    7  chmod +x kops-linux-amd64 kubectl
+    8  ll
+    9  mv kubectl /usr/local/bin/kubectl
+   10  mv kops-linux-amd64 /usr/local/bin/kops
+   11  kops --version
+   12  kubectl --version
+   13  kubectl version
+   14  kops version
+   15  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
+   16  aws s3api create-bucket --bucket rahamssshaik09.k8s.local --region us-east-1
+   17  aws s3api create-bucket --bucket vinodvanamaa007.k8s.local --region us-east-1
+   18  aws s3api put-bucket-versioning --bucket vinodvanamaa007.k8s.local --region us-east-1 --versioning-configura                                                                                                                   tion Status=Enabled
+   19  export KOPS_STATE_STORE=s3://vinodvanamaa007.k8s.local
+   20  kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --no                                                                                                                   de-count=2 --node-size t2.micro
+   21   kops update cluster --name rahams.k8s.local --yes --admin
+   22   kops validate cluster --wait 10m
+   23  kops get cluster
+   24  kubectl get no
+   25  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+   26  kops update cluster --name rahams.k8s.local --yes
+   27   kops rolling-update cluster
+   28  kubectl get no
+   29  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+   30  kops rolling-update cluster
+   31  kops update cluster --name rahams.k8s.local --yes
+   32  kops rolling-update cluster
+   33  kops edit ig --name=rahams.k8s.local master-us-east-1a
+   34  kops update cluster --name rahams.k8s.local --yes
+   35  kops edit ig --name=rahams.k8s.local master-us-east-1a
+   36  kops update cluster --name rahams.k8s.local --yes
+   37  kops rolling-update cluster
+   38  kubectl get no
+   39  kops get cluster
+   40  kops delete cluster --name rahams.k8s.local --yes
+   41  kops get cluster
+   42  history
+===============================================
+DAY 2 FOR KOPS:
 CRIPT:
 RUN BELOW COMMANDS MANUALLY
 #vim .bashrc
@@ -705,49 +749,7 @@ kubectl get secrets password -o yaml
 echo "cmFoYW0xMjM=" | base64 --decode
 echo "cmFoYW0xMjM=" | base64 -d
 
-HISTORY:
-1  vim .bashrc
-    2  source .bashrc
-    3  aws configure
-    4  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubec                                                                                                                   tl"
-    5  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
-    6  ll
-    7  chmod +x kops-linux-amd64 kubectl
-    8  ll
-    9  mv kubectl /usr/local/bin/kubectl
-   10  mv kops-linux-amd64 /usr/local/bin/kops
-   11  kops --version
-   12  kubectl --version
-   13  kubectl version
-   14  kops version
-   15  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
-   16  aws s3api create-bucket --bucket rahamssshaik09.k8s.local --region us-east-1
-   17  aws s3api create-bucket --bucket vinodvanamaa007.k8s.local --region us-east-1
-   18  aws s3api put-bucket-versioning --bucket vinodvanamaa007.k8s.local --region us-east-1 --versioning-configura                                                                                                                   tion Status=Enabled
-   19  export KOPS_STATE_STORE=s3://vinodvanamaa007.k8s.local
-   20  kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --no                                                                                                                   de-count=2 --node-size t2.micro
-   21   kops update cluster --name rahams.k8s.local --yes --admin
-   22   kops validate cluster --wait 10m
-   23  kops get cluster
-   24  kubectl get no
-   25  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
-   26  kops update cluster --name rahams.k8s.local --yes
-   27   kops rolling-update cluster
-   28  kubectl get no
-   29  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
-   30  kops rolling-update cluster
-   31  kops update cluster --name rahams.k8s.local --yes
-   32  kops rolling-update cluster
-   33  kops edit ig --name=rahams.k8s.local master-us-east-1a
-   34  kops update cluster --name rahams.k8s.local --yes
-   35  kops edit ig --name=rahams.k8s.local master-us-east-1a
-   36  kops update cluster --name rahams.k8s.local --yes
-   37  kops rolling-update cluster
-   38  kubectl get no
-   39  kops get cluster
-   40  kops delete cluster --name rahams.k8s.local --yes
-   41  kops get cluster
-   42  history
+  
 ============================================================
 
 
