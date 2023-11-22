@@ -748,8 +748,6 @@ spec:
       targetPort: 80
 
 ======================================================================
-
-DAY-06:
   
 CONFIGMAPS & SECRETS: It is a way of passing variables to k8s pods.
   
