@@ -17,6 +17,10 @@ P : POD
 C : CONTAINER
 A : APPLICATION
 
+NOTE: k8s doesn't communicate with containers.
+it communicate with pods.
+
+
 
 COMPONENTS:
 MASTER:
@@ -121,6 +125,9 @@ spec:
 
 kubectl apply -f pod.yml
 
+DRAWBACK:
+if we delete the pod we cant retrive the pod.
+all the load will be handled by single pod.
 
 HISTORY:
  1  vim minikube.sh
