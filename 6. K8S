@@ -1,7 +1,7 @@
 K8S:
 
-IT is an open-source container orchestration platform.
-It is used to automates many of the manual processes like deploying, managing, and scaling containerized applications.
+k8's is an open-source container orchestration platform.
+which is used to automates many of the manual processes like deploying, managing, and scaling containerized applications.
 Kubernetes was developed by GOOGLE using GO Language.
 Google donated K8's to CNCF in 2014.
 1st version was released in 2015.
