@@ -751,7 +751,7 @@ spec:
 
 DAY-06:
   
-CONFIGMAPS & SECRETS
+CONFIGMAPS & SECRETS: It is a way of passing variables to k8s pods.
   
 ENV VARS: used to define a vlaue.
 LEVEL:
