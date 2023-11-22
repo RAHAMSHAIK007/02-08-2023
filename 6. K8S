@@ -526,8 +526,8 @@ kubecolor get po
 SERVICE: It is used to expose the application in k8s.
 
 TYPES:
-1. CLUSTERIP: It will work inside the cluster.
-it will not expose to outer world.
+1. CLUSTERIP: It will expose the application inside the cluster.
+it will not expose the application to outside of world.
 
 apiVersion: apps/v1
 kind: Deployment
@@ -608,7 +608,7 @@ NOTE: UPDATE THE SG (REMOVE OLD TRAFFIC AND GIVE ALL TRAFFIC & SSH)
 DRAWBACK:
 PORT RESTRICTION.
 
-3. LOADBALACER: It will expose our app and distribute load blw pods.
+3. LOADBALACER: It will expose our application and distribute load bw pods.
 
 apiVersion: apps/v1
 kind: Deployment
