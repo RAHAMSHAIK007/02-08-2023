@@ -28,8 +28,8 @@ MASTER:
 
 WORKER:
 
-1. KUBELET : its an agent which informs all activites to master.
-2. KUBEPROXY: it deals with nlw (ip, networks, ports)
+1. KUBELET : its an agent which informs all activites to master node.
+2. KUBEPROXY: it deals with nlw i.e, ip, networks, ports.
 3. POD : group of conatiners inside pod we have applications.
 
 
@@ -183,7 +183,7 @@ to get lables of pods 	: kubectl get pods -l app=swiggy
 TO scale rs		: kubectl scale rs/swiggy-rs --replicas=10 (LIFO)
 
 DRAWBACKS:
-1. we cant rollin and rollout, we cant update the application in rs.
+1. we cannot rollin and rollout and  we cannot update the application in rs.
 
 DEPLOYMENT:
 deploy -- > rs -- > pods
