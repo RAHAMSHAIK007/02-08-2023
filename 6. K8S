@@ -565,7 +565,7 @@ spec:
 DRAWBACK:
 We cannot use app outside.
 
-2. NODEPORT: It will expose the application in a particular port.
+2. NODEPORT: It will expose the application in 'particular port number only'.
 Range: 30000 - 32767 (in sg we need to give all traffic)
 
 apiVersion: apps/v1
