@@ -624,7 +624,7 @@ mv kubecolor /usr/local/bin/
 kubecolor get po
 
 ==============================================================================
-
+DAY 3 FOR KOPS:
 
 SERVICE: It is used to expose the application in k8s.
 
@@ -766,7 +766,7 @@ METHODS TO DEFINE:
 3. SECRETS
 
 CONFIGMAP:
-
+If we want to pass variables for pods&container we use configmap.
 Used to store data in key-value, files or CLI used by pods, container etc---
 data is not encrypted, if we want encrypt we need to use secrets.
 limit is 1 MB, to store more than 1 MB mount the volume seperately.
