@@ -21,16 +21,16 @@ A : APPLICATION
 COMPONENTS:
 MASTER:
 
-1. API SERVER: communicate with user (takes command execute & give op)
-2. ETCD: database of cluster (stores complete info of a cluster)
-3. SCHEDULER: schedules pods on worker node (depends on hw of node)
+1. API SERVER: communicate with user which takes command execute it & gives op.
+2. ETCD: database of cluster which stores complete information of a cluster.
+3. SCHEDULER: schedules pods on worker node which is depends on h/w of node.
 4. CONTROLLER: control the k8s objects (n/w, service, volume)
 
 WORKER:
 
-1. KUBELET : its an agent (it will inform all activites to master)
+1. KUBELET : its an agent which informs all activites to master.
 2. KUBEPROXY: it deals with nlw (ip, networks, ports)
-3. POD : group of conatiners (inside pod we have app)
+3. POD : group of conatiners inside pod we have applications.
 
 
 CLUSTER:
