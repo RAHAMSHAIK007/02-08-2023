@@ -320,6 +320,18 @@ HISTORY:
    84  kubectl delete pod --all
    85  history
 root@ip-172-31-17-73:~#
+SCALING: 
+
+SCALE-IN: Increasing the count of pods
+kubectl scale rs/swiggy-rs --replicas=10
+
+SCALE-OUT: Decreasing the count of pods
+kubectl scale rs/swiggy-rs --replicas=5
+
+SCALING FOLLOWS LIFO PATTERN:
+LIFO: LAST IN FIRST OUT
+the pod which is created will be deleted first automatically when we scale out.
+
 
 =======================================================
 INFRASTRUCUTRE: Resource used to run our application on cloud.
@@ -407,6 +419,53 @@ Note: bucket will not delete
 2/2 check:
 1.system check.
 2.instance check --means Hardware properties like cpu ram comes under instance check.
+
+
+OR
+
+STEP-1: GIVING PERMISSIONS
+IAM -- > USER -- > CREATE USER -- > NAME: KOPS -- > Attach Polocies Directly -- > AdministratorAccess -- > NEXT -- > CREATE USER
+USER -- > SECURTITY CREDENTIALS -- > CREATE ACCESS KEYS -- > CLI -- > CHECKBOX -- >  CREATE ACCESS KEYS -- > DOWNLOAD 
+
+aws configure
+
+SETP-2: INSTALL KUBECTL AND KOPS
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
+chmod +x kops-linux-amd64 kubectl
+mv kubectl /usr/local/bin/kubectl
+mv kops-linux-amd64 /usr/local/bin/kops
+
+vim .bashrc
+export PATH=$PATH:/usr/local/bin/  -- > save and exit
+source .bashrc
+
+SETP-3: CREATEING BUCKET 
+aws s3api create-bucket --bucket devopsbyraham007.k8s.local --region us-east-1
+aws s3api put-bucket-versioning --bucket cloudanddevopsbyraham007.k8s.local --region us-east-1 --versioning-configuration Status=Enabled
+export KOPS_STATE_STORE=s3://cloudanddevopsbyraham007.k8s.local
+
+SETP-4: CREATING THE CLUSTER
+kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --node-count=2 --node-size t2.micro
+kops update cluster --name rahams.k8s.local --yes --admin
+
+
+Suggestions:
+ * list clusters with: kops get cluster
+ * edit this cluster with: kops edit cluster rahams.k8s.local
+ * edit your node instance group: kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+ * edit your master instance group: kops edit ig --name=rahams.k8s.local master-us-east-1a
+
+
+ADMIN ACTIVITIES:
+To scale the worker nodes:
+kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+kops update cluster --name rahams.k8s.local --yes --admin 
+kops rolling-update cluster --yes
+
+kubectl describe node node_id
+kops delete cluster --name rahams.k8s.local --yes
 
 HISTORY:
 1  vim .bashrc
