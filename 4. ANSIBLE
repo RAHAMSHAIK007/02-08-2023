@@ -1,5 +1,5 @@
 ANSIBLE:
-Its a configuration management too1.
+Its a configuration management too1 using which automates the server-creation,s/w-installation & deploment the app in morethan one server.
 
 Configuration= Software & Hardware props of server
 Management= Installing, deleting, updating 
@@ -7,12 +7,12 @@ Management= Installing, deleting, updating
 Automate= serve creation, Software installation, Deployment
 you can do automation in more than one server.
 
-python is dependency for ansible.
-we use yaml to write the code.
+'python' is dependency for ansible.
+we use 'yaml' to write the code.
 yml=yet another markup language
 It is free and opensource.
-It is agent less.
-Agent less means no need to install any package in worker node.
+It is 'agent less'.
+Agent less means 'no need to install any package in worker node'.
 
 HISTORY:
 2012 -- > maichel dehaan -- > RedHat 
@@ -20,10 +20,10 @@ we can use ansible in amazon linux, ubuntu, RedHat, Centos -----
 
 
 COMPONENTS:
-MASTER NODE: it will communicate and work with worker node.
-WORKER NODE: it will execute the instructions of master node.
-INEVNTORY: it wiil store the information of worker nodes.
-PLAYBOOK: its the way of doing work with anisble. 
+MASTER NODE: it will 'communicate and work with' worker node.
+WORKER NODE: it 'will execute the instructions of' master node.
+INEVNTORY: it 'wiil store the information of' worker nodes.
+PLAYBOOK: its the 'way of doing work'   with anisble. 
 
 
 SETUP:
@@ -83,9 +83,9 @@ BLUE	: SKIPPED
 
 MODES OF WORKING
 1. ADHOC COMMANDS:
-its a simple linux commands.
-we can use it for temperory works.
-this commands will be overrided.
+its a simple 'linux commands'.
+we can use it for 'temperory works'.
+'this commands will be' overrided.
 
 ansible all -a "ls"
 ansible all -a "touch abc.txt"
@@ -142,12 +142,12 @@ HISTORY:
 
 
 MODULES:
-it is a key-value pair.
-and also called as dictionary.
-we can resue the moudules.
+it is a 'key-value pair'.
+and 'also called as' dictionary.
+'we can resue' the moudules.
 
-ansible all -m yum -a "name=git state=present"   (present = install)
-ansible all -m yum -a "name=maven state=latest" (update = latest)
+ansible all -m yum -a "name=git state=present"   (present =install)
+ansible all -m yum -a "name=maven state=latest" (latest = update)
 ansible all -m yum -a "name=maven state=present" (absent = uninstall)
 ansible all -m service -a "name=httpd state=stopped" (started = start)
 ansible all -m service -a "name=httpd state=stopped" (stopped = stop)
@@ -163,19 +163,19 @@ ansible all[0] --list-host
 ansible dev --list-host
 ansible test --list-host
 
-DIS: we can only use single module at time.
+DIS: "we can only use single module at time".
 
 PLAYBOOKS:
-its a collection of modules.
-we can run multiple modules at a single time.
-playbook can be use to automate work.
-we can reuse the playbooks.
-playbook works on yaml syntax.
-yaml syntax is key-value pair.
-playbook extension is .yml or .yaml
+playbook is "collection of modules".
+we can run "multiple modules at a single time".
+playbook can be used "to automate the work".
+we can "reuse the playbooks".
+playbook "works on yaml syntax".
+yaml syntax is a "key-value pair".
+playbook "extension is .yml" or .yaml
 
 SYNTAX:
-playbook start with --- and end with ...
+playbook start with --- and ends with ...
 it contains a list of values
 each value is going to start at 3rd letter.
 : is the seperation of key and value.
@@ -187,7 +187,7 @@ profession: devops
 age: **
 
 
-Gathering Facts means to get info of worker nodes
+Gathering Facts means "to get info of worker nodes"  
 it is default task perform by ansible playbook
 
 TO REMOVE GATHER FACTS:   gather_facts: false
@@ -216,8 +216,8 @@ ansible all -a "yum remove httpd* -y"
 
 ===========================================================
 
-TAGS: used to execute or skip a particulat task in playbook
-
+TAGS: used to execute or "skip a particulat task" in playbook
+      used to "execute a particulat task" in playbook
 - hosts: all
   tasks:
     - name: install apache
