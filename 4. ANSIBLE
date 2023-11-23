@@ -493,9 +493,9 @@ HISTORY:
 ==============================================================================================================================================
 
 ROLES:
-its a way of organizing the playbooks.
+its a 'way of organizing the playbooks'.
 it will encapsulate the data.
-roles will divide the playbook and reduce length.
+roles will 'divide the playbook and reduce the length'.
 it is used to execute the playbook from directories.
 
 
