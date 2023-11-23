@@ -295,10 +295,10 @@ HISTORY:
 ====================================================================================================
 
 CLUSTER : GROUP OF SERVERS
-HOMOGENIUS CLUSTER	: ALL SERVERS OS FLAVOURS ARE SAME
-HETROGENIUS CLUSTER	: ALL SERVERS OS FLAVOURS ARE DIFFERENT
+HOMOGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE SAME'
+HETROGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE DIFFERENT'
 
-CONDITIONS: used when we have hetrogenius clusters.
+CONDITIONS: used 'when we have hetrogenius clusters'.
 
 - hosts: all
   tasks:
