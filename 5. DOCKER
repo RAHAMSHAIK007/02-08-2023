@@ -11,9 +11,9 @@ os will be on images.
 DOCKER: 
 Its an free & opensource tool.1
 it is platform independent.
-used to create, run & deploy applications containers.
+used 'to create, run & deploy applications' containers.
 it is introduced on 2013 by solomenhykes & sebastian phal.
-We used GO laguage to develope the docker.
+We used 'GO laguage to develope the docker'.
 here we write files on YAML.
 before docker user faced lot of problems, but after docker there is no issues with the application.
 
@@ -35,7 +35,7 @@ daemon: manages the docker components(images, containers, volumes)
 
 host: where we install docker (ex: linux, windows, macos)
 
-Registry: manages docker the images.
+Registry: where we manages docker images.
 
 ARCHITECTURE OF DOCKER:
 yum install docker -y    #client
@@ -142,25 +142,25 @@ docker commit cont1 image1
 docke run -it --name cont2 image1
 
 DOCKERFILE:
-it is an automation way to create image.
-here we use components to create image.
+it is an 'automation way' to create image.
+*here we use 'components' to create image.
 in Dockerfile D must be Capiatl.
 Components also capital.
-here we can create image directly without container help.
+here we can create image directly 'without container' help.
 
 
 COMPONENTS:
 
-FROM		: used to base image
-RUN		: used to run linux commands (image creation)
-CMD		: used to run linux commands (container creation)
+*FROM		: used to base image
+*RUN		: used to run linux commands (image creation)
+*CMD		: used to run linux commands (container creation)
 ENTRYPOINT	: high priority than cmd
-COPY		: to copy local files to conatiner
-ADD		: to copy internet files to conatiner
+*COPY		: to copy 'local files' to conatiner
+*ADD		: to copy 'internet files' to conatiner
 WORKDIR		: to open req directory
 LABEL		: to add labels for docker file
-ENV		: to set env variables (inside container)
-ARGS		: to pass env variables (outside containers)
+*ENV		: to set env variables (inside container)
+*ARGS		: to pass env variables (outside containers)
 EXPOSE		: to give port number
 
 EX1:
