@@ -701,13 +701,15 @@ history:
   134  history
 
 =========================================================================================================================
-
+DEBUG MODE: The purpose of using DEBUG MODE to print the message'
 
 - hosts: all
   tasks:
     - name: print msg
       debug:
         msg: hai all my ansible servers flavour is "{{ansible_os_family}}"
+
+DRYRUN: Without execute playbook we can see what will happen
 
 
 ======================
