@@ -714,6 +714,8 @@ DRYRUN: Without execute playbook we can see what will happen
 
 ======================
 NETFLIX DEPLOYMENT:
+deploy application in dev-servers-8020
+
 
 - hosts: dev
   tasks:
@@ -731,6 +733,7 @@ NETFLIX DEPLOYMENT:
         repo: "https://github.com/RAHAMSHAIK007/netflix-clone.git"
         dest: "/var/www/html"
 
+deploy application in test-servers-8020
 
 - hosts: test
   tasks:
@@ -750,6 +753,9 @@ NETFLIX DEPLOYMENT:
 
 TOMCAT DEPLOYMENT:
 ===================
+
+deploy application in dev-servers-8020
+
 vim playbook.yml
 - hosts: dev 
   tasks:
