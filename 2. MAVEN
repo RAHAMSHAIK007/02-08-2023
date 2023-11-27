@@ -1,5 +1,5 @@
 MAVEN: 
-Maven is a build/project management tool.
+Maven is a build/project management tool which is used to manage dependencies for the code.
 Build: adding dependencies to code.
 dependencies: packages req to run the code.
 maven is used to manage dependencies for the code.
