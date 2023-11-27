@@ -32,7 +32,7 @@ cd jenkins-java-project.git
 
 
 MAVEN GOALS:
-it is a command used to execute tasks.
+it is a command which is used to execute tasks.
 1. mvn compile: to compile the code
 2. mvn test: to test the code
 3. mvn package: to create war/jar file
