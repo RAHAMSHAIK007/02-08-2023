@@ -352,7 +352,7 @@ resource "aws_s3_bucket" "two" {
 bucket = "${local.env}-bucketswiggy0011"
 }
 
-
+dis-adv: overide
 TERRAFORM WORKSPACES:
 workspace is 'used to isloate the envs'.
 In real time 'we create infra for envs by using' workspace only.
