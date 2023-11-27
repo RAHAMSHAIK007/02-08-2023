@@ -8,7 +8,7 @@ in genral we used to deploy infra on manual
 Manual:
 1. time consume
 2. manual work
-3. commiting mistakes
+3. chanes to commiting mistakes
 
 Automate -- > Terraform -- > code -- > hcl (Hashicorp configuration languge)
 
