@@ -142,7 +142,7 @@ count = var.instance_count
 ami = "ami-0fa7190e664488b99"
 instance_type = var.instance_type
 tags = {
-Name = "terra-server"
+Name = "terraform-server"
 }
 }
 
