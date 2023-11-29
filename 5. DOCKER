@@ -32,11 +32,11 @@ ARCHITECTURE & COMPONENTS:
 client: it will interact with user
 user gives commands and it will be executed by docker client
 
-daemon: manages the docker components(images, containers, volumes)
+daemon: Its manages the docker components(images, containers, volumes)
 
 host: where we install docker (ex: linux, windows, macos)
 
-Registry: where we manages docker images.
+Registry: where we manage docker images on internet.
 
 ARCHITECTURE OF DOCKER:
 yum install docker -y    #client
