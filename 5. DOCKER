@@ -11,9 +11,10 @@ os will be on images.
 DOCKER: 
 Its an free & opensource tool.1
 it is platform independent.
-used 'to create, run & deploy applications' containers.
+used 'to create, run & deploy' applications on containers.
 it is introduced on 2013 by solomenhykes & sebastian phal.
 We used 'GO laguage to develope the docker'.
+containers will use host resources (cpu, mem, ram, os)
 here we write files on YAML.
 before docker user faced lot of problems, but after docker there is no issues with the application.
 
