@@ -49,6 +49,7 @@ systemctl status docker
 
 COMMANDS:
 docker pull ubuntu	: pull ubuntu image
+docker pull amazonlinux : pull amazonlinux image
 docker images		: to see list of images
 docker run -it --name cont1 ubuntu : to create a container
 -it (interactive) - to go inside a container
