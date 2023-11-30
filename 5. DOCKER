@@ -15,9 +15,13 @@ used 'to create, run & deploy' applications on containers.
 it is introduced on 2013 by solomenhykes & sebastian phal.
 We used 'GO laguage to develope the docker'.
 containers will use host resources (cpu, mem, ram, os)
+by default we dont have any limits for containers
+we need to set it
+docker run -itd --name cont3 --memory="200mb" --cpus="0.2" ubuntu
 here we write files on YAML.
 before docker user faced lot of problems, but after docker there is no issues with the application.
-
+It is used to store data inside container.
+volume is a simple directory inside container.
 
 CONTAINERIZATION:
 Process of packing an application with its dependencies.
