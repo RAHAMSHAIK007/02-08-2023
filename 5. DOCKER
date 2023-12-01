@@ -361,6 +361,7 @@ single volume can be shared to multiple containers.
 ex: cont-1 (vol1)  --- > cont2 (vol1) & cont3 (vol1) & cont4 (vol1)
 at a time we can share single volume to single container only.
 
+Docker volumes are stored in    /var/lib/docker/volumes
 METHOD-1:
 DOCKER FILE:
 
