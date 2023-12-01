@@ -373,6 +373,8 @@ cd volume1/
 touch file{1..5}
 cat>file1
 ctrl p q
+COMMAND TO CREATE VOLUME FROM CONT1 TO CONT2:
+---_----------------------------------------
 
 docker run -it --name cont2 --volumes-from cont1 --privileged=true  ubuntu
 
