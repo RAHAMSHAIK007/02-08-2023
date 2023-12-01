@@ -366,6 +366,8 @@ DOCKER FILE:
 
 FROM ubuntu
 VOLUME ["/volume1"]
+GET VOLUME FROM FILE TO CONTAINER:
+----_-----------++++++++++-------
 
 docker build -t raham:v1 .
 docker run -it --name cont1 raham:v1
