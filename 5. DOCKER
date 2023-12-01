@@ -382,7 +382,7 @@ METHOD-2:
 FROM CLI:
 
 docker run -it --name cont3 -v volume2 ubuntu
-cd volume1/
+cd volume2/
 touch java{1..5}
 ctrl p q
 
