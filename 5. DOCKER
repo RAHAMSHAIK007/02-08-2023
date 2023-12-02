@@ -39,7 +39,7 @@ daemon: Its manages the docker components(images, containers, volumes)
 
 host: where we install docker (ex: linux, windows, macos)
 
-Registry: where we manage docker images on internet.
+Registry: It is a place where we manage docker images on internet.
 
 ARCHITECTURE OF DOCKER:
 yum install docker -y    #client
