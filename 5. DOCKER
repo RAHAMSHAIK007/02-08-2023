@@ -607,9 +607,9 @@ docker tag movies:v1 vinodvanama/paytmmovies
 docker push vinodvanama/paytmmovies
 
 HISTORY:
- 47  2023-09-13 13:06:53 docker ps -a
-   48  2023-09-13 13:07:24 vim index.html
-   49  2023-09-13 13:07:50 docker build -t train:v1 .
+ 47 docker ps -a
+   48  vim index.html
+   49  docker build -t train:v1 .
    50  2023-09-13 13:08:12 docker run -itd --name train -p 82:80 train:v1
    51  2023-09-13 13:08:49 vim index.html
    52  2023-09-13 13:09:01 docker build -t dth:v1 .
