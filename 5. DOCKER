@@ -569,7 +569,7 @@ services:
       - "84:80"
 
 
-docker-compose up -d		: to create and start containers
+docker-compose up -d		: to create and start containers (where -d is containers run in ditached mode)
 docker-compose down		: to stop and delete
 docker-compose stop		: to stop the containers
 docker-compose kill		: to kill the containers
