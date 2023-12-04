@@ -548,6 +548,8 @@ NOTE: do all of these servivces maually
 docker kill $(docker ps -a -q)
 docker rm $(docker ps -a -q)
 
+docker top contName: this commd is used to show the process running inside the container.
+docker stats Cname: To show complete info of container like cpu and memory consumsion,memory limits and we can see live logs.
 vim docker-compose.yml
 
 version: '3'
