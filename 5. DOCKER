@@ -528,7 +528,8 @@ within single host we can lauch these containers.
 we need to write compose file for this.
 compose file is on yaml format.
 inside compose file we wrirte images, volumes, ports ---
-
+Download compose: all-setups --> docker-compose.sh
+=================
 vim Dockerfile
 
 FROM ubuntu
@@ -607,80 +608,82 @@ docker tag movies:v1 vinodvanama/paytmmovies
 docker push vinodvanama/paytmmovies
 
 HISTORY:
- 47 docker ps -a
-   48  vim index.html
+   47 docker ps -a
+   48  docker build -t movies:v1 .
+   49  docker run -itd --name movies -p 82:80 movies:v1
+   49  vim index.html
    49  docker build -t train:v1 .
-   50  2023-09-13 13:08:12 docker run -itd --name train -p 82:80 train:v1
-   51  2023-09-13 13:08:49 vim index.html
-   52  2023-09-13 13:09:01 docker build -t dth:v1 .
-   53  2023-09-13 13:09:15 docker run -itd --name dth -p 83:80 dth:v1
-   54  2023-09-13 13:09:34 vim index.html
-   55  2023-09-13 13:09:57 docker build -t recharge:v1 .
-   56  2023-09-13 13:10:15 docker run -itd --name recharge -p 84:80 recharge:v1
-   57  2023-09-13 13:12:41 docker kill $(docker ps -a -q)
-   58  2023-09-13 13:12:46 docker rm $(docker ps -a -q)
-   59  2023-09-13 13:12:50 docker ps -a
-   60  2023-09-13 13:12:58 vim docker-compose.yml
-   61  2023-09-13 13:16:36 docker version
-   62  2023-09-13 13:17:31 docker-compose up -d
-   63  2023-09-13 13:17:40 docker ps
-   64  2023-09-13 13:19:11 cat Dockerfile
-   65  2023-09-13 13:21:44 docker ps
-   66  2023-09-13 13:22:01 docker-compose down
-   67  2023-09-13 13:22:47 docker-compose up -d
-   68  2023-09-13 13:22:56 docker ps -a
-   69  2023-09-13 13:23:35 docker-compose stop
-   70  2023-09-13 13:23:59 docker-compose start
-   71  2023-09-13 13:24:34 docker ps
-   72  2023-09-13 13:24:41 docker-compose pause
-   73  2023-09-13 13:24:46 docker ps
-   74  2023-09-13 13:24:52 docker-compose unpause
-   75  2023-09-13 13:25:40 docker run -itd --name cont1 ubuntu
-   76  2023-09-13 13:25:43 docker run -itd --name cont2 ubuntu
-   77  2023-09-13 13:25:48 docker run -itd --name cont3 ubuntu
-   78  2023-09-13 13:25:52 docker run -itd --name cont4 ubuntu
-   79  2023-09-13 13:26:01 docker ps
-   80  2023-09-13 13:26:29 docker-compose ps
-   81  2023-09-13 13:26:50 docker-compose logs
-   82  2023-09-13 13:27:46 docker-compose images
-   83  2023-09-13 13:27:56 docker images
-   84  2023-09-13 13:28:54 vim docker-compose.yml
-   85  2023-09-13 13:29:55 mv docker-compose.yml raham.yml
-   86  2023-09-13 13:30:02 docker-compose ps
-   87  2023-09-13 13:31:03 docker-compose -f raham.yml down
-   88  2023-09-13 13:31:21 docker-compose up -d
-   89  2023-09-13 13:31:34 docker-compose -f raham.yml up -d
-   90  2023-09-13 13:37:32 docker images
-   91  2023-09-13 13:41:55 docker login
-   92  2023-09-13 13:42:27 docker images
-   93  2023-09-13 13:43:10 docker tag movies:v1 vinodvanama/paytmmovies
-   94  2023-09-13 13:43:11 docker images
-   95  2023-09-13 13:43:22 docker push vinodvanama/paytmmovies
-   96  2023-09-13 13:45:32 docker images
-   97  2023-09-13 13:46:09 docker tag train:v1 vinodvanama/paytmtrain
-   98  2023-09-13 13:46:18 docker push vinodvanama/paytmtrain
-   99  2023-09-13 13:47:07 docker tag dth:v1 vinodvanama/paytmdth:v1
-  100  2023-09-13 13:47:23 docker push vinodvanama/paytmdth:v1
-  101  2023-09-13 13:48:30 docker tag recharge:v1 vinodvanama/paytmrecharge:v1
-  102  2023-09-13 13:48:39 docker push vinodvanama/paytmrecharge:v1
-  103  2023-09-13 13:49:28 docker kill $(docker ps -a -q)
-  104  2023-09-13 13:49:34 docker rm $(docker ps -a -q)
-  105  2023-09-13 13:49:58 docker rmi $(docker images -q)
-  106  2023-09-13 13:50:09 docker rmi $(docker images -f)
-  107  2023-09-13 13:50:20 docker rmi -f $(docker images -q)
-  108  2023-09-13 13:50:25 docker images
-  109  2023-09-13 13:50:27 docker ps
-  110  2023-09-13 13:50:30 docker ps -a
-  111  2023-09-13 13:51:04 docker run -itd --name cont1 -p 81:80 vinodvanama/movies:latest
-  112  2023-09-13 13:51:14 docker run -itd --name cont1 -p 81:80 vinodvanama/paytmmovies:latest
-  113  2023-09-13 13:52:38 docker run -itd --name cont2 -p 82:80 vinodvanam/paytmtrain:latest
-  114  2023-09-13 13:52:48 docker run -itd --name cont2 -p 82:80 vinodvanama/paytmtrain:latest
-  115  2023-09-13 13:52:57 docker ps -a
-  116  2023-09-13 13:55:32 docker top cont1
-  117  2023-09-13 13:55:47 docker stats
-  118  2023-09-13 13:58:33 history
-  119  2023-09-13 13:59:02 export HISTTIMEFORMAT="%F %T "
-  120  2023-09-13 13:59:09 history
+   50  docker run -itd --name train -p 82:80 train:v1
+   51  vim index.html
+   52  docker build -t dth:v1 .
+   53  docker run -itd --name dth -p 83:80 dth:v1
+   54  vim index.html
+   55  docker build -t recharge:v1 .
+   56  docker run -itd --name recharge -p 84:80 recharge:v1
+   57  docker kill $(docker ps -a -q)
+   58  docker rm $(docker ps -a -q)
+   59  docker ps -a
+   60  vim docker-compose.yml
+   61  docker version
+   62  docker-compose up -d
+   63  docker ps
+   64  cat Dockerfile
+   65  docker ps
+   66  docker-compose down
+   67  docker-compose up -d
+   68  docker ps -a
+   69  docker-compose stop
+   70  docker-compose start
+   71  docker ps
+   72  docker-compose pause
+   73  docker ps
+   74  docker-compose unpause
+   75  docker run -itd --name cont1 ubuntu
+   76  docker run -itd --name cont2 ubuntu
+   77  docker run -itd --name cont3 ubuntu
+   78  docker run -itd --name cont4 ubuntu
+   79  docker ps
+   80  docker-compose ps
+   81  docker-compose logs
+   82  docker-compose images
+   83  docker images
+   84  vim docker-compose.yml
+   85  mv docker-compose.yml raham.yml
+   86  docker-compose ps
+   87  docker-compose -f raham.yml down
+   88  docker-compose up -d
+   89  docker-compose -f raham.yml up -d
+   90  docker images
+   91  docker login
+   92  docker images
+   93  docker tag movies:v1 vinodvanama/paytmmovies
+   94  docker images
+   95  docker push vinodvanama/paytmmovies
+   96  docker images
+   97  docker tag train:v1 vinodvanama/paytmtrain
+   98  docker push vinodvanama/paytmtrain
+   99  docker tag dth:v1 vinodvanama/paytmdth:v1
+  100  docker push vinodvanama/paytmdth:v1
+  101  docker tag recharge:v1 vinodvanama/paytmrecharge:v1
+  102  docker push vinodvanama/paytmrecharge:v1
+  103  docker kill $(docker ps -a -q)
+  104  docker rm $(docker ps -a -q)
+  105  docker rmi $(docker images -q)
+  106  docker rmi $(docker images -f)
+  107  docker rmi -f $(docker images -q)
+  108  docker images
+  109  docker ps
+  110  docker ps -a
+  111  docker run -itd --name cont1 -p 81:80 vinodvanama/movies:latest
+  112  docker run -itd --name cont1 -p 81:80 vinodvanama/paytmmovies:latest
+  113  docker run -itd --name cont2 -p 82:80 vinodvanam/paytmtrain:latest
+  114  docker run -itd --name cont2 -p 82:80 vinodvanama/paytmtrain:latest
+  115  docker ps -a
+  116  docker top cont1
+  117  docker stats
+  118  history
+  119  export HISTTIMEFORMAT="%F %T "
+  120  history
 
 ASSIGNMENT:
 install webserver, app server, db server on conatiner
