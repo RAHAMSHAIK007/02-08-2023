@@ -734,10 +734,12 @@ docker service create --name train --repliacs 6 -p 81:80 vinodvanama/paytmtrain:
 docker service ls                  #To get the list of services
 docker service scale movies=10     #To scale the service
 docker service ps movies           #To list all the containers running for the Movies service
+docker service rm movies           #To remove the service
 docker service scale movies=4      #To scale Movies service
 docker service inspect movies      #To get complete information of service
-docker service rollback movies     #To 
+docker service rollback movies     #To rollback
 docker service logs movies         #List of logs of Movies service
+docker swam leave(Run on wrkrnde1)  #Left from the cluster
 
 TO DETACH NODE FROM CLUSTER:
 go to worker node
