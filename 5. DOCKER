@@ -528,6 +528,8 @@ within single host we can lauch these containers.
 we need to write compose file for this.
 compose file is on yaml format.
 inside compose file we wrirte images, volumes, ports ---
+
+Docker-compose is a tool which is used to create multiple containers at a same time on single server.
 Download compose: all-setups --> docker-compose.sh
 =================
 vim Dockerfile
