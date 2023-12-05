@@ -770,12 +770,12 @@ OVERLAY NETWORK: Used to communicate containers with each other across the multi
 Note: stop before remove
 
 COMMANDS:
-docker network create paytm
-docker network ls
-docker network inspect paytm
-docker network connect paytm cont1
-docker network connect paytm cont2
-docker exec cont1 sudo apt update -y
+docker network create paytm          #To create network
+docker network ls                    #To list the Network
+docker network inspect paytm         #To get the details of Network
+docker network connect paytm cont1   #Attach container to the network(attach cont1 to paytm network)
+docker network connect paytm cont2   #Attach cont2 to the paytm network
+docker exec cont1 sudo apt update -y #
 docker exec cont1 sudo apt install iputils-ping -y
 docker exec cont1 ping ip-cont2
 
