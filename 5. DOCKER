@@ -709,7 +709,7 @@ inside cluster we create services.
 in swarm cluster conatiners are self-healed.
 
 SETUP: 
-CREATE 3 SERVERS (1=MANAGER, 2=WORKER)
+CREATE 3 SERVERS (Amazonlinux 1=MANAGER, 2=WORKER)
 sudo -i
 hostnamectl set-hostname manager/worker-1/worker-2
 sudo -i
@@ -730,10 +730,10 @@ service -- > container -- > app
 service is a way of exposing app.
 we can manage multiple conatiners with help of services.
 
-docker service create --name train --repliacs 6 -p 81:80 vinodvanama/paytmtrain:latest
-docker service ls
-docker service scale movies=10
-docker service ps movies
+docker service create --name train --repliacs 6 -p 81:80 vinodvanama/paytmtrain:latest   #Command to create service
+docker service ls                  #To get the list of services
+docker service scale movies=10     #To scale the service
+docker service ps movies           #To list all the containers running for the Movies service
 docker service scale movies=4
 docker service inspect movies
 docker service rollback movies
