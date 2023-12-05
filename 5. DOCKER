@@ -32,14 +32,14 @@ VIRTUALIZATION:
 able to create resouce with our hardware properties.
 
 ARCHITECTURE & COMPONENTS:
-client: it will interact with user
+docker-client: it will interact with user
 user gives commands and it will be executed by docker client
 
-daemon: Its manages the docker components(images, containers, volumes)
+docker-daemon: Its manages the docker components(images, containers, volumes)
 
-host: where we install docker (ex: linux, windows, macos)
+docker-host: where we install docker (ex: linux, windows, macos)
 
-Registry: It is a place where we manage docker images on internet.
+docker-registry: It is a place where we manage docker images on internet.
 
 ARCHITECTURE OF DOCKER:
 yum install docker -y    #client
