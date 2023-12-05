@@ -749,7 +749,7 @@ if you want to add again: copy the token again
 TO REMOVE THE WORKR NODE COMPLETELY:
 docker node rm id(node) -- > run this on manager
 
-docker swarm join-token manager : to retive the token of manager
+docker swarm join-token manager : To retive the token of manager
 
 
 DOCKER NETWORK:
