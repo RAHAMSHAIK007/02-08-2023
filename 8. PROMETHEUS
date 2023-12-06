@@ -1,6 +1,9 @@
 PROMETHEUS:
 
 Prometheus is an open-source monitoring system that is especially well-suited for cloud-native environments, like Kubernetes. 
+#Prometheus is free and open-source tool which is used to Monitor our Servers and whch is collects the data in Time-Series Based format and whener the cpu utilization,memory utilizxation is increased it is going to send a mail to PagerDuty and which is going to a email to support engineer.
+#Support Eng going to do trouble-shootof it.
+#PromQl is Prometheus Query Language which is used to get the metrix of a server.
 It can monitor the performance of your applications and services.
 it will sends an alert you if there are any issues. 
 It has a powerful query language that allows you to analyze the data.
