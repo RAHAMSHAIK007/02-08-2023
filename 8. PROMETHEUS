@@ -46,10 +46,11 @@ NODE EXPORTER: 9100
 GRAFANA: 3000
 
 CONNECTING PROMETHEUS TO GARAFANA:
-connect to grafana dashboard -- > Data source -- > add -- > promethus -- > url of prometheus -- > save & test -- > top of page -- > explore data-->
--- >if you want run some queries -- > top -- > click on plus (+) symbol--> click on import dashboard -- > 1860 (default code for monitr Linux Server)-- >
--->click on laod --- > in prometheus select prometheus-- > import-->
-save dashbord-->To open saved dashboard goto leftside corner 3dots -->click on Dashboard-->click on Name "Node Exporter Full" -->done its open
+connect to grafana dashboard -- > Data source -- > add -- > promethus -- > url of prometheus -- > save & test -- > 
+-->top of page -- > explore data-->-- >if you want run some queries -- > top -- > click on plus (+) symbol--> 
+-->click on import dashboard -- > 1860 (default code for monitr Linux Server)-- >-->click on laod --- >
+-->in prometheus select prometheus-- > import-->save dashbord-->To open saved dashboard goto leftside corner 3dots -->
+-->click on Dashboard-->click on Name "Node Exporter Full" -->done its open
 
 amazon-linux-extras install epel -y
 yum install strees -y
