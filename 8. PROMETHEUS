@@ -18,6 +18,12 @@ For example, you can use Prometheus to monitor the health of your Kubernetes clu
 COMPONENTS OF PROMETHEUS:
 Prometheus is a monitoring system that consists of the following components:
 
+NODE-EXPORTER: NODE-EXPORTER is a component which is takes the Data from Main Server and executes the queries.
+
+WHY NODE-EXPORTER: 
+1.Prometheus will monitor the servers and which is collects the Data only.
+2.The Data is available in Prometheus database and we have to export the data for this reason we are using componet called Node-Exporter.
+
 A main server that scrapes and stores time series data
 A query language called PromQL is used to retrieve and analyze the data
 A set of exporters that are used to collect metrics from various systems and applications
