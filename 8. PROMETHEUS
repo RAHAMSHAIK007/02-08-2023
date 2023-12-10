@@ -1,7 +1,7 @@
 PROMETHEUS:
 
 Prometheus is free and open-source monitoring tool that is especially well-suited for cloud-native environments, like Kubernetes. 
-#which is used to Monitor our Servers and whch is collects the data in Time-Series Based format
+which is used to Monitor our Servers and whch is collects the data in Time-Series Based format
 and whener the cpu utilization,memory utilizxation is increased it is going to send a mail to PagerDuty and
 which is going to a email to support engineer.
 #Support Eng going to do trouble-shootof it.
