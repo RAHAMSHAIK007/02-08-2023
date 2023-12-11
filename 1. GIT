@@ -133,7 +133,13 @@ DAY-03: 16-08-2023
 
 
 GIT BRANCHES:
-it is an individaul line used to develope the code.
+It's an individual line of development for code.
+we create different branches in real-time.
+each developer will work on their own branch.
+At the end we will combine all branches together in GitHub.
+Default branch in git is Master.
+EX: main, feature, release, hotfix ----
+
 it will track the code seperately for each service.
 local (.git) --- > central (github)
 the default branch in git is master.
