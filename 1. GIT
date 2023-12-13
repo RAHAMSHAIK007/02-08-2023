@@ -157,7 +157,7 @@ git branc -D branch_name	: to delete a branch
 GITHUB:
 it is a central repo where we place soure code.
 we can access github from anywhere with internet.
-to store code we need to create account.
+Purpose of GitHub:to store code we need to create account.
 
 note: it will not accept passwords, it will accept only tokens.
 token will be visible only once.
