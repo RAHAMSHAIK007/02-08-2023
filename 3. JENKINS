@@ -18,7 +18,7 @@ PROD ENV IS CALLED AS LIVE ENV.
 
 PIPELINE: STEP BY STEP EXECUTION OF A PROCESS.
 SERIES OF EVENTS INTERLINKED WITH EACHOTHER.
-ci means we get the sourcecode from github, integrate wirth jenkins build it ,test it and finally getting war-file . the war file deploy in DEV/TEST/UAT and PROD ENVIRONMENT
+ci means we get the sourcecode from github, integrate the sourcecode with jenkins build it ,test it and finally getting war-file . the war file deploy in DEV/TEST/UAT and PROD ENVIRONMENT
 CODE --- > BUILD  -- > TEST --- > WAR  --- > DEV/TEST/UAT/PROD 
 
 
