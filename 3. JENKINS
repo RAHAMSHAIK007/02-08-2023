@@ -92,7 +92,9 @@ day-02 & 03
 VARIABLES:
 variable stores the values and keep changing.
 a=13
-
+It is 2 types 
+1.USER DEFINE variable 
+   a) local variable b) global variable
 LOCAL VARIBALE: it works inside job.
 
 NEW ITEM -- > NAME: ABC -- > FREESTYLE -- > OK -- > BUILD -- >EXECUTE SHELL
@@ -111,7 +113,7 @@ add
 
 echo "hai all my name is $name, $name is from hyderabad, $name is teaching devops"
 
-JENKINS ENV VARIABLES:
+2.JENKINS ENV VARIABLES:
 this variable is not defined by user.
 these values are going to change as per build.
 
