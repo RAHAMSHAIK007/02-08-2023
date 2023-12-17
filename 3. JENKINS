@@ -97,7 +97,7 @@ It is 2 types
    a) local variable b) global variable
 LOCAL VARIBALE: it works inside job.
 
-NEW ITEM -- > NAME: ABC -- > FREESTYLE -- > OK -- > BUILD -- >EXECUTE SHELL
+NEW ITEM -- > NAME: ABC -- > FREESTYLE -- > OK -- > BUILD STEPS -- >EXECUTE SHELL
 name=antony
 echo "hai all my name is $name, $name is from hyderabad, $name is teaching devops"
 
