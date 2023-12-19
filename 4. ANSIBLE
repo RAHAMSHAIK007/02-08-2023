@@ -1,5 +1,5 @@
 ANSIBLE:
-Its a configuration management too1 using which automates the server-creation, automates the software-installation & deploment the applicatin in morethan one server.
+Its a configuration management too1 using which automates the server-creation, automates the software-installation & dautomates the Deploment of applicatin in morethan one server.
 
 Configuration= Software & Hardware props of server
 Management= Installing, deleting, updating 
