@@ -4,7 +4,7 @@ Its a configuration management too1 using which automates the server-creation, a
 Configuration= Software & Hardware props of server
 Management= Installing, deleting, updating 
 
-Automate= serve creation, Software installation, Deployment
+Automate= automates server creation, automates Software installation, automates the Deployment process
 you can do automation in more than one server.
 
 'python' is dependency for ansible.
