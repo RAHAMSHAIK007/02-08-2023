@@ -754,7 +754,7 @@ deploy application in test-servers-8020
 TOMCAT DEPLOYMENT:
 ===================
 
-deploy application in dev-servers-8020
+deploy application in All-Servers/only dev-Server/only Test-Server/-servers-8020
 
 vim playbook.yml
 - hosts: dev 
