@@ -733,9 +733,9 @@ deploy application in dev-servers-8020
         repo: "https://github.com/RAHAMSHAIK007/netflix-clone.git"
         dest: "/var/www/html"
 
-deploy application in test-servers-8020
+DEPLOY APPLICATION IN TEST-SERVER-8020
 
-- hosts: test
+- hosts: all
   tasks:
     - name: installing apache server
       yum: name=httpd state=present
