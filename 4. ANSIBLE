@@ -717,7 +717,7 @@ NETFLIX DEPLOYMENT:
 deploy application in dev-servers-8020
 
 
-- hosts: dev
+- hosts: all /dev /test  /prod
   tasks:
     - name: installing apache server
       yum: name=httpd state=present
@@ -757,7 +757,7 @@ TOMCAT DEPLOYMENT:
 deploy application in All-Servers/only dev-Server/only Test-Server/-servers-8020
 
 vim playbook.yml
-- hosts: dev 
+- hosts: all /dev /test  /prod 
   tasks:
     - name: download tomcat from dlcdn
       get_url:
