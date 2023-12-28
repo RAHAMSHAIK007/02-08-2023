@@ -353,7 +353,7 @@ HISTORY:
 ==================================================================================================================
 
 DAY-03:
-VOLUMES:
+Docker-VOLUMES:
 It is used to store data inside container.
 volume is a simple directory inside container.
 containers uses host resources (cpu, ram, rom).
