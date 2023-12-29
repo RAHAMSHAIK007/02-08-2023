@@ -28,6 +28,9 @@ MASTER:
 1. API SERVER: communicate with user which takes command execute it & gives op.
 2. ETCD: database of cluster which stores complete information of a cluster.
 3. SCHEDULER: schedules pods on worker node which is depends on h/w of node.
+
+
+3. SCHEDULER: select the worker node to shedule pods depends on hw of node
 4. CONTROLLER: control the k8s objects (n/w, service, volume)
 
 WORKER:
