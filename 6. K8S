@@ -47,7 +47,7 @@ minikube = single node cluster
 kubeadm = multi node cluster (manual)
 kops = multi node cluster (automation)
 
-2. CLOUD BASED CLUSTER: CLOUD PROVIDERS WILL MANAGE THEM
+2. CLOUD BASED CLUSTER: WE NEED TO CREATE AND CLOUD PROVIDERS WILL MANAGE THEM
 
 AWS = EKS = ELASTIC KUBERNETES SERVICE
 AZURE = AKS = AZURE KUBERENETS SERVICE
