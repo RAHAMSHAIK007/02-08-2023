@@ -923,3 +923,13 @@ HISTORY:
    61  kubectl get secrets password -o yaml
    62  echo "cmFoYW0xMjM=" | base64 --decode
    63  history
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
+chmod +x kops-linux-amd64 kubectl
+mv kubectl /usr/local/bin/kubectl
+mv kops-linux-amd64 /usr/local/bin/kops
+aws s3api create-bucket --bucket chotape1234 --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
+aws s3api put-bucket-versioning --bucket chotape1234 --region eu-west-1 --versioning-configuration Status=Enabled
+export KOPS_STATE_STORE=s3://chotape1233
+
