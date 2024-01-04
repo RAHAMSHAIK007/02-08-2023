@@ -26,7 +26,7 @@ INEVNTORY: it 'wiil store the information of' worker nodes.
 PLAYBOOK: its the 'way of doing work'   with anisble. 
 
 
-SETUP:
+SETUP: amazonlinux
 Create 5 servers (1=ansible 2=dev 2=test)
 Connect all servers to mobaxterm
 
