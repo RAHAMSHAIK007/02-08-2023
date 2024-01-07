@@ -684,7 +684,7 @@ HISTIRY:
   154  history
 
 =======================================================================================
-
+TERRAFORM LOCAL RESOURCES: To create files on our local
 provider "aws" {
 }
 
