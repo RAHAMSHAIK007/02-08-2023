@@ -714,7 +714,7 @@ DRYRUN: Without execute playbook we can see what will happen
 
 ======================
 NETFLIX DEPLOYMENT:
-deploy application in dev-servers-8020
+NETFLIX APPLICATION DEPLOYMENT ON WEB SERVER
 
 
 - hosts: all /dev /test  /prod
