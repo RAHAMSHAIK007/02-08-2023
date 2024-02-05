@@ -9,7 +9,7 @@ os will be on images.
 (SERVER=AMI, CONTAINER=IMAGE)
 
 DOCKER: 
-Its an free & opensource tool.1
+Its an free & opensource tool.
 it is platform independent.
 used 'to create, run & deploy' applications on containers.
 it is introduced on 2013 by solomenhykes & sebastian phal.
