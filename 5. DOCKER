@@ -753,7 +753,8 @@ docker swarm join-token manager : To retive the token of manager
 
 
 DOCKER NETWORK:
-Docker networks are used to make a communication between the multiple containers that are running on same or different docker hosts. We have different types of docker networks.
+Docker networks are used to establish communication between the containers that are running on same or different docker hosts.
+We have different types of docker networks.
 Bridge Network
 Host Network
 None network
