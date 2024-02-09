@@ -523,7 +523,7 @@ HISTORY:
 ==================================================================================================
 
 DOCKER COMPOSE:
-Docker-compose is a tool which is used to create multiple containers at a same time.
+Docker-compose is a tool which is used to create multiple containers in singe host at a same time.
 within single host we can lauch these containers.
 we need to write compose file for this.
 compose file is on yaml format.
