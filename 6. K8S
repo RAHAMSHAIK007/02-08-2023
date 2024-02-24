@@ -771,7 +771,7 @@ EX: If we have 2 Nodes then Users accessing the server then LoadBalancer distrib
 CONFIGMAPS & SECRETS: It is a way of passing variables to k8s pods.
   
 ENV VARS: used to define a vlaue.
-ENV VARIABLES we can pass on CONTAINER LAVEL, POD LEVEL, DEPLOYMENT LEVEL in 3 METHODS using 1. MANIFEST FILE 2. CONFIGMAPS 3. SECRETS
+ENV VARIABLES we can pass on CONTAINER LAVEL, POD LEVEL, DEPLOYMENT LEVEL through 1. MANIFEST FILE  throug 2.CONFIGMAPS  throug 3. SECRETS
 LEVEL:
 CONTAINER LEVEL
 POD LEVEL
