@@ -785,12 +785,13 @@ METHODS TO DEFINE:
 
 CONFIGMAP:
 If we want to pass variables for pods&container we use configmap.
-Used to store data in key-value, files or CLI used by pods, container etc---
-data is not encrypted, if we want encrypt we need to use secrets.
+Used to store data in key-value, pass the data through files or pass the data through CLI to the pods, container etc---
+in CONFIGMAP data is not going to encrypted, if we want encrypt we need to use secrets.
 limit to pass data from ConfigMap is 1 MB only, to store more than 1 MB mount the volume seperately.We cannot pass morethan 1MB of data inside the ConfigMap.
 
 
-1. key-value:
+1.Manifest File
+key-value:
 
 cat configmap.yml
 apiVersion: v1
@@ -816,8 +817,8 @@ spec:
 
 kubectl apply -f configmap.yml
 kubectl apply -f pod.yml
-kubectl describe cm swiggycm
-kubectl describe pod swiggy
+kubectl describe cm cm1
+kubectl describe pod pod1
 
 
 2. CLI:
@@ -829,17 +830,17 @@ kubectl logs swiggydb-5d49dc56-cbbqk
 kubectl set env deploy swiggydb MYSQL_ROOT_PASSWORD=Raham123 
 kubectl get pods
 
-3. FILE
+3. Normal FILE
 
 vim varsfile
 MYSQL_ROOT_PASSWORD=Raham123
 MYSQL_USER=admin
 
-kubectl create cm dbvars --from-env-file=varsfile
+kubectl create cm dbvars --from-env-file=varsfile #This confimap attach to pod
 kubectl describe cm dbvars
 kubectl get deploy 
 kubectl delete deploy swiggydb
-kubectl create deploy swiggydb --image=mariadb 
+kubectl create deploy swiggydb --image=mariadb   #pod
 kubectl get pods
 kubectl get cm
 kubectl set env deploy swiggydb --from=configmap/dbvars
@@ -849,9 +850,9 @@ kubectl edit deploy swiggydb
 SECRETS:
 
 To store sensitive data in an unencrypted format like passwords, ssh-keys etc ---
-it uses base64 encoded format
-Designed to prevent  exposure or unauthorized access to sensitive information within the cluster.
-Both secrets and Config maps are used outside of deployment
+it uses encryption technique is base64 encoded format
+It is Designed to 'prevent'  'exposure' or 'unauthorized access' to sensitive information within the cluster.
+Both secrets and Config maps are used for outside of deployment only
 config maps cannot encode but secrets will encode the data
 password=raham (now we can encode and ecode the value)
 
@@ -870,6 +871,8 @@ kubectl get secrets password -o yaml
 echo "cmFoYW0xMjM=" | base64 --decode
 echo "cmFoYW0xMjM=" | base64 -d
 
+Q.How to deploy a perticular pod in perticular node?
+A)using taint and tolaretion concept
   
 ============================================================
 
@@ -924,12 +927,12 @@ HISTORY:
    46  kubectl set env deploy swiggydb MYSQL_ROOT_PASSWORD=Raham123
    47  kubectl get po
    48  vim varsfile
-   49  kubectl create cm dbvars --from-env-file=varsfile
+   49  kubectl create cm dbvars --from-env-file=varsfile   #This confimap attach to pod
    50  kubectl get cm
    51  kubectl create deploy swiggydb --image=mariadb
    52  kubectl delete pod swiggydb
    53  kubectl delete deploy swiggydb
-   54  kubectl create deploy swiggydb --image=mariadb
+   54  kubectl create deploy swiggydb --image=mariadb   #POD
    55  kubectl get po
    56  kubectl set env deploy swiggydb --from=configmap/dbvars
    57  kubectl get po
