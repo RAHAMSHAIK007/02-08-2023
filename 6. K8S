@@ -787,7 +787,7 @@ CONFIGMAP:
 If we want to pass variables for pods&container we use configmap.
 Used to store data in key-value, files or CLI used by pods, container etc---
 data is not encrypted, if we want encrypt we need to use secrets.
-limit is 1 MB, to store more than 1 MB mount the volume seperately.
+limit to pass data from ConfigMap is 1 MB only, to store more than 1 MB mount the volume seperately.We cannot pass morethan 1MB of data inside the ConfigMap.
 
 
 1. key-value:
