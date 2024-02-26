@@ -280,6 +280,8 @@ git merge movies
 
 GIT REBASE: used to merge files blw two branches.
 
+GIT RESTORE: to restore the deleted files & used to untrack the tracked files.
+GIT REFLAG: To restore the deleted branches.
 
 MERGE VS REBASE:
 merge will show files, but rebase will not show.
