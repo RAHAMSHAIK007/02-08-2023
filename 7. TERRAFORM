@@ -791,7 +791,7 @@ resource "aws_security_group" "main" {
 
 TERRAFORM FMT: to set the allignment for my code
 
-FOR_EACH:
+FOR_EACH: It is going to take the values one by one
 
 provider "aws" {
 }
@@ -806,22 +806,26 @@ Name = "${each.key}"
 }
 
 
-AWS - CFT
+AWS - CFT 
 AZURE - ARM
 GCP - GDE
 
 
-MODULES:
+TERRAFORM MODULES: It is similar to the Ansible Roles like Ansible Roles will devide the PB in structured format.Similarly,
+The main purpose of terraform modules will devide the configuration file in structured format.
+1.terraform modules are used for reusability.
+2. We are going to divide HCL code to multiple folders.
+3. Whenever we want to change resource configuration for any file,folder like objects, we need to go to that particular folder only.
 
 [root@ip-172-31-87-7 terraform]# cat main.tf
-module "my_instance_module" {
+module "my_instance_module" {                    # create module for instance
         source = "./modules/instances"
         ami = "ami-04823729c75214919"
         instance_type = "t2.micro"
         instance_name = " rahaminstance"
 }
 
-module "s3_module" {
+module "s3_module" {                     #create module for s3 bucket
 source = "./modules/buckets"
 bucket_name = "devopsherahamshaik009988"
 }
