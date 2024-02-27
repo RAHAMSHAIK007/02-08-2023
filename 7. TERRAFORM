@@ -53,7 +53,7 @@ cd terraform
 
 
 TERRAFORM COMMANDS:
-terraform init	: initalize the provider plugins on backed
+terraform init	: initalize the provider plugins on backed.Without having plugins we cannot create resource(ec2,s3...).it will store information of plugins in .terrafrom folder
 terraform plan	: to create execution plan
 terrafrom apply : to create resources
 terrafrom destroy : to delete resources
@@ -684,7 +684,7 @@ HISTIRY:
   154  history
 
 =======================================================================================
-TERRAFORM LOCAL RESOURCES: To create files on our local
+TERRAFORM LOCAL RESOURCES: using terraform we can create local resources also like files and folders
 provider "aws" {
 }
 
@@ -695,6 +695,10 @@ content = "hai all my name is terraform"
 
 TERRAFORM VERSION CONSTRATINTS:
 changing the versions of provider plugins of terraform.
+
+Note:Whenever doing version constraint if we give morthan one block in the file it won't take.We should give one block only.
+
+Google Chrome--->terraform local provider version-->Harchicorp/local-->version(drop down)-->use provider
 Google Chrome--->terraform aws provider version-->Harchicorp/aws-->version(drop down)-->use provider
 provider "aws" {
 }
@@ -721,7 +725,7 @@ terraform {
 command to initialize: terraform init -upgrade
 ===============================================================================
 
-DYNAMIC BLOCK: it is used to reduce the length of code and used for reusabilty of code in loop.
+DYNAMIC BLOCK: it is used to reduce the length of code and used for reusabilty of code in loop format.
 code for sg creation:
 Google-->terraform aws sg code-->aws-securitygroup|resources|harshicorp/aws
 
