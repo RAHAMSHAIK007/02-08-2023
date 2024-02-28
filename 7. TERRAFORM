@@ -55,6 +55,10 @@ cd terraform
 TERRAFORM COMMANDS:
 terraform init	: initalize the provider plugins on backed.Without having plugins we cannot create resource(ec2,s3...).it will store information of plugins in .terrafrom folder
 terraform plan	: to create execution plan
+MEANS it takes the inputs given by the user and plans the resource creation accordingly if usr doesnt give any inputs then it will takes default values.
+it will take inputs given by users and plan the resource creation
+if we haven't given inputs for few feilds it will take default values.
+
 terrafrom apply : to create resources
 terrafrom destroy : to delete resources
 
@@ -99,7 +103,7 @@ HISTORY:
     7  cd terraform/
     8  ls -al
     9  vim main.tf
-   10  cat main.tf
+   10  cat main.tf=
    11  terraform init
    12  terraform plan
    13  terraform apply
@@ -789,9 +793,9 @@ resource "aws_security_group" "main" {
   }
 }
 
-TERRAFORM FMT: to set the allignment for my code
+TERRAFORM FMT: to set the allignment for the code
 
-FOR_EACH: It is going to take the values one by one
+FOR_EACH LOOP: It is going to take the values one by one
 
 provider "aws" {
 }
