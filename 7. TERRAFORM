@@ -688,7 +688,7 @@ HISTIRY:
   154  history
 
 =======================================================================================
-TERRAFORM LOCAL RESOURCES: using terraform we can create local resources also like files and folders
+TERRAFORM LOCAL RESOURCES: using terraform we can create local resources also like files and folders.create fils and folders using terraform local resource
 provider "aws" {
 }
 
@@ -698,7 +698,7 @@ content = "hai all my name is terraform"
 }
 
 TERRAFORM VERSION CONSTRATINTS:
-changing the versions of provider plugins of terraform.
+changing the versions of provider plugins of terraform.cha Changing the versions for plugin.
 
 Note:Whenever doing version constraint if we give morthan one block in the file it won't take.We should give one block only.
 
