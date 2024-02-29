@@ -633,7 +633,7 @@ DAY 3 FOR KOPS:
 SERVICE: It is used to expose the application in k8s.
 
 TYPES:
-1. CLUSTERIP: It will expose the application inside the cluster only.
+1. CLUSTERIP: It is default k8's service.It will expose the application inside the cluster only.
 it will not expose the application to outside of world.
 EX:1.If we hava DataBase server, for the server we cannot give access to all people.We can give only for Organization People i.e; inside cluster only we have to give access
 Whenever we create service then we get one-extra service because k8's will have one default ClusterIp service along with our service.
