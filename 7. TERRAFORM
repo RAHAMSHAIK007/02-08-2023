@@ -804,7 +804,10 @@ AZURE - ARM
 GCP - GDE
 
 
-MODULES:
+MODULES: Used to divide the terrafrom code to multiple folders.
+it makes our work easy and flexiblue.
+it can be reusable
+
 
 [root@ip-172-31-87-7 terraform]# cat main.tf
 module "my_instance_module" {
