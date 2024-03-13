@@ -437,6 +437,7 @@ TERRAFORM GRAPH: used to show the flow chart of our infra
 terraform graph
 copy paste the content in graphviz online
 
+DEPENDS_ON: depends_on is meta-argument which is used to create dependency between resources and modules.
 HISTORY:
  93  mkdir terraform
    94  cd terraform/
