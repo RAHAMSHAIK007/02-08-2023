@@ -438,7 +438,7 @@ terraform graph
 copy paste the content in graphviz online
 
 DEPENDS_ON: depends_on is meta-argument which is used to create dependency between resources or between modules.
-IGNORE_CHANGES: ignore_changes is lifecycle argument which is used to instruct Terraform to ignore changes to certain resource during subsequent operations.
+IGNORE_CHANGES: ignore_changes is meta-argument which is used to instruct Terraform to ignore changes to certain resource during subsequent operations.
                ignore_changes is specify within the lifecycle block of a resource and specifis which attributes to ignore.
 HISTORY:
  93  mkdir terraform
