@@ -555,7 +555,7 @@ terraform apply --auto-approve
 terraform untaint aws_instance.one
 
 TERRAFORM REMOTE BACKEND SETUP:
-when we create infra 'the information of resources' will store on state file.
+when we create infra 'the resource information' will store on state file.
 so it will be tracking the infra information.
 so we need to take backup of that file.
 if we lost that file we cant track the infra.
