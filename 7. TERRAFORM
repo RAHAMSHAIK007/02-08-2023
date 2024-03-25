@@ -136,6 +136,9 @@ HISTORY:
 ==========================================================================
 
 VARIABLES: to pass values as variables
+variables used to store values seperately on terraform.
+if values havent declared on main.tf file, terraform will search for variable.tf and takes values from that file.
+
 
 vim main.tf
 
