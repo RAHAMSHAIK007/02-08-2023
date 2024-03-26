@@ -59,3 +59,5 @@ Add data source -- > loki  -- > url: http://13.233.139.224:3100 -- > save & tets
 
 Checking logs in Loki:
 Explore -- > Label filters -- > jobs=varlogs -- > run query
+
+thanks all
