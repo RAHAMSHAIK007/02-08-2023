@@ -1,6 +1,11 @@
 PROMETHEUS: this is the file
 
-Prometheus is an open-source monitoring system that is especially well-suited for cloud-native environments, like Kubernetes. 
+Prometheus is free and open-source monitoring tool that is especially well-suited for cloud-native environments, like Kubernetes. 
+which is used to Monitor our Servers and whch is collects the data in Time-Series Basedformat
+and whener the cpu utilization,memory utilizxation is increased it is going to send a mail to PagerDuty and
+which is going to a email to support engineer.
+#Support Eng going to do trouble-shootof it.
+#PromQl is Prometheus Query Language which is used to get the metrix of a server.
 It can monitor the performance of your applications and services.
 it will sends an alert you if there are any issues. 
 It has a powerful query language that allows you to analyze the data.
@@ -12,6 +17,12 @@ For example, you can use Prometheus to monitor the health of your Kubernetes clu
 
 COMPONENTS OF PROMETHEUS:
 Prometheus is a monitoring system that consists of the following components:
+
+NODE-EXPORTER: NODE-EXPORTER is a component which is takes the Data from Main Server and executes the queries.
+
+WHY NODE-EXPORTER: 
+1.Prometheus will monitor the servers and which is collects the Data only.
+2.The Data is available in Prometheus database and we have to export the data for this reason we are using componet called Node-Exporter.
 
 A main server that scrapes and stores time series data
 A query language called PromQL is used to retrieve and analyze the data
@@ -35,7 +46,11 @@ NODE EXPORTER: 9100
 GRAFANA: 3000
 
 CONNECTING PROMETHEUS TO GARAFANA:
-connect to grafana dashboard -- > Data source -- > add -- > promethus -- > url of prometheus -- > save & test -- > top of page -- > explore data -- > if you want run some queries -- > top -- > import dashboard -- > 1860 -- > laod --- > prometheus -- > import 
+connect to grafana dashboard -- > Data source -- > add -- > promethus -- > url of prometheus -- > save & test -- > 
+-->top of page -- > explore data-->-- >if you want run some queries -- > top -- > click on plus (+) symbol--> 
+-->click on import dashboard -- > 1860 (default code for monitr Linux Server)-- >-->click on laod --- >
+-->in prometheus select prometheus-- > import-->save dashbord-->To open saved dashboard goto leftside corner 3dots -->
+-->click on Dashboard-->click on Name "Node Exporter Full" -->done its open
 
 amazon-linux-extras install epel -y
 yum install strees -y

@@ -8,30 +8,30 @@ in genral we used to deploy infra on manual
 Manual:
 1. time consume
 2. manual work
-3. commiting mistakes
+3. chanes to commiting mistakes
 
 Automate -- > Terraform -- > code -- > hcl (Hashicorp configuration languge)
 
 
 
-its a tool used to make infrastructure automation.
+its a iaac  tool 'which is used to make infrastructure automation'.
 its a free and opensource.
 its platform independent.
 it comes on year 2014.
 who: mitchel hasimoto 
 ownde: hasicorp 
 terraform is written on go language.
-We can call terraform as IAAC TOOL.
+We can 'call terraform as IAAC TOOL'.
 
 HOW IT WORKS:
-terraform uses code to automate the infra.
+terraform uses 'code to automate the infra'.
 we use HCL : HashiCorp Configuration Language.
 
 IAAC: Infrastructure as a code.
 
 Code --- > execute --- > Infra 
 
-ADVANTGAES:
+ADVANTGAES OF USING INFRA AS A CODE:
 1. Reuseable 
 2. Time saving
 3. Automation
@@ -40,6 +40,7 @@ ADVANTGAES:
 
 
 INSTALLING TERRAFORM:
+google:https://developer.hashicorp.com/terraform/install
 
 sudo yum install -y yum-utils shadow-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
@@ -52,8 +53,12 @@ cd terraform
 
 
 TERRAFORM COMMANDS:
-terraform init	: initalize the provider plugins on backed
+terraform init	: initalize the provider plugins on backed.Without having plugins we cannot create resource(ec2,s3...).it will store information of plugins in .terrafrom folder
 terraform plan	: to create execution plan
+MEANS it takes the inputs given by the user and plans the resource creation accordingly if usr doesnt give any inputs then it will takes default values.
+it will take inputs given by users and plan the resource creation
+if we haven't given inputs for few feilds it will take default values.
+
 terrafrom apply : to create resources
 terrafrom destroy : to delete resources
 
@@ -75,7 +80,7 @@ terraform apply
 terraform destroy 
 
 
-STATE FILE: used to store the resource information which is created by terraform
+STATE FILE: used 'to store 'the resource information' which is created by terraform'
 to track the resource activities
 in real time entire resource info is on state file.
 we need to keep it safe
@@ -98,7 +103,7 @@ HISTORY:
     7  cd terraform/
     8  ls -al
     9  vim main.tf
-   10  cat main.tf
+   10  cat main.tf=
    11  terraform init
    12  terraform plan
    13  terraform apply
@@ -131,6 +136,9 @@ HISTORY:
 ==========================================================================
 
 VARIABLES: to pass values as variables
+variables used to store values seperately on terraform.
+if values havent declared on main.tf file, terraform will search for variable.tf and takes values from that file.
+
 
 vim main.tf
 
@@ -142,7 +150,7 @@ count = var.instance_count
 ami = "ami-0fa7190e664488b99"
 instance_type = var.instance_type
 tags = {
-Name = "terra-server"
+Name = "terraform-server"
 }
 }
 
@@ -352,10 +360,10 @@ resource "aws_s3_bucket" "two" {
 bucket = "${local.env}-bucketswiggy0011"
 }
 
-
+dis-adv: overide
 TERRAFORM WORKSPACES:
-workspace is used to isloate the envs.
-In real time we create infra for envs by using workspace only.
+workspace is 'used to isloate the envs'.
+In real time 'we create infra for envs by using' workspace only.
 by default we have a default workspace.
 the work is not going to effect from one workspace to another workspace.
 
@@ -432,6 +440,12 @@ TERRAFORM GRAPH: used to show the flow chart of our infra
 terraform graph
 copy paste the content in graphviz online
 
+META ARGUMENTS:
+1.depends_on: depends_on is meta-argument which is used to "create dependency between resources" or between modules.
+2.ignore_changes: ignore_changes islifecycle meta-argument which is used to instruct Terraform to "ignore changes to certain resource" during subsequent operations.
+               ignore_changes is specify within the lifecycle block of a resource and specifis which attributes to ignore.
+3.prevent_destroy: prevent_destroy is lifecycle meta-argument is used "within a resource block", " prevent the accidental destruction of that resource".it is specify within the lifecycle block of a resource.
+NOTE: within the lifecycle block are 1.create_before_destroy,2. prevent_destroy, 3.ignore_changes and 4.replace_triggered_by.
 HISTORY:
  93  mkdir terraform
    94  cd terraform/
@@ -505,7 +519,7 @@ HISTORY:
 =================================================
 
 
-ALIAS AND PROVIDER: used to create resources on mutliple regions in single file.
+ALIAS AND PROVIDER: used to 'create resources on mutliple regions in single file'.
 
 provider "aws" {
 region = "us-east-1"
@@ -534,7 +548,7 @@ Name = "mumbai-server"
 }
 
 
-TAINT: used to recrearte a specific objects.
+TAINT: used to 'recrearte a specific objects'.
 here no need to execute the entire file.
 we can just mark the object as tainted.
 
@@ -544,7 +558,7 @@ terraform apply --auto-approve
 terraform untaint aws_instance.one
 
 TERRAFORM REMOTE BACKEND SETUP:
-when we create infra the information of resources will store on state file.
+when we create infra 'the resource information' will store on state file.
 so it will be tracking the infra information.
 so we need to take backup of that file.
 if we lost that file we cant track the infra.
@@ -683,7 +697,7 @@ HISTIRY:
   154  history
 
 =======================================================================================
-
+TERRAFORM LOCAL RESOURCES: using terraform we can create local resources also like files and folders.create fils and folders using terraform local resource
 provider "aws" {
 }
 
@@ -693,8 +707,12 @@ content = "hai all my name is terraform"
 }
 
 TERRAFORM VERSION CONSTRATINTS:
-changing the versions of provider plugins of terraform.
+changing the versions of provider plugins of terraform.cha Changing the versions for plugin.
 
+Note:Whenever doing version constraint if we give morthan one block in the file it won't take.We should give one block only.
+
+Google Chrome--->terraform local provider version-->Harchicorp/local-->version(drop down)-->use provider
+Google Chrome--->terraform aws provider version-->Harchicorp/aws-->version(drop down)-->use provider
 provider "aws" {
 }
 
@@ -717,10 +735,12 @@ terraform {
     }
   }
 }
-
+command to initialize: terraform init -upgrade
 ===============================================================================
 
-DYNAMIC BLOCK: it is used to reduce the length of code and used for reusabilty of code in loop.
+DYNAMIC BLOCK: it is used to reduce the length of code and used for reusabilty of code in loop format.
+code for sg creation:
+Google-->terraform aws sg code-->aws-securitygroup|resources|harshicorp/aws
 
 provider "aws" {
 }
@@ -782,9 +802,9 @@ resource "aws_security_group" "main" {
   }
 }
 
-TERRAFORM FRT: to set the allignment for my code
+TERRAFORM FMT: to set the allignment for the code
 
-FOR_EACH:
+FOR_EACH LOOP: It is going to take the values one by one
 
 provider "aws" {
 }
@@ -799,22 +819,26 @@ Name = "${each.key}"
 }
 
 
-AWS - CFT
+AWS - CFT 
 AZURE - ARM
 GCP - GDE
 
 
-MODULES:
+TERRAFORM MODULES: It is similar to the Ansible Roles like Ansible Roles will devide the PB in structured format.Similarly,
+The main purpose of terraform modules will devide the configuration file in structured format.
+1.terraform modules are used for reusability.
+2. We are going to divide HCL code to multiple folders.
+3. Whenever we want to change resource configuration for any file,folder like objects, we need to go to that particular folder only.
 
 [root@ip-172-31-87-7 terraform]# cat main.tf
-module "my_instance_module" {
+module "my_instance_module" {                    # create module for instance
         source = "./modules/instances"
         ami = "ami-04823729c75214919"
         instance_type = "t2.micro"
         instance_name = " rahaminstance"
 }
 
-module "s3_module" {
+module "s3_module" {                     #create module for s3 bucket
 source = "./modules/buckets"
 bucket_name = "devopsherahamshaik009988"
 }

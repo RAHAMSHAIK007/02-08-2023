@@ -133,7 +133,13 @@ DAY-03: 16-08-2023
 
 
 GIT BRANCHES:
-it is an individaul line used to develope the code.
+It's an individual line of development for code.
+we create different branches in real-time.
+each developer will work on their own branch.
+At the end we will combine all branches together in GitHub.
+Default branch in git is Master.
+EX: main, feature, release, hotfix ----
+
 it will track the code seperately for each service.
 local (.git) --- > central (github)
 the default branch in git is master.
@@ -151,7 +157,7 @@ git branc -D branch_name	: to delete a branch
 GITHUB:
 it is a central repo where we place soure code.
 we can access github from anywhere with internet.
-to store code we need to create account.
+Purpose of GitHub:to store code we need to create account.
 
 note: it will not accept passwords, it will accept only tokens.
 token will be visible only once.
@@ -274,6 +280,8 @@ git merge movies
 
 GIT REBASE: used to merge files blw two branches.
 
+GIT RESTORE: to restore the deleted files & used to untrack the tracked files.
+GIT REFLAG: To restore the deleted branches.
 
 MERGE VS REBASE:
 merge will show files, but rebase will not show.
