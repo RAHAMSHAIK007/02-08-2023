@@ -216,7 +216,7 @@ ansible all -a "yum remove httpd* -y"
 
 ===========================================================
 
-TAGS: used to execute or "skip a particulat task" in playbook
+TAGS: To execute or skip specific tasks
       used to "execute a particulat task" in playbook
 - hosts: all
   tasks:
