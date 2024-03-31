@@ -564,7 +564,7 @@ ansible-galaxy search --author alikins
 
 
 ANSIBLE VAULT:
-it is used to secure the playbooks/files.
+it is used to secure the playbooks and files in encrypted format 
 data will be encrypted.
 technique: AES256 used by facebook
 
