@@ -22,8 +22,8 @@ we can use ansible in amazon linux, ubuntu, RedHat, Centos -----
 COMPONENTS:
 MASTER NODE: it will 'communicate and work with' worker node.
 WORKER NODE: it 'will execute the instructions of' master node.
-INEVNTORY: it 'wiil store the information of' worker nodes.
-PLAYBOOK: its the 'way of doing work'   with anisble. 
+INEVNTORY FILE: Inventory file is a file which is used to 'stores the information of' worker nodes.
+PLAYBOOK: its the 'way of doing work'   with anisble. Playbook a file which is consist of code which is used to execute multiple modules.
 
 
 SETUP: amazonlinux
@@ -142,9 +142,8 @@ HISTORY:
 
 
 MODULES:
-it is a 'key-value pair'.
-and 'also called as' dictionary.
-'we can resue' the moudules.
+it is a 'key-value pair' and 'also called as' dictionary.
+modules are reusable.
 
 ansible all -m yum -a "name=git state=present"   (present =install)
 ansible all -m yum -a "name=maven state=latest" (latest = update)
@@ -166,6 +165,7 @@ ansible test --list-host
 DIS: "we can only use single module at time".
 
 PLAYBOOKS:
+Playbook a file which is consist of code which is used to execute multiple modules.
 playbook is "collection of modules".
 we can run "multiple modules at a single time".
 playbook can be used "to automate the work".
@@ -295,8 +295,8 @@ HISTORY:
 ====================================================================================================
 
 CLUSTER : GROUP OF SERVERS
-HOMOGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE SAME'
-HETROGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE DIFFERENT'
+HOMOGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE SAME'  all servers have same OS and flavour.
+HETROGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE DIFFERENT'  all servers have different OS and flavour.
 
 CONDITIONS: used 'when we have hetrogenius clusters'.
 
@@ -492,10 +492,12 @@ HISTORY:
 
 ==============================================================================================================================================
 
-ROLES:
-its a 'way of organizing the playbooks'.
-it will encapsulate the data.
+ANSIBLE ROLES:
+roles is a way of organizing playbooks in a structured format.
+main purpose of roles is to encapsulate the data.
 roles will 'divide the playbook and reduce the length'.
+we can reuse the roles multiple times.
+in real time we use roles for our daily activities.
 it is used to execute the playbook from directories.
 
 
