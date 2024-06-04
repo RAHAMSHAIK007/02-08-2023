@@ -1,7 +1,7 @@
 K8S:
 
-IT is an open-source container orchestration platform.
-It is used to automates many of the manual processes like deploying, managing, and scaling containerized applications.
+k8's is an open-source container orchestration platform.
+useing which automates many of the manual processes like deploying, managing, and scaling containerized applications.
 Kubernetes was developed by GOOGLE using GO Language.
 Google donated K8's to CNCF in 2014.
 1st version was released in 2015.
@@ -17,30 +17,37 @@ P : POD
 C : CONTAINER
 A : APPLICATION
 
+NOTE: k8s doesn't communicate with containers.
+it communicate with pods.
+
+
 
 COMPONENTS:
 MASTER:
 
-1. API SERVER: communicate with user (takes command execute & give op)
-2. ETCD: database of cluster (stores complete info of a cluster)
-3. SCHEDULER: schedules pods on worker node (depends on hw of node)
+1. API SERVER: communicate with user which takes command execute it & gives op.
+2. ETCD: database of cluster which stores complete information of a cluster.
+3. SCHEDULER: schedules pods on worker node which is depends on h/w of node.
+
+
+3. SCHEDULER: select the worker node to shedule pods depends on hw of node
 4. CONTROLLER: control the k8s objects (n/w, service, volume)
 
 WORKER:
 
-1. KUBELET : its an agent (it will inform all activites to master)
-2. KUBEPROXY: it deals with nlw (ip, networks, ports)
-3. POD : group of conatiners (inside pod we have app)
+1. KUBELET : its an agent which informs all activites to master node.
+2. KUBEPROXY: it deals with nlw i.e, ip, networks, ports.
+3. POD : group of conatiners inside pod we have applications.
 
 
 CLUSTER:
-1. SELF MANAGED: WE NEED TO CREATE & MANAGE THEM
+1. SELF MANAGED CLUSTER: WE NEED TO CREATE & MANAGE THEM
 
 minikube = single node cluster
 kubeadm = multi node cluster (manual)
 kops = multi node cluster (automation)
 
-2. CLOUD BASED: CLOUD PROVIDERS WILL MANAGE THEM
+2. CLOUD BASED CLUSTER: WE NEED TO CREATE AND CLOUD PROVIDERS WILL MANAGE THEM
 
 AWS = EKS = ELASTIC KUBERNETES SERVICE
 AZURE = AKS = AZURE KUBERENETS SERVICE
@@ -60,7 +67,7 @@ NOTE: But we dont implement this in real-time Prod
 
 REQUIREMENTS:
 
-2 CPUs or more
+2 CPUs or more  ubuntu
 2GB of free memory
 20GB of free disk space
 Internet connection
@@ -89,10 +96,10 @@ POD:
 It is a smallest unit of deployment in K8's.
 It is a group of containers.
 Pods are ephemeral (short living objects)
-Mostly we can use single container inside a pod but if we required, we can create multiple containers inside a same pod.
-when we create a pod, containers inside pods can share the same network namespace, and can share the same storage volumes .
-While creating pod, we must specify the image, along with any necessary configuration and resource limits.
-K8's cannot communicate with containers, they can communicate with only pods.
+'Mostly we can use single container inside a pod' but if we required, we can create multiple containers inside a same pod.
+when we create a pod, 'containers inside pods can share the same network namespace, and can share the same storage volumes' .
+While creating pod, 'we must specify the image', along with any necessary configuration and resource limits.
+'K8's cannot communicate with containers', 'they can communicate with only pods'.
  We can create this pod in two ways, 
 1. Imperative(command) 
 2. Declarative (Manifest file)
@@ -119,8 +126,12 @@ spec:
     - image: vinodvanama/paytmtrain:latest
       name: cont1
 
+kubectl create -f pod.yml
 kubectl apply -f pod.yml
 
+DRAWBACK:
+if we delete the pod we cant retrive the pod.
+all the load will be handled by single pod.
 
 HISTORY:
  1  vim minikube.sh
@@ -183,7 +194,7 @@ to get lables of pods 	: kubectl get pods -l app=swiggy
 TO scale rs		: kubectl scale rs/swiggy-rs --replicas=10 (LIFO)
 
 DRAWBACKS:
-1. we cant rollin and rollout, we cant update the application in rs.
+1. we cannot rollin and rollout and  we cannot update the application in rs.
 
 DEPLOYMENT:
 deploy -- > rs -- > pods
@@ -313,8 +324,148 @@ HISTORY:
    84  kubectl delete pod --all
    85  history
 root@ip-172-31-17-73:~#
+SCALING: 
+
+SCALE-IN: Increasing the count of pods
+kubectl scale rs/swiggy-rs --replicas=10
+
+SCALE-OUT: Decreasing the count of pods
+kubectl scale rs/swiggy-rs --replicas=5
+
+SCALING FOLLOWS LIFO PATTERN:
+LIFO: LAST IN FIRST OUT
+the pod which is created will be deleted first automatically when we scale out.
+
 
 =======================================================
+KOPS:
+INFRASTRUCTURE: Resources used to run our application on cloud.
+EX: Ec2, VPC, ALB, -------------
+Highly availablility : More than one server
+
+Minikube -- > single node cluster
+All the pods on single node 
+kOps, also known as Kubernetes operations.
+it is an open-source tool that helps you create, destroy, upgrade, and maintain a highly available, production-grade Kubernetes cluster. 
+Depending on the requirement, kOps can also provide cloud infrastructure.
+kOps is mostly used in deploying AWS and GCE Kubernetes clusters. 
+But officially, the tool only supports AWS. Support for other cloud providers (such as DigitalOcean, GCP, and OpenStack) are in the beta stage.
+
+
+ADVANTAGES:
+•	Automates the provisioning of AWS and GCE Kubernetes clusters
+•	Deploys highly available Kubernetes masters
+•	Supports rolling cluster updates
+•	Autocompletion of commands in the command line
+•	Generates Terraform and CloudFormation configurations
+•	Manages cluster add-ons.
+•	Supports state-sync model for dry-runs and automatic idempotency
+•	Creates instance groups to support heterogeneous clusters
+
+ALTERNATIVES:
+Amazon EKS , MINIKUBE, KUBEADM, RANCHER, TERRAFORM.
+2/2 check:
+===========
+1.system check.
+2.instance check --means Hardware properties like cpu ram comes under instance check.
+
+PREREQUSITES:
+iam: to give permission to create infra
+bucket: used to store cluster info
+versioning: to retrive the deleted objects on bucket
+
+vim .bashrc
+export PATH=$PATH:/usr/local/bin/  -- > save and exit
+source .bashrc
+
+aws configure
+
+STEP-1: GIVING PERMISSIONS
+IAM -- > USER -- > CREATE USER -- > NAME: KOPS -- > Attach Polocies Directly -- > AdministratorAccess -- > NEXT -- > CREATE USER
+USER -- > SECURTITY CREDENTIALS -- > CREATE ACCESS KEYS -- > CLI -- > CHECKBOX -- >  CREATE ACCESS KEYS -- > DOWNLOAD 
+
+SETP-2: INSTALL KUBECTL AND KOPS
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+wget https://github.com/kubernetes/kops/releases/download/v1.27.0/kops-linux-amd64
+chmod +x kops-linux-amd64 kubectl
+mv kubectl /usr/local/bin/kubectl
+mv kops-linux-amd64 /usr/local/bin/kops
+
+
+SETP-3: CREATEING BUCKET 
+aws s3api create-bucket --bucket devopsbyraham007.k8s.local --region us-east-1
+aws s3api put-bucket-versioning --bucket cloudanddevopsbyraham007.k8s.local --region us-east-1 --versioning-configuration Status=Enabled
+export KOPS_STATE_STORE=s3://cloudanddevopsbyraham007.k8s.local
+
+SETP-4: CREATING THE CLUSTER
+kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --node-count=2 --node-size t2.micro
+kops update cluster --name rahams.k8s.local --yes --admin
+
+
+Suggestions:
+ * list clusters with: kops get cluster
+ * edit this cluster with: kops edit cluster rahams.k8s.local
+ * edit your node instance group: kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+ * edit your master instance group: kops edit ig --name=rahams.k8s.local master-us-east-1a
+
+
+ADMIN ACTIVITIES:
+To scale the worker nodes:
+kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+kops update cluster --name rahams.k8s.local --yes --admin 
+kops rolling-update cluster --yes
+
+kubectl describe node node_id
+kops delete cluster --name rahams.k8s.local --yes
+
+
+HISTORY:
+1  vim .bashrc
+    2  source .bashrc
+    3  aws configure
+    4  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubec                                                                                                                   tl"
+    5  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
+    6  ll
+    7  chmod +x kops-linux-amd64 kubectl
+    8  ll
+    9  mv kubectl /usr/local/bin/kubectl
+   10  mv kops-linux-amd64 /usr/local/bin/kops
+   11  kops --version
+   12  kubectl --version
+   13  kubectl version
+   14  kops version
+   15  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
+   16  aws s3api create-bucket --bucket rahamssshaik09.k8s.local --region us-east-1
+   17  aws s3api create-bucket --bucket vinodvanamaa007.k8s.local --region us-east-1
+   18  aws s3api put-bucket-versioning --bucket vinodvanamaa007.k8s.local --region us-east-1 --versioning-configura                                                                                                                   tion Status=Enabled
+   19  export KOPS_STATE_STORE=s3://vinodvanamaa007.k8s.local
+   20  kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --no                                                                                                                   de-count=2 --node-size t2.micro
+   21   kops update cluster --name rahams.k8s.local --yes --admin
+   22   kops validate cluster --wait 10m
+   23  kops get cluster
+   24  kubectl get no
+   25  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+   26  kops update cluster --name rahams.k8s.local --yes
+   27   kops rolling-update cluster
+   28  kubectl get no
+   29  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
+   30  kops rolling-update cluster
+   31  kops update cluster --name rahams.k8s.local --yes
+   32  kops rolling-update cluster
+   33  kops edit ig --name=rahams.k8s.local master-us-east-1a
+   34  kops update cluster --name rahams.k8s.local --yes
+   35  kops edit ig --name=rahams.k8s.local master-us-east-1a
+   36  kops update cluster --name rahams.k8s.local --yes
+   37  kops rolling-update cluster
+   38  kubectl get no
+   39  kops get cluster
+   40  kops delete cluster --name rahams.k8s.local --yes
+   41  kops get cluster
+   42  history
+
+or
+
 INFRASTRUCUTRE: Resource used to run our application on cloud.
 EX: servers, Vpc, LB, Asg
 Highly availablility : More than one server
@@ -396,10 +547,12 @@ kops update cluster --name rahams.k8s.local --yes --admin
 kops rolling-update cluster
 
 To delete cluster: kops delete cluster --name rahams.k8s.local --yes
-Note: bucket will not delete 
+Note: bucket will not delete
+
 
 ===============================================
 
+DAY 2 FOR KOPS:
 CRIPT:
 RUN BELOW COMMANDS MANUALLY
 #vim .bashrc
@@ -415,15 +568,15 @@ chmod +x kops-linux-amd64 kubectl
 mv kubectl /usr/local/bin/kubectl
 mv kops-linux-amd64 /usr/local/bin/kops
 
-aws s3api create-bucket --bucket rahamssshaik09.k8s.local --region us-east-1
-aws s3api put-bucket-versioning --bucket rahamssshaik09.k8s.local --region us-east-1 --versioning-configuration Status=Enabled
-export KOPS_STATE_STORE=s3://rahamssshaik09.k8s.local
-kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --node-count=2 --node-size t2.micro
-kops update cluster --name rahams.k8s.local --yes --admin
+aws s3api create-bucket --bucket fayaz1993recharge --region ca-central-1
+aws s3api put-bucket-versioning --bucket fayaz1993recharge --region ca-central-1 --versioning-configuration Status=Enabled
+export KOPS_STATE_STORE=s3://fayaz1993recharge
+kops create cluster --name kopsssy.k8s.local --zones ca-central-1a --master-count=1 --master-size t2.medium --node-count=2 --node-size t2.micro
+kops update cluster --name kopsy.k8s.local --yes --admin
 
 
 RUN COMMAND AFTER SCRIPT
-export KOPS_STATE_STORE=s3://rahamssshaik09.k8s.local
+export KOPS_STATE_STORE=s3://fayaz1993recharge
 kops validate cluster --wait 10m
 
 ==================================================================
@@ -475,13 +628,16 @@ mv kubecolor /usr/local/bin/
 kubecolor get po
 
 ==============================================================================
-
+DAY 3 FOR KOPS:
 
 SERVICE: It is used to expose the application in k8s.
 
 TYPES:
-1. CLUSTERIP: It will work inside the cluster.
-it will not expose to outer world.
+1. CLUSTERIP: It is default k8's service.It will expose the application inside the cluster only.
+it will not expose the application to outside of world.
+EX:1.If we hava DataBase server, for the server we cannot give access to all people.We can give only for Organization People i.e; inside cluster only we have to give access
+Whenever we create service then we get one-extra service because k8's will have one default ClusterIp service along with our service.
+
 
 apiVersion: apps/v1
 kind: Deployment
@@ -519,8 +675,14 @@ spec:
 DRAWBACK:
 We cannot use app outside.
 
-2. NODEPORT: It will expose our application in a particular port.
+1.Depends of cluster requirment and type of the node we will give alltraffic.Generally we dont give all traffic.
+2.Depends upon type of Server Security Group will change
+3.If it is application server then we should give port number 8080
+4.If it is DataBase server like PostGre then we should give portnumber 5432
+
+2. NODEPORT: It will expose the application in 'particular port number only'.
 Range: 30000 - 32767 (in sg we need to give all traffic)
+ChatGpt will have 5k workernodes
 
 apiVersion: apps/v1
 kind: Deployment
@@ -562,7 +724,7 @@ NOTE: UPDATE THE SG (REMOVE OLD TRAFFIC AND GIVE ALL TRAFFIC & SSH)
 DRAWBACK:
 PORT RESTRICTION.
 
-3. LOADBALACER: It will expose our app and distribute load blw pods.
+3. LOADBALACER: It will expose our application and distribute load bw pods.
 
 apiVersion: apps/v1
 kind: Deployment
@@ -598,32 +760,38 @@ spec:
     - port: 80
       targetPort: 80
 
-======================================================================
+EXTERNAL IP in LOAD BALANCER means LD DNS
+LOAD BALANCER will doesnot suport port numbers which is distributes the loads to servers
+EX: If we have 2 Nodes then Users accessing the server then LoadBalancer distribute the Load 
+    1.One User accessing Node1
+    2.Other User accessing Node2
 
-DAY-06:
+======================================================================
   
-CONFIGMAPS & SECRETS
+CONFIGMAPS & SECRETS: It is a way of passing variables to k8s pods.
   
 ENV VARS: used to define a vlaue.
+ENV VARIABLES we can pass on CONTAINER LAVEL, POD LEVEL, DEPLOYMENT LEVEL through 1. MANIFEST FILE  throug 2.CONFIGMAPS  throug 3. SECRETS
 LEVEL:
 CONTAINER LEVEL
 POD LEVEL
 DEPLOYMENT LEVEL
 
-
+in 3 METHODS using
 METHODS TO DEFINE:
 1. MANIFEST FILE
 2. CONFIGMAPS
 3. SECRETS
 
 CONFIGMAP:
+If we want to pass variables for pods&container we use configmap.
+Used to store data in key-value, pass the data through files or pass the data through CLI to the pods, container etc---
+in CONFIGMAP data is not going to encrypted, if we want encrypt we need to use secrets.
+limit to pass data from ConfigMap is 1 MB only, to store more than 1 MB mount the volume seperately.We cannot pass morethan 1MB of data inside the ConfigMap.
 
-Used to store data in key-value, files or CLI used by pods, container etc---
-data is not encrypted, if we want encrypt we need to use secrets.
-limit is 1 MB, to store more than 1 MB mount the volume seperately.
 
-
-1. key-value:
+1.Manifest File
+key-value:
 
 cat configmap.yml
 apiVersion: v1
@@ -649,8 +817,8 @@ spec:
 
 kubectl apply -f configmap.yml
 kubectl apply -f pod.yml
-kubectl describe cm swiggycm
-kubectl describe pod swiggy
+kubectl describe cm cm1
+kubectl describe pod pod1
 
 
 2. CLI:
@@ -662,17 +830,17 @@ kubectl logs swiggydb-5d49dc56-cbbqk
 kubectl set env deploy swiggydb MYSQL_ROOT_PASSWORD=Raham123 
 kubectl get pods
 
-3. FILE
+3. Normal FILE
 
 vim varsfile
 MYSQL_ROOT_PASSWORD=Raham123
 MYSQL_USER=admin
 
-kubectl create cm dbvars --from-env-file=varsfile
+kubectl create cm dbvars --from-env-file=varsfile #This confimap attach to pod
 kubectl describe cm dbvars
 kubectl get deploy 
 kubectl delete deploy swiggydb
-kubectl create deploy swiggydb --image=mariadb 
+kubectl create deploy swiggydb --image=mariadb   #pod
 kubectl get pods
 kubectl get cm
 kubectl set env deploy swiggydb --from=configmap/dbvars
@@ -682,9 +850,9 @@ kubectl edit deploy swiggydb
 SECRETS:
 
 To store sensitive data in an unencrypted format like passwords, ssh-keys etc ---
-it uses base64 encoded format
-Designed to prevent  exposure or unauthorized access to sensitive information within the cluster.
-Both secrets and Config maps are used outside of deployment
+it uses encryption technique is base64 encoded format
+It is Designed to 'prevent'  'exposure' or 'unauthorized access' to sensitive information within the cluster.
+Both secrets and Config maps are used for outside of deployment only
 config maps cannot encode but secrets will encode the data
 password=raham (now we can encode and ecode the value)
 
@@ -703,49 +871,9 @@ kubectl get secrets password -o yaml
 echo "cmFoYW0xMjM=" | base64 --decode
 echo "cmFoYW0xMjM=" | base64 -d
 
-HISTORY:
-1  vim .bashrc
-    2  source .bashrc
-    3  aws configure
-    4  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubec                                                                                                                   tl"
-    5  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
-    6  ll
-    7  chmod +x kops-linux-amd64 kubectl
-    8  ll
-    9  mv kubectl /usr/local/bin/kubectl
-   10  mv kops-linux-amd64 /usr/local/bin/kops
-   11  kops --version
-   12  kubectl --version
-   13  kubectl version
-   14  kops version
-   15  wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
-   16  aws s3api create-bucket --bucket rahamssshaik09.k8s.local --region us-east-1
-   17  aws s3api create-bucket --bucket vinodvanamaa007.k8s.local --region us-east-1
-   18  aws s3api put-bucket-versioning --bucket vinodvanamaa007.k8s.local --region us-east-1 --versioning-configura                                                                                                                   tion Status=Enabled
-   19  export KOPS_STATE_STORE=s3://vinodvanamaa007.k8s.local
-   20  kops create cluster --name rahams.k8s.local --zones us-east-1a --master-count=1 --master-size t2.medium --no                                                                                                                   de-count=2 --node-size t2.micro
-   21   kops update cluster --name rahams.k8s.local --yes --admin
-   22   kops validate cluster --wait 10m
-   23  kops get cluster
-   24  kubectl get no
-   25  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
-   26  kops update cluster --name rahams.k8s.local --yes
-   27   kops rolling-update cluster
-   28  kubectl get no
-   29  kops edit ig --name=rahams.k8s.local nodes-us-east-1a
-   30  kops rolling-update cluster
-   31  kops update cluster --name rahams.k8s.local --yes
-   32  kops rolling-update cluster
-   33  kops edit ig --name=rahams.k8s.local master-us-east-1a
-   34  kops update cluster --name rahams.k8s.local --yes
-   35  kops edit ig --name=rahams.k8s.local master-us-east-1a
-   36  kops update cluster --name rahams.k8s.local --yes
-   37  kops rolling-update cluster
-   38  kubectl get no
-   39  kops get cluster
-   40  kops delete cluster --name rahams.k8s.local --yes
-   41  kops get cluster
-   42  history
+Q.How to deploy a perticular pod in perticular node?
+A)using taint and tolaretion concept
+  
 ============================================================
 
 
@@ -799,12 +927,12 @@ HISTORY:
    46  kubectl set env deploy swiggydb MYSQL_ROOT_PASSWORD=Raham123
    47  kubectl get po
    48  vim varsfile
-   49  kubectl create cm dbvars --from-env-file=varsfile
+   49  kubectl create cm dbvars --from-env-file=varsfile   #This confimap attach to pod
    50  kubectl get cm
    51  kubectl create deploy swiggydb --image=mariadb
    52  kubectl delete pod swiggydb
    53  kubectl delete deploy swiggydb
-   54  kubectl create deploy swiggydb --image=mariadb
+   54  kubectl create deploy swiggydb --image=mariadb   #POD
    55  kubectl get po
    56  kubectl set env deploy swiggydb --from=configmap/dbvars
    57  kubectl get po
@@ -814,3 +942,13 @@ HISTORY:
    61  kubectl get secrets password -o yaml
    62  echo "cmFoYW0xMjM=" | base64 --decode
    63  history
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+wget https://github.com/kubernetes/kops/releases/download/v1.25.0/kops-linux-amd64
+chmod +x kops-linux-amd64 kubectl
+mv kubectl /usr/local/bin/kubectl
+mv kops-linux-amd64 /usr/local/bin/kops
+aws s3api create-bucket --bucket chotape1234 --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
+aws s3api put-bucket-versioning --bucket chotape1234 --region eu-west-1 --versioning-configuration Status=Enabled
+export KOPS_STATE_STORE=s3://chotape1233
+

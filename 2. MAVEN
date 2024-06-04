@@ -1,5 +1,5 @@
 MAVEN: 
-Maven is a build/project management tool.
+Maven is build/project management tool using which manage the dependencies for the code.
 Build: adding dependencies to code.
 dependencies: packages req to run the code.
 maven is used to manage dependencies for the code.
@@ -32,7 +32,7 @@ cd jenkins-java-project.git
 
 
 MAVEN GOALS:
-it is a command used to execute tasks.
+it is a command which is used to execute tasks.
 1. mvn compile: to compile the code
 2. mvn test: to test the code
 3. mvn package: to create war/jar file
@@ -57,7 +57,7 @@ maven: lifecycle, ant: not have a lifecycle
 maven: plugins (reusable), ant: scripts (not reusable)
 
 
-plugins: is a small software we can use without installing tool.
+plugins: is a small piece software we can use without installing tool.
 
 HISTORY:
 

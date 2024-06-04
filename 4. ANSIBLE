@@ -1,18 +1,18 @@
 ANSIBLE:
-Its a configuration management too1.
+Its a configuration management too1 using which automates the server-creation, automates the software-installation & automates the d Deploment of applicatin in morethan one server.
 
 Configuration= Software & Hardware props of server
 Management= Installing, deleting, updating 
 
-Automate= serve creation, Software installation, Deployment
+Automate= automates server creation, automates Software installation, automates the Deployment process
 you can do automation in more than one server.
 
-python is dependency for ansible.
-we use yaml to write the code.
+'python' is dependency for ansible.
+we use 'yaml' to write the code.
 yml=yet another markup language
 It is free and opensource.
-It is agent less.
-Agent less means no need to install any package in worker node.
+It is 'agent less'.
+Agent less means 'no need to install any package in worker node'.
 
 HISTORY:
 2012 -- > maichel dehaan -- > RedHat 
@@ -20,13 +20,13 @@ we can use ansible in amazon linux, ubuntu, RedHat, Centos -----
 
 
 COMPONENTS:
-MASTER NODE: it will communicate and work with worker node.
-WORKER NODE: it will execute the instructions of master node.
-INEVNTORY: it wiil store the information of worker nodes.
-PLAYBOOK: its the way of doing work with anisble. 
+MASTER NODE: it will 'communicate and work with' worker node.
+WORKER NODE: it 'will execute the instructions of' master node.
+INEVNTORY FILE: Inventory file is a file which is used to 'stores the information of' worker nodes.
+PLAYBOOK: its the 'way of doing work'   with anisble. Playbook a file which is consist of code which is used to execute multiple modules.
 
 
-SETUP:
+SETUP: amazonlinux
 Create 5 servers (1=ansible 2=dev 2=test)
 Connect all servers to mobaxterm
 
@@ -83,9 +83,9 @@ BLUE	: SKIPPED
 
 MODES OF WORKING
 1. ADHOC COMMANDS:
-its a simple linux commands.
-we can use it for temperory works.
-this commands will be overrided.
+its a simple 'linux commands'.
+we can use it for 'temperory works'.
+'this commands will be' overrided.
 
 ansible all -a "ls"
 ansible all -a "touch abc.txt"
@@ -142,12 +142,11 @@ HISTORY:
 
 
 MODULES:
-it is a key-value pair.
-and also called as dictionary.
-we can resue the moudules.
+it is a 'key-value pair' and 'also called as' dictionary.
+modules are reusable.
 
-ansible all -m yum -a "name=git state=present"   (present = install)
-ansible all -m yum -a "name=maven state=latest" (update = latest)
+ansible all -m yum -a "name=git state=present"   (present =install)
+ansible all -m yum -a "name=maven state=latest" (latest = update)
 ansible all -m yum -a "name=maven state=present" (absent = uninstall)
 ansible all -m service -a "name=httpd state=stopped" (started = start)
 ansible all -m service -a "name=httpd state=stopped" (stopped = stop)
@@ -163,19 +162,20 @@ ansible all[0] --list-host
 ansible dev --list-host
 ansible test --list-host
 
-DIS: we can only use single module at time.
+DIS: "we can only use single module at time".
 
 PLAYBOOKS:
-its a collection of modules.
-we can run multiple modules at a single time.
-playbook can be use to automate work.
-we can reuse the playbooks.
-playbook works on yaml syntax.
-yaml syntax is key-value pair.
-playbook extension is .yml or .yaml
+Playbook a file which is consist of code which is used to execute multiple modules.
+playbook is "collection of modules".
+we can run "multiple modules at a single time".
+playbook can be used "to automate the work".
+we can "reuse the playbooks".
+playbook "works on yaml syntax".
+yaml syntax is a "key-value pair".
+playbook "extension is .yml" or .yaml
 
 SYNTAX:
-playbook start with --- and end with ...
+playbook start with --- and ends with ...
 it contains a list of values
 each value is going to start at 3rd letter.
 : is the seperation of key and value.
@@ -187,7 +187,7 @@ profession: devops
 age: **
 
 
-Gathering Facts means to get info of worker nodes
+Gathering Facts means "to get info of worker nodes"  
 it is default task perform by ansible playbook
 
 TO REMOVE GATHER FACTS:   gather_facts: false
@@ -216,8 +216,8 @@ ansible all -a "yum remove httpd* -y"
 
 ===========================================================
 
-TAGS: used to execute or skip a particulat task in playbook
-
+TAGS: To execute or skip specific tasks
+      used to "execute a particulat task" in playbook
 - hosts: all
   tasks:
     - name: install apache
@@ -295,10 +295,10 @@ HISTORY:
 ====================================================================================================
 
 CLUSTER : GROUP OF SERVERS
-HOMOGENIUS CLUSTER	: ALL SERVERS OS FLAVOURS ARE SAME
-HETROGENIUS CLUSTER	: ALL SERVERS OS FLAVOURS ARE DIFFERENT
+HOMOGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE SAME'  all servers have same OS and flavour.
+HETROGENIUS CLUSTER	: ALL SERVERS 'OS FLAVOURS ARE DIFFERENT'  all servers have different OS and flavour.
 
-CONDITIONS: used when we have hetrogenius clusters.
+CONDITIONS: used 'when we have hetrogenius clusters'.
 
 - hosts: all
   tasks:
@@ -492,10 +492,12 @@ HISTORY:
 
 ==============================================================================================================================================
 
-ROLES:
-its a way of organizing the playbooks.
-it will encapsulate the data.
-roles will divide the playbook and reduce length.
+ANSIBLE ROLES:
+roles is a way of organizing playbooks in a structured format.
+main purpose of roles is to encapsulate the data.
+roles will 'divide the playbook and reduce the length'.
+we can reuse the roles multiple times.
+in real time we use roles for our daily activities.
 it is used to execute the playbook from directories.
 
 
@@ -562,7 +564,7 @@ ansible-galaxy search --author alikins
 
 
 ANSIBLE VAULT:
-it is used to secure the playbooks/files.
+it is used to secure the playbooks and files in encrypted format 
 data will be encrypted.
 technique: AES256 used by facebook
 
@@ -701,7 +703,7 @@ history:
   134  history
 
 =========================================================================================================================
-
+DEBUG MODE: The purpose of using DEBUG MODE to print the message'
 
 - hosts: all
   tasks:
@@ -709,11 +711,15 @@ history:
       debug:
         msg: hai all my ansible servers flavour is "{{ansible_os_family}}"
 
+DRYRUN: Without execute playbook we can see what will happen
+
 
 ======================
 NETFLIX DEPLOYMENT:
+NETFLIX APPLICATION DEPLOYMENT ON WEB SERVER
 
-- hosts: dev
+
+- hosts: all /dev /test  /prod
   tasks:
     - name: installing apache server
       yum: name=httpd state=present
@@ -728,6 +734,152 @@ NETFLIX DEPLOYMENT:
       git:
         repo: "https://github.com/RAHAMSHAIK007/netflix-clone.git"
         dest: "/var/www/html"
+
+DEPLOY APPLICATION IN TEST-SERVER-8020
+
+- hosts: all
+  tasks:
+    - name: installing apache server
+      yum: name=httpd state=present
+
+    - name: activating apache server
+      service: name=httpd state=started
+
+    - name: installing git
+      yum: name=git state=present
+
+    - name: git checkout
+      git:
+        repo: "https://github.com/CleverProgrammers/pwj-netflix-clone.git"
+        dest: "/var/www/html"
+
+TOMCAT DEPLOYMENT:
+===================
+
+deploy application in All-Servers/only dev-Server/only Test-Server/-servers-8020
+
+vim playbook.yml
+- hosts: all /dev /test  /prod 
+  tasks:
+    - name: download tomcat from dlcdn (To download URL from Internet in Ansible we use a MODULE called get_url module)
+      get_url:
+        url: "https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.83/bin/apache-tomcat-9.0.83.tar.gz"
+        dest: "/root/"
+
+    - name: untar the apache file
+      command: tar -zxvf apache-tomcat-9.0.83.tar.gz
+        #unarchive:
+        #src: "apache-tomcat-9.0.83.tar.gz"
+        #dest: "/root/"
+
+    - name: rename the tomcat
+      command: mv apache-tomcat-9.0.83 tomcat
+      tags: abc
+
+    - name: install java
+      command: yum install java-1.8.0-openjdk -y
+
+    - name: setting the roles in tomcat-user.xml file
+      template:
+        src: tomcat-users.xml
+        dest: /root/tomcat/conf/tomcat-users.xml
+
+    - name: delete two lines in context.xml
+      template:
+        src: context.xml
+        dest: /root/tomcat/webapps/manager/META-INF/context.xml
+
+    - name: start the tomcat
+      shell: nohup /root/tomcat/bin/startup.sh
+
+vim tomcat-users.xml
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<tomcat-users xmlns="http://tomcat.apache.org/xml"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+              version="1.0">
+<!--
+  By default, no user is included in the "manager-gui" role required
+  to operate the "/manager/html" web application.  If you wish to use this app,
+  you must define such a user - the username and password are arbitrary.
+
+  Built-in Tomcat manager roles:
+    - manager-gui    - allows access to the HTML GUI and the status pages
+    - manager-script - allows access to the HTTP API and the status pages
+    - manager-jmx    - allows access to the JMX proxy and the status pages
+    - manager-status - allows access to the status pages only
+
+  The users below are wrapped in a comment and are therefore ignored. If you
+  wish to configure one or more of these users for use with the manager web
+  application, do not forget to remove the <!.. ..> that surrounds them. You
+  will also need to set the passwords to something appropriate.
+-->
+<!--
+  <user username="admin" password="<must-be-changed>" roles="manager-gui"/>
+  <user username="robot" password="<must-be-changed>" roles="manager-script"/>
+-->
+<!--
+  The sample user and role entries below are intended for use with the
+  examples web application. They are wrapped in a comment and thus are ignored
+  when reading this file. If you wish to configure these users for use with the
+  examples web application, do not forget to remove the <!.. ..> that surrounds
+  them. You will also need to set the passwords to something appropriate.
+-->
+<!--
+  <role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
+  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
+  <user username="role1" password="<must-be-changed>" roles="role1"/>
+-->
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <user username="fayaz" password="fayaz123" roles="manager-gui, manager-script"/>
+</tomcat-users>
+
+
+vim context.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<Context antiResourceLocking="false" privileged="true" >
+  <CookieProcessor className="org.apache.tomcat.util.http.Rfc6265CookieProcessor"
+                   sameSiteCookies="strict" />
+  <Manager sessionAttributeValueClassNameFilter="java\.lang\.(?:Boolean|Integer|Long|Number|String)|org\.apache\.catalina\.filters\.CsrfPreventionFilter\$LruCache(?:\$1)?|java\.util\.(?:Linked)?HashMap"/>
+</Context>
 
 HISTORY:
  235  ansible-playbook playbook1.yml --check

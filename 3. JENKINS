@@ -3,7 +3,7 @@ DAY-01:
 
 JENKINS = CI/CD TOOL
 
-CI = CONTINOUS INTEGRATION : CONTINOUS BUILD + CONTINOUS TEST : (OLD CODE + NEW CODE)
+CI = CONTINOUS INTEGRATION : CONTINOUS BUILD +with CONTINOUS TEST : (OLD CODE +with  NEW CODE)
 CD = CONTINOUS DEVLIVERY : DEPLOYMENT TO PROD IS MANUAL
 CD = CONTINOUS DEPLOYMENT: DEPLOYMENT TO PROD IS AUTOMATIC
 
@@ -12,17 +12,18 @@ ENV:
 DEV	: DEVELOPERS
 TEST/QA	: TESTERS
 UAT	: CLIENT
+ABOVE 3 ENVS ARE CALLED AS PRE PROD/NON PROD
 PROD	: USERS
-
+PROD ENV IS CALLED AS LIVE ENV.
 
 PIPELINE: STEP BY STEP EXECUTION OF A PROCESS.
 SERIES OF EVENTS INTERLINKED WITH EACHOTHER.
-
+ci means we get the sourcecode from github, integrate the sourcecode with jenkins build it ,test it and finally getting war-file . the war file deploy in DEV/TEST/UAT and PROD ENVIRONMENT
 CODE --- > BUILD  -- > TEST --- > WAR  --- > DEV/TEST/UAT/PROD 
 
 
 JENKINS:
-ITS A FREE AND OPEN SOURCE TOOL.
+ITS A FREE AND OPEN SOURCE TOOL.WRITTEN ON JAVA-11 AND IT IS PLATFORM INDEPENDENT.
 JENKINS WRITTEN ON JAVA-11.
 IT IS PLATFORM INDEPENDENT.
 IT CONSIST OF PLUGINS.
@@ -33,6 +34,15 @@ HUDSON IS PAID VERSION.
 LATER ORACLE BROUHT HUDSON AND MAKE IT FREE.
 INVENTOR: Kohsuke Kawaguchi
 PORT NUMBER: 8080
+
+PORT CHANGING:
+
+vim /usr/lib/systemd/system/jenkins.service
+line 67 (8080=8090)
+systemctl daemon-reload
+systemctl restart jenkins.service
+public-ip:8090
+
 
 SETUP:
 
@@ -82,10 +92,12 @@ day-02 & 03
 VARIABLES:
 variable stores the values and keep changing.
 a=13
-
+It is 2 types 
+1.USER DEFINE variable 
+   a) local variable b) global variable
 LOCAL VARIBALE: it works inside job.
 
-NEW ITEM -- > NAME: ABC -- > FREESTYLE -- > OK -- > BUILD -- >EXECUTE SHELL
+NEW ITEM -- > NAME: ABC -- > FREESTYLE -- > OK -- > BUILD STEPS -- >EXECUTE SHELL
 name=antony
 echo "hai all my name is $name, $name is from hyderabad, $name is teaching devops"
 
@@ -101,7 +113,7 @@ add
 
 echo "hai all my name is $name, $name is from hyderabad, $name is teaching devops"
 
-JENKINS ENV VARIABLES:
+2.JENKINS ENV VARIABLES:
 this variable is not defined by user.
 these values are going to change as per build.
 
@@ -367,7 +379,7 @@ Dashboard -- > Manage Jenkins -- > Plugins -- > Available plugins -- > Blue Ocea
  
 
 
-LIST VIEW: to make a list of all jobs as per my req.
+LIST VIEW: to make a list of all jobs as per my req. List all the jobs as per my requirement
 MY VIEW: to see all the jobs which i can access.
 
 
@@ -407,11 +419,11 @@ Dashboard -- > Manage Jenkins -- > Nodes & Clouds -- > New node -- > nodename: a
 CONFIGURATION OF SALVE:
 
 Number of executors : 3 #Number of Parallel builds
-Remote root directory : /tmp #The place where our output is stored on slave sever.
+Remote root directory : /tmp #The place where our output is stored ON THE SLAVE SERVER.
 Labels : swiggy #place the op in a particular slave
 useage: last option
 Launch method : last option 
-Host: (your privte ip)
+Host: (your SLAVE PRIVATE IP)
 Credentials -- > add -- >jenkins -- > Kind : ssh username with privatekey -- > username: ec2-user 
 privatekey : pemfile of server -- > save -- > 
 Host Key Verification Strategy: last option
@@ -507,7 +519,7 @@ Plugins
 Available plugin
 Role-based Authorization Strategy  
 
-STEP-3: 
+STEP-3: Select  Role-based  Strategy
 Dashboard
 Manage Jenkins
 Security
@@ -644,6 +656,9 @@ used to deploy java applications
 its free and platform independent.
 it is given by apache software foundations.
 Here we can deploy jar and war files.
+
+Port Changing:  vim /root/apache-tomcat-9.0.80/conf/server.xml
+line 69: 8080=8090 -- > save -- > shutdown and start the tomcat using scripts
 
 SETUP:
 1. wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.80/bin/apache-tomcat-9.0.80.tar.gz
